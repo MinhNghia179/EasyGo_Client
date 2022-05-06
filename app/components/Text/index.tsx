@@ -5,7 +5,7 @@ interface IProps {
   fontWeight?: string;
   type?: string;
   numberOfLines?: number;
-  textAlign?: string;
+  textAlign?: 'left' | 'center' | 'right';
 }
 
 const AppText: React.FC<IProps> = props => {
