@@ -18,4 +18,6 @@ const Route = {
   // Start Game
 };
 
+export const APP_NAME = 'FLIPPING GAME';
+
 export {Route};

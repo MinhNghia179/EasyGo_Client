@@ -1,6 +1,55 @@
 import {StyleSheet} from 'react-native';
-import {hp, wp} from '../services/response-screen-service';
+import {hp, wp, wpFont} from '../services/response-screen-service';
 import {Colors} from './colors';
+
+const FontSizes = {
+  fs_34: {
+    fontSize: wpFont(34),
+    lineHeight: wpFont(34) * 1.2,
+  },
+  fs_28: {
+    fontSize: wpFont(28),
+    lineHeight: wpFont(28) * 1.2,
+  },
+  fs_22: {
+    fontSize: wpFont(22),
+    lineHeight: wpFont(22) * 1.2,
+  },
+  fs_20: {
+    fontSize: wpFont(20),
+    lineHeight: wpFont(20) * 1.2,
+  },
+  fs_18: {
+    fontSize: wpFont(18),
+    lineHeight: wpFont(18) * 1.3,
+  },
+  fs_17: {
+    // fontSize: wp(16.4),
+    fontSize: wpFont(17),
+    lineHeight: wpFont(17) * 1.3,
+  },
+  fs_16: {
+    // fontSize: wp(15),
+    fontSize: wpFont(16),
+    lineHeight: wpFont(16) * 1.3,
+  },
+  fs_14: {
+    fontSize: wpFont(14),
+    lineHeight: wpFont(14) * 1.3,
+  },
+  fs_13: {
+    fontSize: wpFont(13),
+    lineHeight: wpFont(13) * 1.3,
+  },
+  fs_12: {
+    fontSize: wpFont(12),
+    lineHeight: wpFont(12) * 1.3,
+  },
+  fs_11: {
+    fontSize: wpFont(11),
+    lineHeight: wpFont(11) * 1.3,
+  },
+};
 
 const wpUnits = {
   x2_small: wp(1),
@@ -283,14 +332,6 @@ const Paddings = StyleSheet.create({
   pb_x8_large: {paddingBottom: hpUnits.x8_large},
 });
 
-const FontWeights = StyleSheet.create({
-  fw_light: {fontFamily: 'inter-light'},
-  fw_regular: {fontFamily: 'inter-regular'},
-  fw_demibold: {fontFamily: 'inter-semibold'},
-  fw_medium: {fontFamily: 'inter-medium'},
-  fw_bold: {fontFamily: 'inter-bold'},
-});
-
 const Backgrounds = StyleSheet.create({
   bg_white: {backgroundColor: Colors.White},
   bg_black: {backgroundColor: Colors.Black},
@@ -308,17 +349,17 @@ const Positions = StyleSheet.create({
 });
 
 const Flexes = StyleSheet.create({
-  fl: {flex: 1},
-  fl_2: {flex: 2},
-  fl_3: {flex: 3},
-  fl_4: {flex: 4},
+  flex: {flex: 1},
+  flex_2: {flex: 2},
+  flex_3: {flex: 3},
+  flex_4: {flex: 4},
 
-  fl_wrap: {flexWrap: 'wrap'},
+  flex_wrap: {flexWrap: 'wrap'},
 
-  fl_row: {flexDirection: 'row'},
-  fl_row_rev: {flexDirection: 'row-reverse'},
-  fl_col: {flexDirection: 'column'},
-  fl_col_rev: {flexDirection: 'column-reverse'},
+  flex_row: {flexDirection: 'row'},
+  flex_row_rev: {flexDirection: 'row-reverse'},
+  flex_col: {flexDirection: 'column'},
+  flex_col_rev: {flexDirection: 'column-reverse'},
 
   jus_end: {justifyContent: 'flex-end'},
   jus_start: {justifyContent: 'flex-start'},
@@ -339,12 +380,26 @@ const Flexes = StyleSheet.create({
   },
 });
 
+const FullSize = {
+  full_width: {
+    width: '100%',
+  },
+  full_height: {
+    height: '100%',
+  },
+  full: {
+    width: '100%',
+    height: '100%',
+  },
+};
+
 export default StyleSheet.create({
-  ...FontWeights,
   ...Radius,
   ...Backgrounds,
   ...Flexes,
   ...Positions,
   ...Margins,
   ...Paddings,
+  ...FontSizes,
+  ...FullSize,
 });
