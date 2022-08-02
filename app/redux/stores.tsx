@@ -1,3 +1,3 @@
-import { accountStore } from './models/accoutStore';
+import accountStore from './models/accountStore';
 
 export { accountStore };
