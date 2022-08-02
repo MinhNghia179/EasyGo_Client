@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./app",
+    "jsx": "react-native",
+    "esModuleInterop": false,
+    "checkJs": false,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
+  }
+}
