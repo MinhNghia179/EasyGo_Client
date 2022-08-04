@@ -12,6 +12,6 @@ const Route = {
   // Feedback
 };
 
-export const APP_NAME = 'FLIPPING GAME';
+export const APP_NAME = 'App đặt xe';
 
 export { Route };

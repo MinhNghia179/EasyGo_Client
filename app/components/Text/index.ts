@@ -1,3 +1,3 @@
 import Text from './AppText';
 
-export {Text};
+export { Text };
