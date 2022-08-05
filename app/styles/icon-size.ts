@@ -1,4 +1,4 @@
-import {wp} from '../services/response-screen-service';
+import { wp } from '../services/response-screen-service';
 
 const IconSizes = {
   x3_small: wp(10),

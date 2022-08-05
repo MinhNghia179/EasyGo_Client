@@ -2,7 +2,6 @@ import React from 'react';
 import { Text } from 'react-native';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
-
 interface IAppTextProps {
   type?:
     | 'headline'
@@ -11,10 +10,9 @@ interface IAppTextProps {
     | 'subhead'
     | 'footnote'
     | 'caption1'
-    | 'caption2'; // text type
+    | 'caption2';
   fontWeight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 'bold';
   color?: Colors;
-  ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
   numberOfLines?: number;
   textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify';
   style?: any;
@@ -32,7 +30,6 @@ const AppText = (props: IAppTextProps) => {
     type,
     fontWeight,
     color,
-    ellipsizeMode,
     numberOfLines,
     textAlign,
     allowFontScaling = true,
@@ -80,7 +77,6 @@ const AppText = (props: IAppTextProps) => {
     <Text
       style={[textStyle, { ...style }]}
       numberOfLines={numberOfLines ? numberOfLines : null}
-      ellipsizeMode={ellipsizeMode ? ellipsizeMode : null}
       allowFontScaling={allowFontScaling}>
       {children}
     </Text>

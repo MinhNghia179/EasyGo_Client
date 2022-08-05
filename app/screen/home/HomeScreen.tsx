@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import Toast from 'react-native-root-toast';
-import AlertError from '../../components/Alert/AlertError';
 import { ActionModal } from '../../components/Modal';
 import { Text } from '../../components/Text';
 import { APP_NAME } from '../../constants/constant';
@@ -17,7 +16,7 @@ interface IProps {}
 const HomeScreen = (props: IProps) => {
   const {} = props;
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const [visibleModal, setVisibleModal] = useState(false);
 
   const _onNavigateScreen = () => {};
@@ -28,14 +27,7 @@ const HomeScreen = (props: IProps) => {
   };
 
   const _onClick = () => {
-    () => setVisibleModal(true);
-    Toast.show('Hello', {
-      duration: Toast.durations.LONG,
-      position: Toast.positions.BOTTOM,
-      shadow: true,
-      animation: true,
-      hideOnPress: true,
-    });
+    Toast.show('Hello');
   };
 
   return (
@@ -60,14 +52,10 @@ const HomeScreen = (props: IProps) => {
 
       <ActionModal
         isVisible={visibleModal}
-        title="App đặt xe"
+        title="Set default finance export"
         onClose={() => setVisibleModal(false)}>
-        <Text type="callout">123</Text>
+        <Text type="callout">list option</Text>
       </ActionModal>
-
-      {visibleModal && (
-        <AlertError title={'Show Toast'} description={'Show Description'} />
-      )}
     </View>
   );
 };
