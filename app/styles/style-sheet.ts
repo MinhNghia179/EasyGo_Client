@@ -396,7 +396,7 @@ const FullSize = {
   },
 };
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   ...Radius,
   ...Backgrounds,
   ...Flexes,
@@ -406,3 +406,5 @@ export default StyleSheet.create({
   ...FontSizes,
   ...FullSize,
 });
+
+export default styles;

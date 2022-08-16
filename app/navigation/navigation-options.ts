@@ -10,4 +10,4 @@ const noHeaderNavigationConfig = {
   gestureEnabled: false,
 };
 
-export {defaultNavigationConfig, noHeaderNavigationConfig};
+export { defaultNavigationConfig, noHeaderNavigationConfig };

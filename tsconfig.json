@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./app",
     "jsx": "react-native",
     "esModuleInterop": false,
     "checkJs": false,

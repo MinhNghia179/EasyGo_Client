@@ -1,7 +1,9 @@
-import { Text } from '../../components/Text';
 import React from 'react';
-import { View } from 'react-native';
+import { Dimensions, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Text } from '../../components/Text';
 import { Colors } from '../../styles/colors';
+import styles from '../../styles/style-sheet';
 
 interface IProps {
   title?: string;
@@ -17,6 +19,7 @@ interface IProps {
   rightIconColor?: Colors;
   rightIconOnPress?: () => void;
   stickyBottom?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const SafeAreaView = (props: IProps) => {
@@ -33,17 +36,13 @@ const SafeAreaView = (props: IProps) => {
     leftIconColor,
     rightIconColor,
     stickyBottom,
+    children,
   } = props;
-  return (
-    <View style={[]}>
-      <View style={[]}></View>
-      {stickyBottom && (
-        <View style={[]}>
-          <Text>Sticky Bottom</Text>
-        </View>
-      )}
-    </View>
-  );
+
+  const DimensionWidthDevice = Dimensions.get('window').width;
+  const DimensionHeightDevice = Dimensions.get('window').height;
+
+  return <SafeAreaProvider></SafeAreaProvider>;
 };
 
 export default SafeAreaView;
