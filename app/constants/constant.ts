@@ -6,16 +6,12 @@ const Route = {
   // Home
   ABOUT: 'About',
   FEED_BACK: 'FeedBack',
-  HIGH_SCORE: 'HighScore',
-  START_GAME: 'START_GAME',
 
   // About
 
   // Feedback
-
-  // High Score
-
-  // Start Game
 };
 
-export {Route};
+export const APP_NAME = 'App đặt xe';
+
+export { Route };
