@@ -1,3 +1,3 @@
-import SafeAreaView from './SafeAreaView';
+import SafeAreaContainer from './SafeAreaContainer';
 
-export { SafeAreaView };
+export { SafeAreaContainer };
