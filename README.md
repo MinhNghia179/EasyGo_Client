@@ -1,1 +1,1 @@
-# Flipping-Game
+# Easy Go
