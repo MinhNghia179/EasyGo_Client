@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Dimensions, View } from 'react-native';
+import { View } from 'react-native';
 import Toast from 'react-native-root-toast';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
-import { APP_NAME } from '../../constants/constant';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
-
-const DimensionWidthDevice = Dimensions.get('window').width;
-const DimensionHeightDevice = Dimensions.get('window').height;
 
 interface IProps {}
 
@@ -31,15 +27,16 @@ const HomeScreen = (props: IProps) => {
 
   return (
     <SafeAreaContainer title="Finance Export" left="Left" right="Right">
-      <View style={[styles.mb_x2_large]}>
-        <Text
-          type="callout"
-          color={Colors.Black}
-          textAlign="center"
-          fontWeight="bold">
-          {APP_NAME}
-        </Text>
-        <Button title="Action" onPress={() => {}} />
+      <View style={[styles.mb_x2_large, styles.p_small]}>
+        <View style={[styles.mb_medium]}>
+          <Text
+            type="callout"
+            color={Colors.Black}
+            textAlign="center"
+            fontWeight="bold">
+            Demo UI
+          </Text>
+        </View>
       </View>
     </SafeAreaContainer>
   );

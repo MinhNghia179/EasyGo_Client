@@ -8,31 +8,27 @@ interface IProps {
   color?: string;
   style?: any;
   children?: React.ReactElement | string;
-  opacity?: number;
   disable?: boolean;
   loading?: boolean;
 }
 
 const SecondaryButton = (props: IProps) => {
-  const { onPress, color, children, style, opacity, disable, loading } = props;
-
-  const buttonStyle = {
-    backgroundColor: color || Colors.Blue600,
-    opacity,
-  };
-
-  const titleStyle = {};
+  const { onPress, color, children, style, disable, loading } = props;
 
   return (
     <View style={style}>
       <Button
-        type="solid"
-        title={children}
-        buttonStyle={buttonStyle}
-        onPress={onPress}
         disabled={disable}
+        type="outline"
+        title={children}
+        onPress={onPress}
         loading={loading}
-        titleStyle={titleStyle}
+        titleStyle={{
+          color: color ? color : Colors.Blue600,
+        }}
+        buttonStyle={{
+          borderColor: color ? color : Colors.Blue600,
+        }}
       />
     </View>
   );

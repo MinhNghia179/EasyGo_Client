@@ -1,9 +1,9 @@
 import React from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
-import HyperLinkButton from '../Button/HyperLinkButton';
+import LinkButton from '../Button/LinkButton';
 import { Text } from '../Text';
 
 interface IProps {
@@ -50,12 +50,12 @@ const SafeAreaContainer = (props: IProps) => {
     const isLeftSide = position === 'left';
     return (
       <View>
-        <HyperLinkButton
+        <LinkButton
           {...((leftIconOnPress || rightIconOnPress) && {
             onPress: isLeftSide ? leftIconOnPress : rightIconOnPress,
           })}>
           <Text>fdf</Text>
-        </HyperLinkButton>
+        </LinkButton>
       </View>
     );
   };
@@ -69,29 +69,31 @@ const SafeAreaContainer = (props: IProps) => {
           height: DimensionHeightDevice,
         },
       ]}>
-      {isHeaderVisible && (
-        <View
-          style={[
-            styles.alg_center,
-            styles.jus_between,
-            styles.flex,
-            styles.flex_row,
-            styles.p_medium,
-          ]}>
-          {(left || leftIconName) && LeftOrRightHeader('left')}
-          <Text
-            fontWeight="bold"
-            numberOfLines={1}
-            allowFontScaling
-            type="subhead"
-            color={titleColor ? titleColor : Colors.Text.DarkBlue}>
-            {title}
-          </Text>
-          {(right || rightIconName) && LeftOrRightHeader('right')}
-        </View>
-      )}
-      {children}
-      {stickyBottom && <View></View>}
+      <ScrollView>
+        {isHeaderVisible && (
+          <View
+            style={[
+              styles.alg_center,
+              styles.jus_between,
+              styles.flex,
+              styles.flex_row,
+              styles.p_medium,
+            ]}>
+            {(left || leftIconName) && LeftOrRightHeader('left')}
+            <Text
+              fontWeight="bold"
+              numberOfLines={1}
+              allowFontScaling
+              type="subhead"
+              color={titleColor ? titleColor : Colors.Text.DarkBlue}>
+              {title}
+            </Text>
+            {(right || rightIconName) && LeftOrRightHeader('right')}
+          </View>
+        )}
+        {children}
+        {stickyBottom && <View></View>}
+      </ScrollView>
     </SafeAreaView>
   );
 };
