@@ -44,7 +44,7 @@ const SafeAreaContainer = (props: IProps) => {
   } = props;
 
   const isHeaderVisible =
-    title || left || right || leftIconName || rightIconName;
+    !!title || !!left || !!right || !!leftIconName || !!rightIconName;
 
   const LeftOrRightHeader = (position: 'left' | 'right') => {
     const isLeftSide = position === 'left';
@@ -79,7 +79,8 @@ const SafeAreaContainer = (props: IProps) => {
               styles.flex_row,
               styles.p_medium,
             ]}>
-            {(left || leftIconName) && LeftOrRightHeader('left')}
+            {(!!left || !!leftIconName) && LeftOrRightHeader('left')}
+
             <Text
               fontWeight="bold"
               numberOfLines={1}
@@ -88,7 +89,8 @@ const SafeAreaContainer = (props: IProps) => {
               color={titleColor ? titleColor : Colors.Text.DarkBlue}>
               {title}
             </Text>
-            {(right || rightIconName) && LeftOrRightHeader('right')}
+
+            {(!!right || !!rightIconName) && LeftOrRightHeader('right')}
           </View>
         )}
         {children}
