@@ -23,6 +23,7 @@ interface IAppTextProps {
     | 'underline'
     | 'line-through'
     | 'underline line-through';
+  onPress?: () => void;
 }
 
 const AppText = (props: IAppTextProps) => {
@@ -36,6 +37,7 @@ const AppText = (props: IAppTextProps) => {
     style = {},
     children,
     textDecorationLine = 'none',
+    ...data
   } = props;
 
   const textStyle: [any] = [{ color }];
@@ -77,7 +79,8 @@ const AppText = (props: IAppTextProps) => {
     <Text
       style={[textStyle, { ...style }]}
       numberOfLines={numberOfLines ? numberOfLines : null}
-      allowFontScaling={allowFontScaling}>
+      allowFontScaling={allowFontScaling}
+      {...data}>
       {children}
     </Text>
   );

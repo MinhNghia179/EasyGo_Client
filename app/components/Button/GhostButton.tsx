@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Colors } from '../../styles/colors';
-import styles from '../../styles/style-sheet';
 
 interface IProps {
   onPress?: () => void;
@@ -16,9 +15,7 @@ interface IProps {
 const GhostButton = (props: IProps) => {
   const { onPress, children, style, disabled, color, loading } = props;
 
-  const titleStyle = {};
-
-  const buttonStyle = {};
+  const colorStyle = color ? color : Colors.Text.GreySecondary;
 
   return (
     <View style={style}>
@@ -28,8 +25,10 @@ const GhostButton = (props: IProps) => {
         title={children}
         onPress={onPress}
         loading={loading}
-        titleStyle={titleStyle}
-        buttonStyle={buttonStyle}
+        titleStyle={{
+          color: colorStyle,
+        }}
+        buttonStyle={{}}
       />
     </View>
   );
