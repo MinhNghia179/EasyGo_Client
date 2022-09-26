@@ -36,6 +36,9 @@ const HomeScreen = (props: IProps) => {
             fontWeight="bold">
             Demo UI
           </Text>
+          <View style={[{ padding: 12, borderWidth: 1, borderColor: 'red' }]}>
+            123
+          </View>
         </View>
       </View>
     </SafeAreaContainer>
