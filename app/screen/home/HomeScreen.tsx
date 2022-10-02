@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import Toast from 'react-native-root-toast';
+import { ActionModal, BottomSheetModal } from '../../components/Modal';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
@@ -37,6 +38,18 @@ const HomeScreen = (props: IProps) => {
             Demo UI
           </Text>
         </View>
+
+        <BottomSheetModal
+          isVisible
+          hasDivider
+          title="Bottom Sheet Modal"
+          description="hello">
+          <Text color={Colors.Text.Primary}>Hello Bottom Sheet Modal</Text>
+        </BottomSheetModal>
+
+        <ActionModal isVisible title="Action Modal">
+          <Text>Action Modal</Text>
+        </ActionModal>
       </View>
     </SafeAreaContainer>
   );
