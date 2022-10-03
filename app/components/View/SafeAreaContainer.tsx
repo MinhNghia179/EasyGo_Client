@@ -1,26 +1,26 @@
 import React from 'react';
-import { Dimensions, View, ScrollView } from 'react-native';
+import { Dimensions, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Divider } from 'react-native-elements';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
-import LinkButton from '../Button/LinkButton';
 import { Text } from '../Text';
+import Icon from 'react-native-vector-icons/Octicons';
+import IconSizes from '../../styles/icon-size';
 
 interface IProps {
   title?: string;
   titleColor?: Colors;
   left?: React.ReactNode;
   right?: React.ReactNode;
-  leftIconName?: 'back' | 'close';
   leftIconSize?: number;
-  leftIconColor?: Colors;
   leftIconOnPress?: () => void;
-  rightIconName?: 'back' | 'close';
   rightIconSize?: number;
   rightIconColor?: Colors;
   rightIconOnPress?: () => void;
   stickyBottom?: React.ReactNode;
   children?: React.ReactNode;
+  hasDivider?: boolean;
 }
 
 const DimensionWidthDevice = Dimensions.get('window').width;
@@ -30,35 +30,17 @@ const SafeAreaContainer = (props: IProps) => {
   const {
     title,
     left,
-    leftIconName,
     right,
     leftIconOnPress,
-    rightIconName,
     titleColor,
-    leftIconSize,
     rightIconOnPress,
-    leftIconColor,
     rightIconColor,
     stickyBottom,
     children,
+    hasDivider,
   } = props;
 
-  const isHeaderVisible =
-    !!title || !!left || !!right || !!leftIconName || !!rightIconName;
-
-  const LeftOrRightHeader = (position: 'left' | 'right') => {
-    const isLeftSide = position === 'left';
-    return (
-      <View>
-        <LinkButton
-          {...((leftIconOnPress || rightIconOnPress) && {
-            onPress: isLeftSide ? leftIconOnPress : rightIconOnPress,
-          })}>
-          <Text>fdf</Text>
-        </LinkButton>
-      </View>
-    );
-  };
+  const isHeaderVisible = !!title || !!left || !!right;
 
   return (
     <SafeAreaView
@@ -71,27 +53,35 @@ const SafeAreaContainer = (props: IProps) => {
       ]}>
       <ScrollView>
         {isHeaderVisible && (
-          <View
-            style={[
-              styles.alg_center,
-              styles.jus_between,
-              styles.flex,
-              styles.flex_row,
-              styles.p_medium,
-            ]}>
-            {(!!left || !!leftIconName) && LeftOrRightHeader('left')}
-
-            <Text
-              fontWeight="bold"
-              numberOfLines={1}
-              allowFontScaling
-              type="subhead"
-              color={titleColor ? titleColor : Colors.Text.DarkBlue}>
-              {title}
-            </Text>
-
-            {(!!right || !!rightIconName) && LeftOrRightHeader('right')}
-          </View>
+          <>
+            <View
+              style={[
+                styles.alg_center,
+                styles.jus_between,
+                styles.flex,
+                styles.flex_row,
+                styles.p_medium,
+              ]}>
+              <Icon
+                name="chevron-left"
+                size={IconSizes.x_small}
+                color={Colors.Text.Primary}
+                onPress={leftIconOnPress}
+              />
+              <Text
+                fontWeight="bold"
+                numberOfLines={1}
+                allowFontScaling
+                type="subhead"
+                color={titleColor ? titleColor : Colors.Text.DarkBlue}>
+                {title}
+              </Text>
+              <TouchableOpacity onPress={rightIconOnPress}>
+                {right}
+              </TouchableOpacity>
+            </View>
+            {hasDivider && <Divider />}
+          </>
         )}
         {children}
         {stickyBottom && <View></View>}

@@ -29,7 +29,7 @@ const HomeScreen = (props: IProps) => {
   };
 
   return (
-    <SafeAreaContainer title="Finance Export" left="Left" right="Right">
+    <SafeAreaContainer title="Finance Export" hasDivider>
       <View style={[styles.mb_x2_large, styles.p_small]}>
         <View style={[styles.mb_medium]}>
           <Text
