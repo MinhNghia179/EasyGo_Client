@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Animation } from 'react-native-animatable';
 import { Divider } from 'react-native-elements';
 import Modal from 'react-native-modal';
@@ -8,6 +8,8 @@ import { wp } from '../../services/response-screen-service';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
 import { Text } from '../Text';
+import Icon from 'react-native-vector-icons/EvilIcons';
+import IconSizes from '../../styles/icon-size';
 
 interface IProps {
   title?: string;
@@ -15,13 +17,15 @@ interface IProps {
   children?: React.ReactNode;
   animationIn?: Animation;
   animationOut?: Animation;
-  onClose?: () => void;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   headerStyle?: object;
   headerTitleStyle?: object;
   description?: string;
   hasDivider?: boolean;
+  onClose?: () => void;
+  onPressRightIcon?: () => void;
+  onPressLeftIcon?: () => void;
 }
 
 const BottomSheetModal = (props: IProps) => {
@@ -38,6 +42,8 @@ const BottomSheetModal = (props: IProps) => {
     headerTitleStyle,
     description,
     hasDivider,
+    onPressRightIcon,
+    onPressLeftIcon,
   } = props;
 
   return (
@@ -65,42 +71,53 @@ const BottomSheetModal = (props: IProps) => {
               ...headerStyle,
             },
           ]}>
-          <View style={[styles.ph_large, styles.pv_small]}>
+          <View style={[styles.ph_medium, styles.pv_small]}>
             <View
               style={[
                 styles.flex,
                 styles.flex_row,
                 styles.jus_between,
                 styles.alg_center,
-
                 { ...headerTitleStyle },
               ]}>
               {!!leftIcon ? leftIcon : null}
 
               {!!title ? (
                 _.isString(title) ? (
-                  <Text type="callout" fontWeight="bold" color={Colors.Black}>
-                    {title}
-                  </Text>
+                  <View style={[styles.flex, styles.flex_col]}>
+                    <Text type="callout" fontWeight="bold" color={Colors.Black}>
+                      {title}
+                    </Text>
+                    {!!description && (
+                      <Text type="subhead" color={Colors.Text.Primary}>
+                        {description}
+                      </Text>
+                    )}
+                  </View>
                 ) : (
                   title
                 )
               ) : null}
 
-              {rightIcon ? rightIcon : null}
+              <TouchableOpacity
+                onPress={rightIcon ? onPressRightIcon : onClose}>
+                {!!rightIcon ? (
+                  rightIcon
+                ) : (
+                  <Icon
+                    name="close-o"
+                    color={Colors.Text.Primary}
+                    size={IconSizes.medium}
+                  />
+                )}
+              </TouchableOpacity>
             </View>
-
-            {!!description && (
-              <Text type="subhead" color={Colors.Text.Primary}>
-                {description}
-              </Text>
-            )}
           </View>
 
           {hasDivider && <Divider />}
 
           {!!children && (
-            <View style={[styles.ph_large, styles.pv_large]}>{children}</View>
+            <View style={[styles.ph_medium, styles.pv_large]}>{children}</View>
           )}
         </View>
       )}
