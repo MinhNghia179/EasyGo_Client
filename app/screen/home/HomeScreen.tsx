@@ -10,6 +10,7 @@ import styles from '../../styles/style-sheet';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import InputText from '../../components/Input/InputText';
 import IconSizes from '../../styles/icon-size';
+import CardItem from '../../components/Card/CardItem';
 
 interface IProps {}
 
@@ -80,6 +81,9 @@ const HomeScreen = (props: IProps) => {
             'Please confirm your password',
           ]}
         />
+        <CardItem>
+          <Text>Card Item</Text>
+        </CardItem>
       </View>
     </SafeAreaContainer>
   );
