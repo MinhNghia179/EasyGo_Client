@@ -8,6 +8,8 @@ import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
 import Icon from 'react-native-vector-icons/EvilIcons';
+import InputText from '../../components/Input/InputText';
+import IconSizes from '../../styles/icon-size';
 
 interface IProps {}
 
@@ -15,6 +17,7 @@ const HomeScreen = (props: IProps) => {
   const {} = props;
 
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState<string>('nguyenminhnghia.thd@gmail.com');
   const [visibleModal, setVisibleModal] = useState(false);
 
   const _onNavigateScreen = () => {};
@@ -53,6 +56,30 @@ const HomeScreen = (props: IProps) => {
           description="hello">
           <Text color={Colors.Text.Primary}>Hello Bottom Sheet Modal</Text>
         </BottomSheetModal>
+
+        <InputText
+          style={[styles.mt_large]}
+          isValid
+          label="Password"
+          value={email}
+          autoCapitalize="characters"
+          onChange={setEmail}
+        />
+
+        <InputText
+          style={[styles.mt_large]}
+          isValid={false}
+          showErrorMessage
+          label="Password"
+          value={email}
+          autoCapitalize="characters"
+          onChange={setEmail}
+          errorMessage={[
+            'Please enter your password ',
+            'Invalid token verify',
+            'Please confirm your password',
+          ]}
+        />
       </View>
     </SafeAreaContainer>
   );
