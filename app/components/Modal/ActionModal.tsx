@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Animation } from 'react-native-animatable';
+import { Divider } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import { Text } from '../../components/Text';
 import { wp } from '../../services/response-screen-service';
@@ -49,7 +50,7 @@ const ActionModal = (props: IActionModal) => {
             right: wp(15),
           },
         ]}>
-        {title && (
+        {!!title && (
           <Text
             type="footnote"
             fontWeight="bold"
@@ -57,7 +58,8 @@ const ActionModal = (props: IActionModal) => {
             {title}
           </Text>
         )}
-        <View style={[styles.mt_medium]}>{children}</View>
+
+        {!!children && <View style={[styles.mt_medium]}>{children}</View>}
       </View>
     </Modal>
   );

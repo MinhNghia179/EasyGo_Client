@@ -398,6 +398,66 @@ const FullSize = {
   },
 };
 
+const Borders = StyleSheet.create({
+  // All borders
+  b_none: { borderWidth: 0 },
+  b_small: { borderWidth: 1 },
+  b_medium: { borderWidth: 2 },
+  b_large: { borderWidth: 4 },
+  b_x_large: { borderWidth: 6 },
+  b_x2_large: { borderWidth: 8 },
+  b_x3_large: { borderWidth: 10 },
+
+  bh_none: { borderLeftWidth: 0, borderRightWidth: 0 },
+  bh_small: { borderLeftWidth: 1, borderRightWidth: 1 },
+  bh_medium: { borderLeftWidth: 2, borderRightWidth: 2 },
+  bh_large: { borderLeftWidth: 4, borderRightWidth: 4 },
+  bh_x_large: { borderLeftWidth: 6, borderRightWidth: 6 },
+  bh_x2_large: { borderLeftWidth: 8, borderRightWidth: 8 },
+  bh_x3_large: { borderLeftWidth: 10, borderRightWidth: 10 },
+
+  bv_none: { borderTopWidth: 0, borderBottomWidth: 0 },
+  bv_small: { borderTopWidth: 1, borderBottomWidth: 1 },
+  bv_medium: { borderTopWidth: 2, borderBottomWidth: 2 },
+  bv_large: { borderTopWidth: 4, borderBottomWidth: 4 },
+  bv_x_large: { borderTopWidth: 6, borderBottomWidth: 6 },
+  bv_x2_large: { borderTopWidth: 8, borderBottomWidth: 8 },
+  bv_x3_large: { borderTopWidth: 10, borderBottomWidth: 10 },
+
+  bt_none: { borderTopWidth: 0 },
+  bt_hairline: { borderTopWidth: 0.5 },
+  bt_small: { borderTopWidth: 1 },
+  bt_medium: { borderTopWidth: 2 },
+  bt_large: { borderTopWidth: 4 },
+  bt_x_large: { borderTopWidth: 6 },
+  bt_x2_large: { borderTopWidth: 8 },
+  bt_x3_large: { borderTopWidth: 10 },
+
+  bb_none: { borderBottomWidth: 0 },
+  bb_small: { borderBottomWidth: 1 },
+  bb_medium: { borderBottomWidth: 2 },
+  bb_large: { borderBottomWidth: 4 },
+  bb_x_large: { borderBottomWidth: 6 },
+  bb_x2_large: { borderBottomWidth: 8 },
+  bb_x3_large: { borderBottomWidth: 10 },
+
+  bl_none: { borderLeftWidth: 0 },
+  bl_small: { borderLeftWidth: 1 },
+  bl_medium: { borderLeftWidth: 2 },
+  bl_large: { borderLeftWidth: 4 },
+  bl_x_large: { borderLeftWidth: 6 },
+  bl_x2_large: { borderLeftWidth: 8 },
+  bl_x3_large: { borderLeftWidth: 10 },
+
+  br_none: { borderRightWidth: 0 },
+  br_small: { borderRightWidth: 1 },
+  br_medium: { borderRightWidth: 2 },
+  br_large: { borderRightWidth: 4 },
+  br_x_large: { borderRightWidth: 6 },
+  br_x2_large: { borderRightWidth: 8 },
+  br_x3_large: { borderRightWidth: 10 },
+});
+
 const styles = StyleSheet.create({
   ...Radius,
   ...Backgrounds,
@@ -407,6 +467,7 @@ const styles = StyleSheet.create({
   ...Paddings,
   ...FontSizes,
   ...FullSize,
+  ...Borders,
 });
 
 export default styles;
