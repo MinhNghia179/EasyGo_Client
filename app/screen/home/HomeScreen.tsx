@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-root-toast';
+import { Avatar } from '../../components/Avatar';
 import PrimaryButton from '../../components/Button/PrimaryButton';
 import CardItem from '../../components/Card/CardItem';
 import InputText from '../../components/Input/InputText';
@@ -9,6 +10,7 @@ import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
+import Icon from 'react-native-vector-icons/EvilIcons';
 
 interface IProps {}
 
@@ -93,6 +95,19 @@ const HomeScreen = (props: IProps) => {
           rightIconName="right">
           <Text>Card Item 1</Text>
         </CardItem>
+
+        <Text>Avatar</Text>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => console.log('Touch')}>
+          <Avatar
+            imageSize={40}
+            rounded
+            source={{ uri: 'https://randomuser.me/api/portraits/men/36.jpg' }}
+            position="bottom-left"
+            icon={<Icon name="pencil" size={15} />}
+          />
+        </TouchableOpacity>
       </View>
     </SafeAreaContainer>
   );
