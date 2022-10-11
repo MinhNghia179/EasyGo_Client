@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import Toast from 'react-native-root-toast';
 import PrimaryButton from '../../components/Button/PrimaryButton';
-import { ActionModal, BottomSheetModal } from '../../components/Modal';
+import CardItem from '../../components/Card/CardItem';
+import InputText from '../../components/Input/InputText';
+import { BottomSheetModal } from '../../components/Modal';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
-import Icon from 'react-native-vector-icons/EvilIcons';
-import InputText from '../../components/Input/InputText';
-import IconSizes from '../../styles/icon-size';
-import CardItem from '../../components/Card/CardItem';
 
 interface IProps {}
 
@@ -44,7 +42,7 @@ const HomeScreen = (props: IProps) => {
             Demo UI 123
           </Text>
           <View style={[{ padding: 12, borderWidth: 1, borderColor: 'red' }]}>
-            123
+            <Text>123</Text>
           </View>
         </View>
 
@@ -84,8 +82,17 @@ const HomeScreen = (props: IProps) => {
             'Please confirm your password',
           ]}
         />
-        <CardItem>
-          <Text>Card Item</Text>
+
+        <CardItem
+          description="Password"
+          label="123456Aa@"
+          onPress={() => setVisibleModal(true)}
+          style={[styles.mt_medium]}
+          hasBorderRadius
+          hasShadow
+          rightIconName="right"
+          isCustom>
+          <Text>Card Item 1</Text>
         </CardItem>
       </View>
     </SafeAreaContainer>

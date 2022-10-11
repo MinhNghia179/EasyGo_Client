@@ -398,6 +398,16 @@ const FullSize = {
   },
 };
 
+const Shadow = {
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+};
+
 const Borders = StyleSheet.create({
   // All borders
   b_none: { borderWidth: 0 },
@@ -468,6 +478,7 @@ const styles = StyleSheet.create({
   ...FontSizes,
   ...FullSize,
   ...Borders,
+  ...Shadow,
 });
 
 export default styles;
