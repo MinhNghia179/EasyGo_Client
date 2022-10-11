@@ -39,7 +39,7 @@ const HomeScreen = (props: IProps) => {
             color={Colors.Black}
             textAlign="center"
             fontWeight="bold">
-            Demo UI 123
+            Design System
           </Text>
           <View style={[{ padding: 12, borderWidth: 1, borderColor: 'red' }]}>
             <Text>123</Text>
@@ -90,8 +90,7 @@ const HomeScreen = (props: IProps) => {
           style={[styles.mt_medium]}
           hasBorderRadius
           hasShadow
-          rightIconName="right"
-          isCustom>
+          rightIconName="right">
           <Text>Card Item 1</Text>
         </CardItem>
       </View>

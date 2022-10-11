@@ -76,7 +76,7 @@ const CardItem = (props: IProps) => {
             styles.jus_between,
             styles.alg_center,
           ]}>
-          <View>
+          <View style={[styles.flex, styles.flex_row, styles.alg_center]}>
             {!!leftIcon && leftIcon}
             <Text type="footnote" color={Colors.Text.Primary}>
               {description || ''}
@@ -84,7 +84,7 @@ const CardItem = (props: IProps) => {
           </View>
           <View style={[styles.flex, styles.flex_row, styles.alg_center]}>
             <Text type="footnote" color={Colors.Text.Primary}>
-              {label}
+              {label || ''}
             </Text>
             {(!!rightIcon || rightIconName) && (
               <View style={[styles.ml_x_small]}>{renderRightIcon()}</View>
