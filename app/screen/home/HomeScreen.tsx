@@ -8,6 +8,7 @@ import CardItem from '../../components/Card/CardItem';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import InputText from '../../components/Input/InputText';
 import { BottomSheetModal } from '../../components/Modal';
+import Select from '../../components/Select/SelectInput';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
@@ -22,6 +23,15 @@ const HomeScreen = (props: IProps) => {
   const [email, setEmail] = useState<string>('nguyenminhnghia.thd@gmail.com');
   const [visibleModal, setVisibleModal] = useState(false);
   const [isChecked, setIsChecked] = useState<boolean>(false);
+
+  const [selected, setSelected] = useState(undefined);
+  const data = [
+    { label: 'One', value: '1' },
+    { label: 'Two', value: '2' },
+    { label: 'Three', value: '3' },
+    { label: 'Four', value: '4' },
+    { label: 'Five', value: '5' },
+  ];
 
   const _onNavigateScreen = () => {};
 
@@ -54,6 +64,8 @@ const HomeScreen = (props: IProps) => {
           Show bottom sheet modal
         </PrimaryButton>
 
+        <Select label="Select service" data={data} onSelect={setSelected} />
+
         <BottomSheetModal
           isVisible={visibleModal}
           hasDivider
@@ -65,7 +77,6 @@ const HomeScreen = (props: IProps) => {
 
         <InputText
           style={[styles.mt_large]}
-          isValid
           label="Password"
           value={email}
           autoCapitalize="characters"
@@ -133,6 +144,8 @@ const HomeScreen = (props: IProps) => {
             onPress={() => setIsChecked(!isChecked)}
           />
         </View>
+
+        <Text>Select Option</Text>
       </View>
     </SafeAreaContainer>
   );

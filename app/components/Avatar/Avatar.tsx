@@ -75,6 +75,7 @@ export const Avatar = (props: Props) => {
       </View>
     );
   }
+
   return (
     <View style={[styles.relative]}>
       <FastImage

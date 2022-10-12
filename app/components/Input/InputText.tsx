@@ -64,7 +64,7 @@ const InputText = (props: IProps) => {
     placeholder,
     numberOfLines,
     disabled,
-    isValid,
+    isValid = true,
     borderColor,
     autoFocus,
     autoCapitalize = 'none',
