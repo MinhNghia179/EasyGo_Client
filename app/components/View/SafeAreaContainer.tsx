@@ -49,6 +49,7 @@ const SafeAreaContainer = (props: IProps) => {
         {
           width: DimensionWidthDevice,
           height: DimensionHeightDevice,
+          backgroundColor: Colors.White,
         },
       ]}>
       <ScrollView>

@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-root-toast';
+import Icon from 'react-native-vector-icons/EvilIcons';
 import { Avatar } from '../../components/Avatar';
 import PrimaryButton from '../../components/Button/PrimaryButton';
 import CardItem from '../../components/Card/CardItem';
+import Checkbox from '../../components/Checkbox/Checkbox';
 import InputText from '../../components/Input/InputText';
 import { BottomSheetModal } from '../../components/Modal';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
-import Icon from 'react-native-vector-icons/EvilIcons';
 
 interface IProps {}
 
@@ -20,6 +21,7 @@ const HomeScreen = (props: IProps) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState<string>('nguyenminhnghia.thd@gmail.com');
   const [visibleModal, setVisibleModal] = useState(false);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const _onNavigateScreen = () => {};
 
@@ -108,6 +110,29 @@ const HomeScreen = (props: IProps) => {
             icon={<Icon name="pencil" size={15} />}
           />
         </TouchableOpacity>
+
+        <Text>Checkbox</Text>
+
+        <View>
+          <Checkbox
+            label="Account and password "
+            checked={isChecked}
+            onPress={() => setIsChecked(!isChecked)}
+          />
+
+          <Checkbox
+            label="Account and password "
+            checked={isChecked}
+            checkedColor={Colors.Green600}
+            onPress={() => setIsChecked(!isChecked)}
+          />
+          <Checkbox
+            label="Account and password "
+            checked={isChecked}
+            checkedColor={Colors.Red700}
+            onPress={() => setIsChecked(!isChecked)}
+          />
+        </View>
       </View>
     </SafeAreaContainer>
   );
