@@ -27,6 +27,34 @@ export const Avatar = (props: Props) => {
 
   const [loadError, setLoadError] = useState<boolean>(false);
 
+  const renderIcon = () => {
+    if (!icon) return;
+
+    return (
+      <View
+        style={[
+          styles.absolute,
+          rounded ? styles.rounded_full : undefined,
+          {
+            backgroundColor: iconBackgroundColor
+              ? iconBackgroundColor
+              : Colors.White,
+
+            left:
+              position === 'bottom-right'
+                ? wp(-2)
+                : position === 'bottom-left'
+                ? wp(25)
+                : position,
+            zIndex: 1,
+            bottom: 0,
+          },
+        ]}>
+        {icon}
+      </View>
+    );
+  };
+
   if (loadError) {
     return (
       <View style={[styles.relative]}>
@@ -43,46 +71,28 @@ export const Avatar = (props: Props) => {
           ]}>
           <Icon name="user" size={wp(imageSize / 2)} color={Colors.White} />
         </View>
-        {!!icon && (
-          <View
-            style={[
-              styles.absolute,
-              rounded ? styles.rounded_full : undefined,
-              {
-                backgroundColor: iconBackgroundColor
-                  ? iconBackgroundColor
-                  : Colors.White,
-
-                left:
-                  position === 'bottom-right'
-                    ? wp(-2)
-                    : position === 'bottom-left'
-                    ? wp(25)
-                    : position,
-                zIndex: 1,
-                bottom: 0,
-              },
-            ]}>
-            {icon}
-          </View>
-        )}
+        {renderIcon()}
       </View>
     );
   }
   return (
-    <FastImage
-      style={[
-        rounded ? styles.rounded_full : undefined,
-        {
-          width: wp(imageSize),
-          height: wp(imageSize),
-          borderWidth: 1,
-        },
-        style,
-      ]}
-      resizeMode={FastImage.resizeMode.contain}
-      {...rest}
-      onError={() => setLoadError(true)}
-    />
+    <View style={[styles.relative]}>
+      <FastImage
+        style={[
+          rounded ? styles.rounded_full : undefined,
+          {
+            width: wp(imageSize),
+            height: wp(imageSize),
+            borderColor: Colors.White,
+            borderWidth: 1,
+          },
+          style,
+        ]}
+        resizeMode={FastImage.resizeMode.contain}
+        {...rest}
+        onError={() => setLoadError(true)}
+      />
+      {renderIcon()}
+    </View>
   );
 };
