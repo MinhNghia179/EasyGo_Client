@@ -46,7 +46,14 @@ const HomeScreen = (props: IProps) => {
   };
 
   return (
-    <SafeAreaContainer title="Finance Export" hasDivider>
+    <SafeAreaContainer
+      title="Finance Export"
+      hasDivider
+      stickyBottom={
+        <PrimaryButton onPress={() => console.log('Minh Nghia 179')}>
+          Action Bottom
+        </PrimaryButton>
+      }>
       <View style={[styles.mb_x2_large, styles.p_small]}>
         <View style={[styles.mb_medium]}>
           <Text
@@ -146,8 +153,7 @@ const HomeScreen = (props: IProps) => {
           />
         </View>
 
-        <Text>Select Option</Text>
-        <SelectInput label={selected} data={data} />
+        <Text>Select Option: Done</Text>
       </View>
     </SafeAreaContainer>
   );
