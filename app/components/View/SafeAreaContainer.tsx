@@ -1,12 +1,20 @@
 import React from 'react';
-import { Dimensions, View, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  Dimensions,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Divider } from 'react-native-elements';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { hp } from '../../services/response-screen-service';
 import { Colors } from '../../styles/colors';
+import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
 import { Text } from '../Text';
-import Icon from 'react-native-vector-icons/Octicons';
-import IconSizes from '../../styles/icon-size';
 
 interface IProps {
   title?: string;
@@ -15,8 +23,6 @@ interface IProps {
   right?: React.ReactNode;
   leftIconSize?: number;
   leftIconOnPress?: () => void;
-  rightIconSize?: number;
-  rightIconColor?: Colors;
   rightIconOnPress?: () => void;
   stickyBottom?: React.ReactNode;
   children?: React.ReactNode;
@@ -34,7 +40,6 @@ const SafeAreaContainer = (props: IProps) => {
     leftIconOnPress,
     titleColor,
     rightIconOnPress,
-    rightIconColor,
     stickyBottom,
     children,
     hasDivider,
@@ -46,6 +51,8 @@ const SafeAreaContainer = (props: IProps) => {
     <SafeAreaView
       style={[
         styles.flex,
+        styles.relative,
+        StyleSheet.absoluteFill,
         {
           width: DimensionWidthDevice,
           height: DimensionHeightDevice,
@@ -63,12 +70,15 @@ const SafeAreaContainer = (props: IProps) => {
                 styles.flex_row,
                 styles.p_medium,
               ]}>
-              <Icon
-                name="chevron-left"
-                size={IconSizes.x_small}
-                color={Colors.Text.Primary}
-                onPress={leftIconOnPress}
-              />
+              <TouchableOpacity activeOpacity={1} onPress={leftIconOnPress}>
+                <Icon
+                  name="arrowleft"
+                  size={IconSizes.x_small}
+                  color={Colors.Black}
+                  onPress={leftIconOnPress}
+                />
+              </TouchableOpacity>
+
               <Text
                 fontWeight="bold"
                 numberOfLines={1}
@@ -77,16 +87,32 @@ const SafeAreaContainer = (props: IProps) => {
                 color={titleColor ? titleColor : Colors.Text.DarkBlue}>
                 {title}
               </Text>
-              <TouchableOpacity onPress={rightIconOnPress}>
+
+              <TouchableOpacity activeOpacity={1} onPress={rightIconOnPress}>
                 {right}
               </TouchableOpacity>
             </View>
+
             {hasDivider && <Divider />}
           </>
         )}
         {children}
-        {stickyBottom && <View></View>}
       </ScrollView>
+
+      {!!stickyBottom && (
+        <View
+          style={[
+            styles.absolute,
+            styles.full_width,
+            styles.p_small,
+            {
+              bottom: 0,
+              marginBottom: Platform.OS === 'android' ? hp(40) : hp(30),
+            },
+          ]}>
+          {stickyBottom}
+        </View>
+      )}
     </SafeAreaView>
   );
 };
