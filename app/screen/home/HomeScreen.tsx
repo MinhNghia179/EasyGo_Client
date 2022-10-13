@@ -8,6 +8,7 @@ import CardItem from '../../components/Card/CardItem';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import InputText from '../../components/Input/InputText';
 import { BottomSheetModal } from '../../components/Modal';
+import SelectInput from '../../components/Select/SelectInput';
 import Select from '../../components/Select/SelectInput';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
@@ -146,6 +147,7 @@ const HomeScreen = (props: IProps) => {
         </View>
 
         <Text>Select Option</Text>
+        <SelectInput label={selected} data={data} />
       </View>
     </SafeAreaContainer>
   );

@@ -1,9 +1,10 @@
 import React, { ReactElement, useRef, useState } from 'react';
-import { FlatList, Modal, TouchableOpacity, View } from 'react-native';
+import { FlatList, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { Colors } from '../../styles/colors';
 import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
+import { ActionModal } from '../Modal';
 import { Text } from '../Text';
 
 interface IProps {
@@ -20,14 +21,6 @@ const SelectInput = (props: IProps) => {
 
   const [visible, setVisible] = useState<boolean>(false);
   const [selected, setSelected] = useState(undefined);
-  const [dropdownTop, setDropdownTop] = useState<number>(0);
-
-  const openDropdown = () => {
-    DropdownButton.current.measure((_fx, _fy, _w, h, _px, py) => {
-      setDropdownTop(py + h);
-    });
-    setVisible(true);
-  };
 
   const onItemPress = item => {
     setSelected(item);
@@ -37,7 +30,7 @@ const SelectInput = (props: IProps) => {
 
   const renderDropDown = (): ReactElement => {
     return (
-      <Modal visible={visible} transparent animationType="none">
+      <ActionModal isVisible={visible} onClose={() => setVisible(false)}>
         <TouchableOpacity
           style={[styles.full]}
           onPress={() => setVisible(false)}>
@@ -47,21 +40,12 @@ const SelectInput = (props: IProps) => {
               styles.full_width,
               {
                 backgroundColor: Colors.White,
-                top: dropdownTop,
               },
             ]}>
             <FlatList
               data={data}
               renderItem={(item: any) => (
-                <TouchableOpacity
-                  onPress={onItemPress}
-                  style={[
-                    styles.ph_small,
-                    styles.pv_small,
-                    {
-                      borderBottomWidth: 1,
-                    },
-                  ]}>
+                <TouchableOpacity onPress={onItemPress}>
                   {item.label}
                 </TouchableOpacity>
               )}
@@ -69,7 +53,7 @@ const SelectInput = (props: IProps) => {
             />
           </View>
         </TouchableOpacity>
-      </Modal>
+      </ActionModal>
     );
   };
 
@@ -77,7 +61,7 @@ const SelectInput = (props: IProps) => {
     <TouchableOpacity
       activeOpacity={1}
       ref={DropdownButton}
-      onPress={visible ? () => setVisible(false) : openDropdown}
+      onPress={() => setVisible(!visible)}
       style={[
         styles.flex,
         styles.flex_row,
