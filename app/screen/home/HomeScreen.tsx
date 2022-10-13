@@ -58,12 +58,7 @@ const HomeScreen = (props: IProps) => {
     <SafeAreaContainer
       title="Finance Export"
       onRefresh={onRefresh}
-      refreshing={refresh}
-      stickyBottom={
-        <PrimaryButton onPress={() => console.log('Minh Nghia 179')}>
-          Action Bottom
-        </PrimaryButton>
-      }>
+      refreshing={refresh}>
       <View style={[styles.mb_x2_large, styles.p_small]}>
         <View style={[styles.mb_medium]}>
           <Text

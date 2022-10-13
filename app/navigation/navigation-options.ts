@@ -1,7 +1,12 @@
 const defaultNavigationConfig = {
   headerStyle: {},
   headerTintColor: {},
-  headerTitleStyle: {},
+  headerTitleStyle: {
+    fontWeight: 'bold',
+    zIndex: 1,
+    fontSize: 18,
+    lineHeight: 23,
+  },
   animationEnabled: true,
 };
 

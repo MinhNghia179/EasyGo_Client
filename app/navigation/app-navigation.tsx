@@ -1,9 +1,9 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import {Route} from '../constants/constant';
+import { Route } from '../constants/constant';
 import AppStack from './app-stack';
-import {noHeaderNavigationConfig} from './navigation-options';
+import { noHeaderNavigationConfig } from './navigation-options';
 
 const Stack = createStackNavigator();
 
