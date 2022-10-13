@@ -2,12 +2,14 @@ import React from 'react';
 import {
   Dimensions,
   Platform,
+  RefreshControl,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { Divider } from 'react-native-elements';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { hp } from '../../services/response-screen-service';
@@ -22,11 +24,14 @@ interface IProps {
   left?: React.ReactNode;
   right?: React.ReactNode;
   leftIconSize?: number;
-  leftIconOnPress?: () => void;
-  rightIconOnPress?: () => void;
   stickyBottom?: React.ReactNode;
   children?: React.ReactNode;
   hasDivider?: boolean;
+  loadingView?: boolean;
+  leftIconOnPress?: () => void;
+  rightIconOnPress?: () => void;
+  onRefresh?: () => void;
+  refreshing?: boolean;
 }
 
 const DimensionWidthDevice = Dimensions.get('window').width;
@@ -43,6 +48,9 @@ const SafeAreaContainer = (props: IProps) => {
     stickyBottom,
     children,
     hasDivider,
+    loadingView,
+    onRefresh,
+    refreshing,
   } = props;
 
   const isHeaderVisible = !!title || !!left || !!right;
@@ -59,7 +67,12 @@ const SafeAreaContainer = (props: IProps) => {
           backgroundColor: Colors.White,
         },
       ]}>
-      <ScrollView>
+      <Spinner visible={loadingView} />
+
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         {isHeaderVisible && (
           <>
             <View

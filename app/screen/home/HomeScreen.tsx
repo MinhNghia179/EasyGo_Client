@@ -8,19 +8,23 @@ import CardItem from '../../components/Card/CardItem';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import InputText from '../../components/Input/InputText';
 import { BottomSheetModal } from '../../components/Modal';
-import SelectInput from '../../components/Select/SelectInput';
 import Select from '../../components/Select/SelectInput';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
 
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 interface IProps {}
 
 const HomeScreen = (props: IProps) => {
   const {} = props;
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [refresh, setRefresh] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('nguyenminhnghia.thd@gmail.com');
   const [visibleModal, setVisibleModal] = useState(false);
   const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -45,10 +49,16 @@ const HomeScreen = (props: IProps) => {
     Toast.show('Hello');
   };
 
+  const onRefresh = React.useCallback(() => {
+    setRefresh(true);
+    wait(1000).then(() => setRefresh(false));
+  }, []);
+
   return (
     <SafeAreaContainer
       title="Finance Export"
-      hasDivider
+      onRefresh={onRefresh}
+      refreshing={refresh}
       stickyBottom={
         <PrimaryButton onPress={() => console.log('Minh Nghia 179')}>
           Action Bottom
