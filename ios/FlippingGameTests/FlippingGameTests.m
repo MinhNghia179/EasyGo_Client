@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface FlippingGameTests : XCTestCase
+@interface EasyGoTests : XCTestCase
 
 @end
 
-@implementation FlippingGameTests
+@implementation EasyGoTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.flippinggame">
+  package="com.EasyGo">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
