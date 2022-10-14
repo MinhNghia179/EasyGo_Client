@@ -13,6 +13,11 @@ import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { Dimensions } from 'react-native';
+
+const LATITUDE = 21.02593;
+const LONGITUDE = 105.81327;
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -73,7 +78,21 @@ const HomeScreen = (props: IProps) => {
           </View>
         </View>
 
-        <PrimaryButton onPress={() => setVisibleModal(true)}>
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={{
+            height: 300,
+          }}
+          initialRegion={{
+            latitude: LATITUDE,
+            longitude: LONGITUDE,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
+          }}></MapView>
+
+        <PrimaryButton
+          style={[styles.mt_medium]}
+          onPress={() => setVisibleModal(true)}>
           Show bottom sheet modal
         </PrimaryButton>
 

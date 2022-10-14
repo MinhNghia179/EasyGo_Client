@@ -1,4 +1,11 @@
 {
   "name": "EasyGo",
-  "displayName": "EasyGo"
+  "displayName": "EasyGo",
+  "android": {
+    "config":{
+      "googleMaps":{
+        "apiKey":"AIzaSyCPLslQXR5rphfj5iGoCnJOedMTGaB-FUg"
+      }
+    }
+  }
 }
