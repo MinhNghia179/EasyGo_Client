@@ -60,125 +60,18 @@ const HomeScreen = (props: IProps) => {
   }, []);
 
   return (
-    <SafeAreaContainer
-      title="Finance Export"
-      onRefresh={onRefresh}
-      refreshing={refresh}>
-      <View style={[styles.mb_x2_large, styles.p_small]}>
-        <View style={[styles.mb_medium]}>
-          <Text
-            type="callout"
-            color={Colors.Black}
-            textAlign="center"
-            fontWeight="bold">
-            Design System
-          </Text>
-          <View style={[{ padding: 12, borderWidth: 1, borderColor: 'red' }]}>
-            <Text>123</Text>
-          </View>
-        </View>
-
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={{
-            height: 300,
-          }}
-          initialRegion={{
-            latitude: LATITUDE,
-            longitude: LONGITUDE,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
-          }}></MapView>
-
-        <PrimaryButton
-          style={[styles.mt_medium]}
-          onPress={() => setVisibleModal(true)}>
-          Show bottom sheet modal
-        </PrimaryButton>
-
-        <Select label="Select service" data={data} onSelect={setSelected} />
-
-        <BottomSheetModal
-          isVisible={visibleModal}
-          hasDivider
-          onClose={() => setVisibleModal(false)}
-          title="Bottom Sheet Modal"
-          description="hello">
-          <Text color={Colors.Text.Primary}>Hello Bottom Sheet Modal</Text>
-        </BottomSheetModal>
-
-        <InputText
-          style={[styles.mt_large]}
-          label="Password"
-          value={email}
-          autoCapitalize="characters"
-          onChange={setEmail}
-        />
-
-        <InputText
-          style={[styles.mt_large]}
-          isValid={false}
-          showErrorMessage
-          label="Password"
-          value={email}
-          autoCapitalize="characters"
-          onChange={setEmail}
-          errorMessage={[
-            'Please enter your password ',
-            'Invalid token verify',
-            'Please confirm your password',
-          ]}
-        />
-
-        <CardItem
-          description="Password"
-          label="123456Aa@"
-          onPress={() => setVisibleModal(true)}
-          style={[styles.mt_medium]}
-          hasBorderRadius
-          hasShadow
-          rightIconName="right">
-          <Text>Card Item 1</Text>
-        </CardItem>
-
-        <Text>Avatar</Text>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => console.log('Touch')}>
-          <Avatar
-            imageSize={40}
-            rounded
-            source={{ uri: 'https://randomuser.me/api/portraits/men/36.jpg' }}
-            position="bottom-left"
-            icon={<Icon name="pencil" size={15} />}
-          />
-        </TouchableOpacity>
-
-        <Text>Checkbox</Text>
-
-        <View>
-          <Checkbox
-            label="Account and password "
-            checked={isChecked}
-            onPress={() => setIsChecked(!isChecked)}
-          />
-
-          <Checkbox
-            label="Account and password "
-            checked={isChecked}
-            checkedColor={Colors.Green600}
-            onPress={() => setIsChecked(!isChecked)}
-          />
-          <Checkbox
-            label="Account and password "
-            checked={isChecked}
-            checkedColor={Colors.Red700}
-            onPress={() => setIsChecked(!isChecked)}
-          />
-        </View>
-
-        <Text>Select Option: Done</Text>
-      </View>
+    <SafeAreaContainer onRefresh={onRefresh} refreshing={refresh}>
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={{
+          height: 700,
+        }}
+        initialRegion={{
+          latitude: LATITUDE,
+          longitude: LONGITUDE,
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05,
+        }}></MapView>
     </SafeAreaContainer>
   );
 };
