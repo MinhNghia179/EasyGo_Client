@@ -70,6 +70,7 @@ const SafeAreaContainer = (props: IProps) => {
       <Spinner visible={loadingView} />
 
       <ScrollView
+        style={[styles.full]}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
@@ -84,12 +85,7 @@ const SafeAreaContainer = (props: IProps) => {
                 styles.p_medium,
               ]}>
               <TouchableOpacity activeOpacity={1} onPress={leftIconOnPress}>
-                <Icon
-                  name="arrowleft"
-                  size={IconSizes.x_small}
-                  color={Colors.Black}
-                  onPress={leftIconOnPress}
-                />
+                {!!left && left}
               </TouchableOpacity>
 
               <Text

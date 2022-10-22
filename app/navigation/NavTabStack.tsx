@@ -5,7 +5,6 @@ import { Route } from '../constants/constant';
 import AccountScreen from '../screen/Account/AccountScreen';
 import ActivityScreen from '../screen/Activity/ActivityScreen';
 import HomeScreen from '../screen/Home/HomeScreen';
-import ShowMap from '../screen/Home/views/ShowMap';
 import MessageScreen from '../screen/Message/MessageScreen';
 import PaymentScreen from '../screen/Payment/PaymentScreen';
 import { Colors } from '../styles/colors';
@@ -38,7 +37,7 @@ const NavTabStack = () => {
 
       <Tab.Screen
         name={Route.ACTIVITY_STACK.ACTIVITY}
-        component={ShowMap}
+        component={ActivityScreen}
         options={{
           tabBarLabel: 'Activity',
           tabBarColor: Colors.Text.Primary,
