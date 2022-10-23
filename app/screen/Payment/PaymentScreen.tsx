@@ -1,36 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
 import LinkButton from '../../components/Button/LinkButton';
-import CardItem from '../../components/Card/CardItem';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
 import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
+import PaymentCardItem from './components/PaymentCardItem';
 
 const PaymentScreen = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <SafeAreaContainer
       left={
-        <Text fontWeight="bold" color={Colors.Text.Primary} type="headline">
-          Thanh toán
+        <Text fontWeight="bold" type="headline">
+          Payment
         </Text>
       }
       right={
         <Icon name="setting" size={IconSizes.small} style={[styles.mr_small]} />
       }>
-      <View style={[styles.flex, styles.flex_col, styles.p_medium]}>
-        <View style={[styles.pv_small]}>
-          <Text type="callout" color={Colors.Text.Primary} fontWeight="bold">
-            Đề xuất cho bạn
+      <View style={[styles.flex_col, styles.p_medium]}>
+        <View style={[styles.pv_small, styles.mt_medium]}>
+          <Text type="callout" fontWeight="bold">
+            Recommended for you
           </Text>
 
-          <View style={[styles.mt_small]}>
-            <CardItem
-              hasShadow
-              leftIcon={
+          <View style={[styles.flex_col]}>
+            <PaymentCardItem
+              icon={
                 <Icon
                   name="minussquareo"
                   size={IconSizes.x_small}
@@ -38,14 +39,10 @@ const PaymentScreen = () => {
                   style={[styles.mr_small]}
                 />
               }
-              style={[styles.mt_medium, styles.mb_medium]}
-              hasBorderRadius
-              description="Nạp tiền ĐT để giữ kết nối"
+              description="Charge your phone to stay connected"
             />
-
-            <CardItem
-              hasShadow
-              leftIcon={
+            <PaymentCardItem
+              icon={
                 <Icon
                   name="swap"
                   size={IconSizes.x_small}
@@ -53,31 +50,27 @@ const PaymentScreen = () => {
                   style={[styles.mr_small]}
                 />
               }
-              hasBorderRadius
-              description="Thanh toán hóa đơn mọi lúc"
+              description="Pay bills anytime"
             />
           </View>
         </View>
 
-        <View style={[styles.pv_medium]}>
-          <Divider />
-        </View>
+        <Divider />
 
-        <View>
-          <Text type="callout" color={Colors.Text.Primary} fontWeight="bold">
-            Giao dịch gần đây
+        <View style={[styles.mt_medium]}>
+          <Text type="callout" fontWeight="bold">
+            Recent transactions
           </Text>
           <View
             style={[
-              styles.flex,
               styles.flex_col,
               styles.alg_center,
               styles.jus_center,
               styles.mt_medium,
             ]}>
-            <Text type="footnote">Không có hoạt động nào gần đây</Text>
+            <Text type="footnote">There is no recent activity</Text>
             <LinkButton color={Colors.Blue600} onPress={() => {}}>
-              Xem các giao dịch trước đó
+              View previous transactions
             </LinkButton>
           </View>
         </View>

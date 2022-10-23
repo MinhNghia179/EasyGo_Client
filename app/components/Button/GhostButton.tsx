@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, ButtonProps } from 'react-native-elements';
 import { Colors } from '../../styles/colors';
 
-interface IProps {
+interface IProps extends ButtonProps {
   onPress?: () => void;
   style?: any;
   disabled?: boolean;
@@ -18,7 +18,7 @@ const GhostButton = (props: IProps) => {
   const colorStyle = color ? color : Colors.Text.GreySecondary;
 
   return (
-    <View style={style}>
+    <View style={[style]}>
       <Button
         disabled={disabled}
         type="outline"

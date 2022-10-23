@@ -18,46 +18,32 @@ const ActivityScreen = (props: IProps) => {
   return (
     <SafeAreaContainer
       left={
-        <Text fontWeight="bold" color={Colors.Text.Primary} type="headline">
-          Hoạt động
+        <Text fontWeight="bold" type="headline">
+          Activity
         </Text>
       }
       right={
         <PrimaryButton
           color={Colors.Cyan100}
-          borderRadius={20}
-          onPress={() => {}}
-          style={[styles.rounded, styles.p_medium]}>
-          <View
-            style={[
-              styles.flex,
-              styles.flex_row,
-              styles.jus_center,
-              styles.alg_center,
-            ]}>
+          style={[styles.rounded_full]}
+          icon={
             <Icon
               name="history"
               size={IconSizes.x2_small}
               style={[styles.mr_small]}
             />
-            <Text color={Colors.Text.Primary} type="footnote" fontWeight="bold">
-              Lịch sử
-            </Text>
-          </View>
+          }>
+          <Text type="footnote" fontWeight="bold">
+            History
+          </Text>
         </PrimaryButton>
       }>
-      <View
-        style={[
-          styles.flex,
-          styles.flex_col,
-          styles.alg_center,
-          styles.jus_center,
-        ]}>
-        <Text type="headline" color={Colors.Text.Primary} fontWeight="bold">
-          Hiện vẫn chưa có hoạt động nào
+      <View style={[styles.flex_col, styles.alg_center, styles.jus_center]}>
+        <Text type="headline" fontWeight="bold">
+          No activity yet
         </Text>
         <View style={[styles.mt_small]}>
-          <Text type="footnote">Tìm hiểu xem EasyGo nay có giừ mới nào!</Text>
+          <Text type="footnote">Learn what's new with EasyGo now.</Text>
         </View>
       </View>
     </SafeAreaContainer>

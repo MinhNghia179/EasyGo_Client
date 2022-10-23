@@ -361,9 +361,9 @@ const Flexes = StyleSheet.create({
 
   flex_wrap: { flexWrap: 'wrap' },
 
-  flex_row: { flexDirection: 'row' },
+  flex_row: { flexDirection: 'row', display: 'flex' },
   flex_row_rev: { flexDirection: 'row-reverse' },
-  flex_col: { flexDirection: 'column' },
+  flex_col: { flexDirection: 'column', display: 'flex' },
   flex_col_rev: { flexDirection: 'column-reverse' },
 
   jus_end: { justifyContent: 'flex-end' },

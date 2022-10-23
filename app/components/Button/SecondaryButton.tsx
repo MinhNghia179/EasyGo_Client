@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, ButtonProps } from 'react-native-elements';
 import { Colors } from '../../styles/colors';
 
-interface IProps {
+interface IProps extends ButtonProps {
   onPress?: () => void;
   color?: string;
   style?: any;
@@ -16,7 +16,7 @@ const SecondaryButton = (props: IProps) => {
   const { onPress, color, children, style, disable, loading } = props;
 
   return (
-    <View style={style}>
+    <View style={[style]}>
       <Button
         disabled={disable}
         type="outline"

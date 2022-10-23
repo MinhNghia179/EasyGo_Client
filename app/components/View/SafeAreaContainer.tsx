@@ -11,10 +11,8 @@ import {
 import { Divider } from 'react-native-elements';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/AntDesign';
 import { hp } from '../../services/response-screen-service';
 import { Colors } from '../../styles/colors';
-import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
 import { Text } from '../Text';
 
@@ -80,7 +78,6 @@ const SafeAreaContainer = (props: IProps) => {
               style={[
                 styles.alg_center,
                 styles.jus_between,
-                styles.flex,
                 styles.flex_row,
                 styles.p_medium,
               ]}>
