@@ -1,77 +1,76 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import Toast from 'react-native-root-toast';
-import Icon from 'react-native-vector-icons/EvilIcons';
-import { Avatar } from '../../components/Avatar';
-import PrimaryButton from '../../components/Button/PrimaryButton';
-import CardItem from '../../components/Card/CardItem';
-import Checkbox from '../../components/Checkbox/Checkbox';
+import Icon from 'react-native-vector-icons/Entypo';
 import InputText from '../../components/Input/InputText';
-import { BottomSheetModal } from '../../components/Modal';
-import Select from '../../components/Select/SelectInput';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
+import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import { Dimensions } from 'react-native';
-
-const LATITUDE = 21.02593;
-const LONGITUDE = 105.81327;
-
-const wait = timeout => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-};
+import AddressVisitedRecentlyListing from './components/AddressVisitedRecentlyListing';
+import SelectLocationHeader from './components/SelectLocationHeader';
 
 interface IProps {}
 
 const HomeScreen = (props: IProps) => {
   const {} = props;
 
-  const [loading, setLoading] = useState<boolean>(false);
-  const [refresh, setRefresh] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>('nguyenminhnghia.thd@gmail.com');
-  const [visibleModal, setVisibleModal] = useState(false);
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-
-  const [selected, setSelected] = useState(undefined);
-  const data = [
-    { label: 'One', value: '1' },
-    { label: 'Two', value: '2' },
-    { label: 'Three', value: '3' },
-    { label: 'Four', value: '4' },
-    { label: 'Five', value: '5' },
-  ];
-
-  const _onNavigateScreen = () => {};
-
-  const _onSubmitButton = (name: string) => {
-    setLoading(true);
-    setLoading(false);
-  };
-
-  const _onClick = () => {
-    Toast.show('Hello');
-  };
-
-  const onRefresh = React.useCallback(() => {
-    setRefresh(true);
-    wait(1000).then(() => setRefresh(false));
-  }, []);
+  const [address, setAddress] = useState<string>('');
 
   return (
-    <SafeAreaContainer onRefresh={onRefresh} refreshing={refresh}>
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        style={{
-          height: 700,
-        }}
-        initialRegion={{
-          latitude: LATITUDE,
-          longitude: LONGITUDE,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05,
-        }}></MapView>
+    <SafeAreaContainer>
+      <SelectLocationHeader onPressShowMap={() => {}} />
+
+      <View style={[styles.p_medium]}>
+        <InputText
+          style={[styles.shadow]}
+          leftIcon={
+            <Icon
+              name="location-pin"
+              size={IconSizes.small}
+              color={Colors.Red300}
+            />
+          }
+          placeholder="To where?"
+          value={address}
+          onChange={setAddress}
+        />
+      </View>
+
+      <AddressVisitedRecentlyListing
+        onSelectAddress={value => console.log(value)}
+      />
+
+      <View style={[styles.p_medium]}>
+        <Text fontWeight="bold" type="headline">
+          Add more ways to move
+        </Text>
+
+        <TouchableOpacity
+          onPress={() => {}}
+          style={[
+            styles.p_medium,
+            styles.rounded,
+            styles.mt_medium,
+            styles.mb_medium,
+            {
+              backgroundColor: Colors.Green100,
+            },
+          ]}>
+          <Text type="footnote">Car rental by the hour</Text>
+        </TouchableOpacity>
+
+        <View style={[styles.flex_row, styles.jus_between, styles.alg_center]}>
+          <Text fontWeight="bold" type="headline">
+            Move to favorite places
+          </Text>
+          <Icon
+            name="chevron-with-circle-right"
+            color={Colors.Black}
+            size={IconSizes.x_small}
+          />
+        </View>
+      </View>
     </SafeAreaContainer>
   );
 };
