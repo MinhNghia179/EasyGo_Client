@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
+import { useDispatch } from 'react-redux';
 import InputText from '../../components/Input/InputText';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
+import { IRootDispatch } from '../../redux/root-store';
 import { Colors } from '../../styles/colors';
 import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
@@ -14,6 +16,8 @@ interface IProps {}
 
 const HomeScreen = (props: IProps) => {
   const {} = props;
+
+  const dispatch = useDispatch<IRootDispatch>();
 
   const [address, setAddress] = useState<string>('');
 
@@ -47,7 +51,7 @@ const HomeScreen = (props: IProps) => {
         </Text>
 
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => dispatch.homeStore.getUser()}
           style={[
             styles.p_medium,
             styles.rounded,

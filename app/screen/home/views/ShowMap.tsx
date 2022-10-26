@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { SafeAreaContainer } from '../../../components/View';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import React from 'react';
 import { Dimensions } from 'react-native';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { SafeAreaContainer } from '../../../components/View';
 
 const LATITUDE = 21.02593;
 const LONGITUDE = 105.81327;
