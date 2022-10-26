@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { Route } from '../constants/constant';
 import AccountScreen from '../screen/Account/AccountScreen';
 import ActivityScreen from '../screen/Activity/ActivityScreen';
-import HomeScreen from '../screen/Home/HomeScreen';
+import HomeScreen from '../screen/Home/HomeDetailScreen';
 import MessageScreen from '../screen/Message/MessageScreen';
 import PaymentScreen from '../screen/Payment/PaymentScreen';
 import { Colors } from '../styles/colors';
@@ -25,9 +25,9 @@ const NavTabStack = () => {
         borderTopColor: Colors.Grey400,
         borderTopWidth: 0.5,
       }}
-      initialRouteName={Route.HOME_STACK.HOME}>
+      initialRouteName={Route.HOME}>
       <Tab.Screen
-        name={Route.HOME_STACK.HOME}
+        name={Route.HOME}
         component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
@@ -36,7 +36,7 @@ const NavTabStack = () => {
         }}></Tab.Screen>
 
       <Tab.Screen
-        name={Route.ACTIVITY_STACK.ACTIVITY}
+        name={Route.ACTIVITY}
         component={ActivityScreen}
         options={{
           tabBarLabel: 'Activity',
@@ -45,7 +45,7 @@ const NavTabStack = () => {
         }}></Tab.Screen>
 
       <Tab.Screen
-        name={Route.PAYMENT_STACK.PAYMENT}
+        name={Route.PAYMENT}
         component={PaymentScreen}
         options={{
           tabBarLabel: 'Payment',
@@ -56,7 +56,7 @@ const NavTabStack = () => {
         }}></Tab.Screen>
 
       <Tab.Screen
-        name={Route.MESSAGE_STACK.MESSAGE}
+        name={Route.MESSAGE}
         component={MessageScreen}
         options={{
           tabBarLabel: 'Message',
@@ -65,7 +65,7 @@ const NavTabStack = () => {
         }}></Tab.Screen>
 
       <Tab.Screen
-        name={Route.ACCOUNT_STACK.ACCOUNT}
+        name={Route.ACCOUNT}
         component={AccountScreen}
         options={{
           tabBarLabel: 'Account',

@@ -1,16 +1,23 @@
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Route } from '../../constants/constant';
-import HomeScreen from '../../screen/Home/HomeScreen';
+import CurrentLocationScreen from '../../screen/Home/CurrentLocationScreen';
+import HomeScreen from '../../screen/Home/HomeDetailScreen';
 import { noHeaderNavigationConfig } from '../navigation-options';
 
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator screenOptions={noHeaderNavigationConfig}>
+    <Stack.Navigator
+      initialRouteName={Route.HOME_DETAIL_SCREEN}
+      screenOptions={noHeaderNavigationConfig}>
       <Stack.Screen
-        name={Route.HOME_STACK.HOME}
+        name={Route.HOME_DETAIL_SCREEN}
         component={HomeScreen}></Stack.Screen>
+      <Stack.Screen
+        name={Route.CURRENT_LOCATION}
+        component={CurrentLocationScreen}></Stack.Screen>
     </Stack.Navigator>
   );
 };

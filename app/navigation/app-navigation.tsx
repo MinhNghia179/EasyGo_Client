@@ -4,12 +4,13 @@ import React from 'react';
 import { Route } from '../constants/constant';
 import AppStack from './app-stack';
 import { noHeaderNavigationConfig } from './navigation-options';
+import navigationService from './navigation-service';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationService.navigationRef}>
       <Stack.Navigator
         screenOptions={noHeaderNavigationConfig}
         initialRouteName={Route.APP}>
