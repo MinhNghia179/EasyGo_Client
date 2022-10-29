@@ -1,7 +1,8 @@
 const Route = {
   APP: 'App',
+  NON_AUTH: 'Non auth',
   MAIN_APP: 'MainApp',
-
+  LOGIN: 'login',
   HOME: 'Home',
   CURRENT_LOCATION: 'Current location',
   HOME_DETAIL_SCREEN: 'Home detail screen',

@@ -54,6 +54,15 @@ function _getNavigation(route: string, params: any) {
         };
       }
       break;
+    case Route.LOGIN: {
+      navRoute = Route.NON_AUTH;
+      navParams = {
+        params: {
+          screen: route,
+          params: params,
+        },
+      };
+    }
   }
 
   return { route: navRoute, params: navParams };

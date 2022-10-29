@@ -9,6 +9,7 @@ import MessageScreen from '../screen/Message/MessageScreen';
 import PaymentScreen from '../screen/Payment/PaymentScreen';
 import { Colors } from '../styles/colors';
 import IconSizes from '../styles/icon-size';
+import { HomeStack } from './stacks';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -28,7 +29,7 @@ const NavTabStack = () => {
       initialRouteName={Route.HOME}>
       <Tab.Screen
         name={Route.HOME}
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarLabel: 'Home',
           tabBarColor: Colors.Text.Primary,

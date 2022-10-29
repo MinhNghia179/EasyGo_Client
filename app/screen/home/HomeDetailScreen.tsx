@@ -25,7 +25,11 @@ const HomeDetailScreen = (props: IProps) => {
 
   return (
     <SafeAreaContainer>
-      <SelectLocationHeader onPressShowMap={() => {}} />
+      <SelectLocationHeader
+        onPressShowMap={() =>
+          navigationService.navigate(Route.CURRENT_LOCATION, {})
+        }
+      />
 
       <View style={[styles.p_medium]}>
         <InputText
@@ -54,11 +58,7 @@ const HomeDetailScreen = (props: IProps) => {
 
         <TouchableOpacity
           onPress={() => {
-            console.log(
-              navigationService.navigate(Route.CURRENT_LOCATION, {
-                teamMembers: 'param 123',
-              }),
-            );
+            console.log('Log');
           }}
           style={[
             styles.p_medium,

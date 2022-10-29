@@ -2,14 +2,11 @@ import React from 'react';
 import {
   Dimensions,
   Platform,
-  RefreshControl,
-  ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { Divider } from 'react-native-elements';
-import Spinner from 'react-native-loading-spinner-overlay';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { hp } from '../../services/response-screen-service';
 import { Colors } from '../../styles/colors';
@@ -25,11 +22,9 @@ interface IProps {
   stickyBottom?: React.ReactNode;
   children?: React.ReactNode;
   hasDivider?: boolean;
-  loadingView?: boolean;
   leftIconOnPress?: () => void;
   rightIconOnPress?: () => void;
-  onRefresh?: () => void;
-  refreshing?: boolean;
+  backgroundColor?: string;
 }
 
 const DimensionWidthDevice = Dimensions.get('window').width;
@@ -46,9 +41,6 @@ const SafeAreaContainer = (props: IProps) => {
     stickyBottom,
     children,
     hasDivider,
-    loadingView,
-    onRefresh,
-    refreshing,
   } = props;
 
   const isHeaderVisible = !!title || !!left || !!right;
@@ -61,49 +53,47 @@ const SafeAreaContainer = (props: IProps) => {
         StyleSheet.absoluteFill,
         {
           width: DimensionWidthDevice,
-          height: DimensionHeightDevice,
+          height: '100%',
           backgroundColor: Colors.White,
+          flex: 1,
         },
       ]}>
-      <Spinner visible={loadingView} />
+      {isHeaderVisible && (
+        <>
+          <View
+            style={[
+              styles.alg_center,
+              styles.jus_between,
+              styles.flex_row,
+              styles.p_medium,
+              styles.absolute,
+              {
+                flex: 1,
+              },
+            ]}>
+            <TouchableOpacity activeOpacity={1} onPress={leftIconOnPress}>
+              {!!left && left}
+            </TouchableOpacity>
 
-      <ScrollView
-        style={[styles.full]}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        {isHeaderVisible && (
-          <>
-            <View
-              style={[
-                styles.alg_center,
-                styles.jus_between,
-                styles.flex_row,
-                styles.p_medium,
-              ]}>
-              <TouchableOpacity activeOpacity={1} onPress={leftIconOnPress}>
-                {!!left && left}
-              </TouchableOpacity>
+            <Text
+              fontWeight="bold"
+              numberOfLines={1}
+              allowFontScaling
+              type="subhead"
+              color={titleColor ? titleColor : Colors.Text.DarkBlue}>
+              {title}
+            </Text>
 
-              <Text
-                fontWeight="bold"
-                numberOfLines={1}
-                allowFontScaling
-                type="subhead"
-                color={titleColor ? titleColor : Colors.Text.DarkBlue}>
-                {title}
-              </Text>
+            <TouchableOpacity activeOpacity={1} onPress={rightIconOnPress}>
+              {right}
+            </TouchableOpacity>
+          </View>
 
-              <TouchableOpacity activeOpacity={1} onPress={rightIconOnPress}>
-                {right}
-              </TouchableOpacity>
-            </View>
+          {hasDivider && <Divider />}
+        </>
+      )}
 
-            {hasDivider && <Divider />}
-          </>
-        )}
-        {children}
-      </ScrollView>
+      {children}
 
       {!!stickyBottom && (
         <View
