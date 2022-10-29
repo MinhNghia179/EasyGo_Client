@@ -53,9 +53,8 @@ const SafeAreaContainer = (props: IProps) => {
         StyleSheet.absoluteFill,
         {
           width: DimensionWidthDevice,
-          height: '100%',
+          height: DimensionHeightDevice,
           backgroundColor: Colors.White,
-          flex: 1,
         },
       ]}>
       {isHeaderVisible && (
@@ -66,10 +65,6 @@ const SafeAreaContainer = (props: IProps) => {
               styles.jus_between,
               styles.flex_row,
               styles.p_medium,
-              styles.absolute,
-              {
-                flex: 1,
-              },
             ]}>
             <TouchableOpacity activeOpacity={1} onPress={leftIconOnPress}>
               {!!left && left}

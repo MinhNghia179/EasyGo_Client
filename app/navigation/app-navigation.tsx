@@ -14,7 +14,7 @@ const AppNavigator = () => {
     <NavigationContainer ref={navigationService.navigationRef}>
       <Stack.Navigator
         screenOptions={noHeaderNavigationConfig}
-        initialRouteName={Route.NON_AUTH}>
+        initialRouteName={Route.APP}>
         <Stack.Screen
           name={Route.NON_AUTH}
           component={LoginStack}></Stack.Screen>
