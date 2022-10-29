@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import { Divider } from 'react-native-elements';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { hp } from '../../services/response-screen-service';
 import { Colors } from '../../styles/colors';
@@ -25,6 +26,8 @@ interface IProps {
   leftIconOnPress?: () => void;
   rightIconOnPress?: () => void;
   backgroundColor?: string;
+  loadingView?: boolean;
+  hasMarginBottom?: boolean;
 }
 
 const DimensionWidthDevice = Dimensions.get('window').width;
@@ -41,6 +44,8 @@ const SafeAreaContainer = (props: IProps) => {
     stickyBottom,
     children,
     hasDivider,
+    loadingView,
+    hasMarginBottom,
   } = props;
 
   const isHeaderVisible = !!title || !!left || !!right;
@@ -57,6 +62,7 @@ const SafeAreaContainer = (props: IProps) => {
           backgroundColor: Colors.White,
         },
       ]}>
+      <Spinner visible={loadingView} />
       {isHeaderVisible && (
         <>
           <View
@@ -95,10 +101,9 @@ const SafeAreaContainer = (props: IProps) => {
           style={[
             styles.absolute,
             styles.full_width,
-            styles.p_small,
             {
               bottom: 0,
-              marginBottom: Platform.OS === 'android' ? hp(40) : hp(30),
+              marginBottom: Platform.OS === 'android' ? hp(30) : hp(30),
             },
           ]}>
           {stickyBottom}

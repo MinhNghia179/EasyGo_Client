@@ -6,8 +6,7 @@ export interface IAddress {
 }
 
 export interface ILocation {
-  latitude: number;
-  longitude: number;
-  latitudeDelta: number;
-  longitudeDelta: number;
+  lat: number;
+  long: number;
+  fullAddress?: string;
 }

@@ -1,18 +1,31 @@
 import { INITIAL_ADDRESS } from '../../constants/constant';
-import { IAddress } from '../../interfaces/home-interfaces';
+import { IAddress, ILocation } from '../../interfaces/home-interfaces';
 import apiClient from '../../services/api-client';
 
 export interface IHomeStore {
   AddressVisitedRecently: IAddress[];
+  currentLocation: ILocation;
+  isLoading: boolean;
 }
 
 const initialState: IHomeStore = {
   AddressVisitedRecently: INITIAL_ADDRESS,
+  currentLocation: null,
+  isLoading: false,
 };
 
 const homeStore = {
   state: initialState,
-  reducers: {},
+  reducers: {
+    setCurrentLocation: (state: IHomeStore, payload) => ({
+      ...state,
+      currentLocation: payload,
+    }),
+    setIsLoading: (state: IHomeStore, payload) => ({
+      ...state,
+      isLoading: payload,
+    }),
+  },
   effects: dispatch => ({
     async getUser() {
       try {
@@ -22,11 +35,20 @@ const homeStore = {
         throw error;
       }
     },
-    async getCurrentLocation() {
+    async getCurrentLocationName(payload) {
+      dispatch.homeStore.setIsLoading(true);
       try {
-        Geolocation;
+        const response = await apiClient.post(
+          `/maps/point_name?lat=${payload.lat}&lon=${payload.long}`,
+        );
+        dispatch.homeStore.setCurrentLocation({
+          ...payload,
+          fullAddress: response.data.name,
+        });
       } catch (error) {
         throw error;
+      } finally {
+        dispatch.homeStore.setIsLoading(false);
       }
     },
   }),

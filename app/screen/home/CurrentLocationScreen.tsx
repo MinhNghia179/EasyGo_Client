@@ -1,8 +1,15 @@
-import Geolocation from '@react-native-community/geolocation';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useEffect, useState } from 'react';
-import { PermissionsAndroid } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
+import { useSelector } from 'react-redux';
+import PrimaryButton from '../../components/Button/PrimaryButton';
+import BingMap from '../../components/Map/Map';
 import { SafeAreaContainer } from '../../components/View';
+import { IRootState } from '../../redux/root-store';
+import { Colors } from '../../styles/colors';
+import styles from '../../styles/style-sheet';
+
+import AddressDetailsSection from './components/AddressDetailsSection';
 
 interface IProps {
   navigation: StackNavigationProp<any, 'Home'>;
@@ -11,30 +18,37 @@ interface IProps {
 const CurrentLocationScreen = (props: IProps) => {
   const { navigation } = props;
 
-  const [position, setPosition] = useState({
-    latitude: 10,
-    longitude: 10,
-    latitudeDelta: 0.001,
-    longitudeDelta: 0.001,
-  });
+  const { currentLocation, isLoading } = useSelector((state: IRootState) => ({
+    currentLocation: state.homeStore.currentLocation,
+    isLoading: state.homeStore.isLoading,
+  }));
 
-  useEffect(() => {
-    PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    );
-    Geolocation.getCurrentPosition(pos => {
-      const crd = pos.coords;
-      setPosition({
-        latitude: crd.latitude,
-        longitude: crd.longitude,
-        latitudeDelta: 0.0421,
-        longitudeDelta: 0.0421,
-      });
-    }),
-      { enableHighAccuracy: false, timeout: 20000 };
-  }, []);
+  return (
+    <SafeAreaContainer
+      loadingView={isLoading}
+      stickyBottom={
+        <View
+          style={[
+            {
+              backgroundColor: Colors.White,
+              padding: 10,
+            },
+          ]}>
+          <AddressDetailsSection
+            currentLocation={currentLocation}
+            onPress={() => {}}
+          />
 
-  return <SafeAreaContainer></SafeAreaContainer>;
+          <PrimaryButton style={[styles.mt_medium]} color={Colors.Green500}>
+            Confirm pick up point
+          </PrimaryButton>
+        </View>
+      }>
+      <BingMap
+        location={{ lat: currentLocation.lat, long: currentLocation.long }}
+      />
+    </SafeAreaContainer>
+  );
 };
 
 export default CurrentLocationScreen;

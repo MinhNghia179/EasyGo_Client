@@ -68,7 +68,6 @@ function _getNavigation(route: string, params: any) {
   return { route: navRoute, params: navParams };
 }
 
-// add other navigation functions that you need and export them
 export default {
   navigationRef,
   navigate,

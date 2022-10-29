@@ -26,9 +26,9 @@ const AddressVisitedRecentlyListing: React.FC<IProps> = ({
 
   return (
     <View style={[styles.p_medium]}>
-      {map(AddressVisitedRecently, one => {
+      {map(AddressVisitedRecently, (one, index) => {
         return (
-          <TouchableOpacity onPress={() => onSelectAddress(one)}>
+          <TouchableOpacity key={index} onPress={() => onSelectAddress(one)}>
             <View
               style={[
                 styles.flex_row,

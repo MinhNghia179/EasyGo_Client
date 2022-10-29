@@ -57,9 +57,7 @@ const HomeDetailScreen = (props: IProps) => {
         </Text>
 
         <TouchableOpacity
-          onPress={() => {
-            console.log('Log');
-          }}
+          onPress={() => {}}
           style={[
             styles.p_medium,
             styles.rounded,

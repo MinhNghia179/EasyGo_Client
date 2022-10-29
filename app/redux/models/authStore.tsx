@@ -29,9 +29,8 @@ const authStore = {
         const response = await apiClient.post(
           `/users/login?id=${payload.userName}`,
         );
-        const { session_id, ...user } = response;
-
-        dispatch.authStore.setPortalUser(user);
+        const { session_id, info } = response;
+        dispatch.authStore.setPortalUser(info);
         dispatch.authStore.setClientSession(session_id);
       } catch (error) {
         throw error;

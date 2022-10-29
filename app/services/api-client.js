@@ -4,14 +4,19 @@ import { API_URL } from '../variables/app-config';
 const options = {
   baseURL: API_URL,
   timeout: 1000,
-  headers: { 'X-Custom-Header': 'foobar' },
+  headers: { 'X-Custom-Header': 'foobar', session: '' },
 };
 
 class ApiClient {
   client = {};
+  session = '';
 
   constructor() {
-    this.client = axios.create(options);
+    this.client = axios.create({
+      baseURL: API_URL,
+      timeout: 1000,
+      headers: { 'X-Custom-Header': 'foobar', session: '93ac1694' },
+    });
   }
 
   get(url, conf = {}) {
