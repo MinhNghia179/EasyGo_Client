@@ -3,21 +3,24 @@ import { TouchableOpacity, View } from 'react-native';
 import { Colors } from '../../../styles/colors';
 import styles from '../../../styles/style-sheet';
 
+import { isEmpty } from 'lodash';
 import Icon from 'react-native-vector-icons/Entypo';
 import { Text } from '../../../components/Text';
-import IconSizes from '../../../styles/icon-size';
 import { ILocation } from '../../../interfaces/home-interfaces';
+import IconSizes from '../../../styles/icon-size';
 
 interface IProps {
-  currentLocation: ILocation;
+  location: ILocation;
   onPress?: () => void;
 }
 
 const AddressDetailsSection = (props: IProps) => {
-  const { currentLocation, onPress } = props;
+  const { location, onPress } = props;
+
+  const isNotLocation = isEmpty(location);
 
   return (
-    <View
+    <TouchableOpacity
       style={[
         styles.flex_row,
         styles.alg_center,
@@ -26,8 +29,11 @@ const AddressDetailsSection = (props: IProps) => {
         styles.rounded_small,
         {
           backgroundColor: Colors.Grey100,
+          borderWidth: 1,
+          borderColor: isNotLocation ? Colors.Red500 : Colors.Green500,
         },
-      ]}>
+      ]}
+      onPress={onPress}>
       <View style={[styles.flex_1]}>
         <Icon
           name="location-pin"
@@ -43,18 +49,24 @@ const AddressDetailsSection = (props: IProps) => {
             flex: 10,
           },
         ]}>
-        <Text type="subhead" numberOfLines={1} fontWeight="bold">
-          {currentLocation.fullAddress.slice(0, 25)}
-        </Text>
-        <Text type="footnote" numberOfLines={1}>
-          {currentLocation.fullAddress}
-        </Text>
+        {isNotLocation ? (
+          <Text color={Colors.Red400}>Please select a destination</Text>
+        ) : (
+          <>
+            <Text type="subhead" numberOfLines={1} fontWeight="bold">
+              {location?.fullAddress?.slice(0, 22)}...
+            </Text>
+            <Text type="caption1" numberOfLines={2}>
+              {location?.fullAddress}
+            </Text>
+          </>
+        )}
       </View>
 
       <TouchableOpacity onPress={onPress}>
         <Icon name="bookmark" size={IconSizes.x_small} color={Colors.White} />
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 

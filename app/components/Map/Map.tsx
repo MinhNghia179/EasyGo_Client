@@ -1,29 +1,33 @@
 import React, { useEffect } from 'react';
-import { Dimensions, PermissionsAndroid, View } from 'react-native';
-import BingMapsView from 'react-native-bing-maps';
+import { Dimensions, View } from 'react-native';
+import BingMapsView, { BingMapsProps } from 'react-native-bing-maps';
 import Geolocation from 'react-native-geolocation-service';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ILocation } from '../../interfaces/home-interfaces';
-import { IRootDispatch } from '../../redux/root-store';
+import { IRootDispatch, IRootState } from '../../redux/root-store';
 import styles from '../../styles/style-sheet';
 import { GOOGLE_API_KEY } from '../../variables/app-config';
 
+const iconSVG =
+  '<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt" height="64.000000pt" viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="orange" stroke="none"><path d="M235 627 c-62 -21 -97 -42 -139 -84 -123 -121 -123 -324 0 -447 123 -123 325 -123 448 0 123 123 123 325 0 448 -77 77 -215 114 -309 83z"/></g></svg>';
+
 const { width, height } = Dimensions.get('window');
 
-interface IProps {
+interface IProps extends BingMapsProps {
   location?: ILocation;
   zoom?: number;
+  routes?: any;
 }
 
 const BingMap = (props: IProps) => {
-  const { location, zoom = 15 } = props;
+  const { location, zoom = 15, routes } = props;
 
   const dispatch = useDispatch<IRootDispatch>();
 
+  const lat = location?.lat || 21.040995;
+  const long = location?.long || 105.817583;
+
   const getCurrentLocation = async () => {
-    await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    );
     await Geolocation.getCurrentPosition(
       position => {
         dispatch.homeStore.getCurrentLocationName({
@@ -56,8 +60,19 @@ const BingMap = (props: IProps) => {
         compassButtonVisible
         tiltButtonVisible
         zoomButtonsVisible
-        copyrightDisplay="always"
-        mapLocation={{ lat: location.lat, long: location.long, zoom: zoom }}
+        mapLocation={{
+          lat: lat,
+          long: long,
+          zoom: zoom,
+        }}
+        pins={[
+          {
+            lat: lat,
+            long: long,
+            icon: iconSVG,
+          },
+        ]}
+        routes={routes}
         style={{ height, width, marginVertical: 20 }}
       />
     </View>

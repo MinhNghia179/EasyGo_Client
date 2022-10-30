@@ -15,7 +15,8 @@ interface IProps extends ButtonProps {
 }
 
 const PrimaryButton = (props: IProps) => {
-  const { onPress, color, children, style, disable, loading, icon } = props;
+  const { onPress, color, children, style, disable, loading, icon, ...other } =
+    props;
 
   return (
     <View
@@ -39,6 +40,7 @@ const PrimaryButton = (props: IProps) => {
         titleStyle={{
           color: Colors.White,
         }}
+        {...other}
       />
     </View>
   );

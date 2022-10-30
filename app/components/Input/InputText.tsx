@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, View } from 'react-native';
+import { TextInput, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
 import { Text } from '../Text';
@@ -28,6 +28,7 @@ interface IProps {
   isRequired?: boolean;
   inputHeight?: number;
   multiline?: boolean;
+  onPressRightIcon?: () => void;
   autoCompleteType?:
     | 'name'
     | 'username'
@@ -74,6 +75,7 @@ const InputText = (props: IProps) => {
     errorMessage,
     isRequired,
     label,
+    onPressRightIcon,
     inputHeight,
     multiline,
     onChange,
@@ -101,6 +103,7 @@ const InputText = (props: IProps) => {
           styles.flex,
           styles.flex_row,
           styles.alg_center,
+          styles.jus_between,
           multiline ? styles.alg_start : styles.alg_center,
           {
             borderWidth: 1,
@@ -134,7 +137,13 @@ const InputText = (props: IProps) => {
           autoComplete={autoCompleteType}
         />
 
-        {!!rightIcon && <View style={[styles.mr_x_small]}>{rightIcon}</View>}
+        {!!rightIcon && (
+          <TouchableOpacity
+            onPress={onPressRightIcon}
+            style={[styles.mr_small]}>
+            {rightIcon}
+          </TouchableOpacity>
+        )}
       </View>
 
       {!isValid && showErrorMessage && (

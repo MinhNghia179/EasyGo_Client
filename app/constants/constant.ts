@@ -15,25 +15,28 @@ const Route = {
 
 export const APP_NAME = 'App đặt xe';
 
-export { Route };
+const STEP_DETAILS = {
+  PICK_UP_LOCATION: 'PICK_UP_LOCATION',
+  SELECT_SERVICE: 'SELECT_SERVICE',
+  PAYMENT: 'PAYMENT',
+};
+
+export { Route, STEP_DETAILS };
 
 export const INITIAL_ADDRESS = [
   {
-    shortAddress: '68 Cầu Giấy',
     fullAddress: '68 Cầu giấy, Phường Quan Hoa, Quận Cầu Giấy',
-    lat: '',
-    lng: '',
+    lat: 0,
+    long: 0,
   },
   {
-    shortAddress: '219 Trung Kính',
     fullAddress: '219 Trung Kính, Phường Yên Hòa',
-    lat: '',
-    lng: '',
+    lat: 0,
+    long: 0,
   },
   {
-    shortAddress: '107 Đặng Văn Ngữ',
     fullAddress: '107 Đặng Văn Ngữ, Nam Đồng, Đống Đá',
-    lat: '',
-    lng: '',
+    lat: 0,
+    long: 0,
   },
 ];

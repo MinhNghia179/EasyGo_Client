@@ -1,9 +1,7 @@
 import { map } from 'lodash';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { IAddress } from '../../../interfaces/home-interfaces';
-import { IRootState } from '../../../redux/root-store';
+import { IAddress, ILocation } from '../../../interfaces/home-interfaces';
 
 import { Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -15,18 +13,16 @@ import styles from '../../../styles/style-sheet';
 
 interface IProps {
   onSelectAddress?: (value: IAddress) => void;
+  addressList?: ILocation[];
 }
 
 const AddressVisitedRecentlyListing: React.FC<IProps> = ({
   onSelectAddress,
+  addressList,
 }) => {
-  const AddressVisitedRecently = useSelector(
-    (state: IRootState) => state.homeStore.AddressVisitedRecently,
-  );
-
   return (
     <View style={[styles.p_medium]}>
-      {map(AddressVisitedRecently, (one, index) => {
+      {map(addressList, (one, index) => {
         return (
           <TouchableOpacity key={index} onPress={() => onSelectAddress(one)}>
             <View
@@ -58,7 +54,7 @@ const AddressVisitedRecentlyListing: React.FC<IProps> = ({
 
                 <View style={[styles.flex_col, styles.ml_small]}>
                   <Text fontWeight="bold" type="subhead">
-                    {one.shortAddress}
+                    {one?.fullAddress.slice(0, 22)}...
                   </Text>
                   <Text type="footnote" numberOfLines={1}>
                     {one.fullAddress}

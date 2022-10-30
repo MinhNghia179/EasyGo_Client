@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { PermissionsAndroid, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import InputText from '../../components/Input/InputText';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Route } from '../../constants/constant';
 import navigationService from '../../navigation/navigation-service';
-import { IRootDispatch } from '../../redux/root-store';
+import { IRootDispatch, IRootState } from '../../redux/root-store';
 import { Colors } from '../../styles/colors';
 import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
@@ -22,6 +22,23 @@ const HomeDetailScreen = (props: IProps) => {
   const dispatch = useDispatch<IRootDispatch>();
 
   const [address, setAddress] = useState<string>('');
+
+  const { AddressVisitedRecently } = useSelector((state: IRootState) => ({
+    AddressVisitedRecently: state.homeStore.AddressVisitedRecently,
+  }));
+
+  const handleRequestAccess = async () => {
+    try {
+      await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      );
+    } catch (error) {
+      throw error;
+    }
+  };
+  useEffect(() => {
+    handleRequestAccess();
+  }, []);
 
   return (
     <SafeAreaContainer>
@@ -47,9 +64,7 @@ const HomeDetailScreen = (props: IProps) => {
         />
       </View>
 
-      <AddressVisitedRecentlyListing
-        onSelectAddress={value => console.log(value)}
-      />
+      <AddressVisitedRecentlyListing addressList={AddressVisitedRecently} />
 
       <View style={[styles.p_medium]}>
         <Text fontWeight="bold" type="headline">

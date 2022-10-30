@@ -1,17 +1,30 @@
 import { INITIAL_ADDRESS } from '../../constants/constant';
-import { IAddress, ILocation } from '../../interfaces/home-interfaces';
+import {
+  IBooking,
+  ILocation,
+  IService,
+} from '../../interfaces/home-interfaces';
 import apiClient from '../../services/api-client';
-
 export interface IHomeStore {
-  AddressVisitedRecently: IAddress[];
+  AddressVisitedRecently: ILocation[];
   currentLocation: ILocation;
+  destination: ILocation;
   isLoading: boolean;
+  routes: any;
+  serviceSelected: IService;
+  services: IService[];
+  booking: IBooking;
 }
 
 const initialState: IHomeStore = {
   AddressVisitedRecently: INITIAL_ADDRESS,
   currentLocation: null,
+  destination: null,
   isLoading: false,
+  routes: [],
+  services: null,
+  serviceSelected: null,
+  booking: null,
 };
 
 const homeStore = {
@@ -21,22 +34,47 @@ const homeStore = {
       ...state,
       currentLocation: payload,
     }),
+    setDestinationLocation: (state: IHomeStore, payload) => ({
+      ...state,
+      destination: payload,
+    }),
     setIsLoading: (state: IHomeStore, payload) => ({
       ...state,
       isLoading: payload,
+    }),
+    setRoutes: (state: IHomeStore, payload) => ({
+      ...state,
+      routes: payload,
+    }),
+    setServices: (state: IHomeStore, payload) => ({
+      ...state,
+      services: payload,
+    }),
+    setServiceSelected: (state: IHomeStore, payload) => ({
+      ...state,
+      serviceSelected: payload,
+    }),
+    setBooking: (state: IHomeStore, payload) => ({
+      ...state,
+      booking: payload,
+    }),
+    setRemoveState: (state: IHomeStore) => ({
+      ...state,
+      destination: null,
+      serviceSelected: null,
+      services: null,
+      booking: null,
     }),
   },
   effects: dispatch => ({
     async getUser() {
       try {
         const response = await apiClient.get('/users');
-        console.log(response);
       } catch (error) {
         throw error;
       }
     },
     async getCurrentLocationName(payload) {
-      dispatch.homeStore.setIsLoading(true);
       try {
         const response = await apiClient.post(
           `/maps/point_name?lat=${payload.lat}&lon=${payload.long}`,
@@ -47,8 +85,85 @@ const homeStore = {
         });
       } catch (error) {
         throw error;
-      } finally {
-        dispatch.homeStore.setIsLoading(false);
+      }
+    },
+    async getCoordinates(payload) {
+      try {
+        const response = await apiClient.post(`/maps/point`, payload);
+        if (response.status === 200) {
+          const lat = response.data.coordinates[0];
+          const long = response.data.coordinates[1];
+          const res = await apiClient.post(
+            `/maps/point_name?lat=${lat}&lon=${long}`,
+          );
+          return [{ lat, long, fullAddress: res.data.name }];
+        }
+      } catch (error) {
+        throw error;
+      }
+    },
+    async getRoute(payload, rootState) {
+      const { currentLocation, destination } = rootState.homeStore;
+      try {
+        const response = await apiClient.post(
+          `/maps/route?p0=${currentLocation.fullAddress}&p1=${destination.fullAddress}`,
+        );
+        dispatch.homeStore.setRoutes(response.data.coordinates);
+      } catch (error) {
+        throw error;
+      }
+    },
+    async getServices() {
+      try {
+        const response = await apiClient.get(`/services`);
+        dispatch.homeStore.setServices(response.data.services);
+      } catch (error) {
+        throw error;
+      }
+    },
+    async getCalculatePrice(payload, rootState) {
+      const { currentLocation, destination } = rootState.homeStore;
+
+      try {
+        const response = await apiClient.post(
+          `/payments?p0=${currentLocation.fullAddress}&p1=${destination.fullAddress}&serviceId=${payload.id_service}`,
+        );
+
+        dispatch.homeStore.setBooking({
+          id_booking: new Date().toString(),
+          number: 1,
+          timer: null,
+          id_service: payload.id_service,
+          serviceName: payload.name,
+          pick_location: currentLocation.fullAddress,
+          destination_location: destination.fullAddress,
+          calPrice: response.data.calPrice,
+          travelDistance: response.data.travelDistance,
+        });
+      } catch (error) {
+        throw error;
+      }
+    },
+    async doCreateBooking(payload, rootState) {
+      const { serviceSelected, currentLocation, destination } =
+        rootState.homeStore;
+      try {
+        const payload = {
+          id_booking: null,
+          number: 1,
+          timer: null,
+          id_service: serviceSelected?.id_service,
+          pick_location: currentLocation?.fullAddress,
+          destination_location: destination?.fullAddress,
+          status: 'accept',
+        };
+        const response = await apiClient.post(`/booking/create`, payload);
+
+        if (response.status === 200) {
+          dispatch.homeStore.setBooking(response.booking);
+        }
+      } catch (error) {
+        throw error;
       }
     },
   }),
