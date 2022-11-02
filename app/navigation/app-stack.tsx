@@ -10,10 +10,10 @@ const Stack = createStackNavigator();
 const AppStack = () => {
   return (
     <Stack.Navigator screenOptions={noHeaderNavigationConfig}>
-      <Stack.Screen name={Route.HOME} component={HomeStack}></Stack.Screen>
       <Stack.Screen
         name={Route.MAIN_APP}
         component={NavTabStack}></Stack.Screen>
+      <Stack.Screen name={Route.HOME} component={HomeStack}></Stack.Screen>
     </Stack.Navigator>
   );
 };

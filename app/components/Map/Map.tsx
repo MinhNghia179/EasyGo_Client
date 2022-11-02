@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { Dimensions, View } from 'react-native';
 import BingMapsView, { BingMapsProps } from 'react-native-bing-maps';
 import Geolocation from 'react-native-geolocation-service';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ILocation } from '../../interfaces/home-interfaces';
-import { IRootDispatch, IRootState } from '../../redux/root-store';
+import { IRootDispatch } from '../../redux/root-store';
 import styles from '../../styles/style-sheet';
 import { GOOGLE_API_KEY } from '../../variables/app-config';
 
