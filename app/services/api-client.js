@@ -1,12 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../variables/app-config';
 
-const options = {
-  baseURL: API_URL,
-  timeout: 1000,
-  headers: { 'X-Custom-Header': 'foobar', session: '' },
-};
-
 class ApiClient {
   client = {};
   session = '';
@@ -15,7 +9,21 @@ class ApiClient {
     this.client = axios.create({
       baseURL: API_URL,
       timeout: 1000,
-      headers: { 'X-Custom-Header': 'foobar', session: '93ac1694' },
+      headers: {
+        'X-Custom-Header': 'foobar',
+        session: this.session,
+      },
+    });
+  }
+
+  setSession(session) {
+    this.client = axios.create({
+      baseURL: API_URL,
+      timeout: 1000,
+      headers: {
+        'X-Custom-Header': 'foobar',
+        session: session,
+      },
     });
   }
 

@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { Route } from '../constants/constant';
 import AccountScreen from '../screen/Account/AccountScreen';
 import ActivityScreen from '../screen/Activity/ActivityScreen';
-import HomeScreen from '../screen/Home/HomeDetailScreen';
 import MessageScreen from '../screen/Message/MessageScreen';
 import PaymentScreen from '../screen/Payment/PaymentScreen';
 import { Colors } from '../styles/colors';

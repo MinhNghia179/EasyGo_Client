@@ -9,7 +9,9 @@ const Stack = createStackNavigator();
 
 const AppStack = () => {
   return (
-    <Stack.Navigator screenOptions={noHeaderNavigationConfig}>
+    <Stack.Navigator
+      initialRouteName={Route.MAIN_APP}
+      screenOptions={noHeaderNavigationConfig}>
       <Stack.Screen
         name={Route.MAIN_APP}
         component={NavTabStack}></Stack.Screen>

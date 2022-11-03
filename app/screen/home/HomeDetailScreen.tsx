@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { PermissionsAndroid, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -37,6 +38,7 @@ const HomeDetailScreen = (props: IProps) => {
       throw error;
     }
   };
+
   useEffect(() => {
     handleRequestAccess();
   }, []);

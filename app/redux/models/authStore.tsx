@@ -1,14 +1,11 @@
 import { IUser } from '../../interfaces/auth-interface';
 import apiClient from '../../services/api-client';
-
 export interface IAuthStore {
   portalUser: IUser;
-  session: string;
 }
 
 const initialState: IAuthStore = {
   portalUser: null,
-  session: '',
 };
 
 const authStore = {
@@ -18,10 +15,6 @@ const authStore = {
       ...state,
       portalUser: payload,
     }),
-    setClientSession: (state: IAuthStore, payload) => ({
-      ...state,
-      session: payload,
-    }),
   },
   effects: dispatch => ({
     async doSignIn(payload) {
@@ -29,9 +22,12 @@ const authStore = {
         const response = await apiClient.post(
           `/users/login?id=${payload.userName}`,
         );
-        const { session_id, info } = response;
-        dispatch.authStore.setPortalUser(info);
-        dispatch.authStore.setClientSession(session_id);
+
+        if (response.status === 200) {
+          apiClient.setSession(response.data.session_id);
+        }
+
+        dispatch.authStore.setPortalUser(response.data.info);
       } catch (error) {
         throw error;
       }
@@ -39,7 +35,6 @@ const authStore = {
     async doSignOut() {
       try {
         dispatch.authStore.setPortalUser(null);
-        dispatch.authStore.setClientSession('');
       } catch (error) {
         throw error;
       }
