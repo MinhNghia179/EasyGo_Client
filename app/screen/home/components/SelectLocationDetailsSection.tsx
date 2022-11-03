@@ -104,7 +104,7 @@ const SelectLocationDetailsSection = (props: IProps) => {
       ) : (
         <AddressVisitedRecentlyListing
           addressList={locationList}
-          onSelectAddress={onSelect}
+          onSelectAddress={value => console.log(value)}
         />
       )}
       <View style={[styles.flex_row, styles.jus_end]}>

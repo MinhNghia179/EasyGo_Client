@@ -1,10 +1,11 @@
 import React from 'react';
-import {Dimensions, View} from 'react-native';
-import {Provider} from 'react-redux';
+import { enableLatestRenderer } from 'react-native-maps';
+import { Provider } from 'react-redux';
 import AppNavigator from './app/navigation/app-navigation';
 import rootState from './app/redux/root-store';
+import './app/services/app';
 
-const DimensionWidthDevice = Dimensions.get('window').width;
+enableLatestRenderer();
 
 const App = () => {
   return (
