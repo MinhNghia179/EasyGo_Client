@@ -9,10 +9,8 @@ export interface IHomeStore {
   AddressVisitedRecently: ILocation[];
   currentLocation: ILocation;
   destination: ILocation;
-  isLoading: boolean;
   routes: any;
   serviceSelected: IService;
-  services: IService[];
   booking: IBooking;
 }
 
@@ -20,9 +18,7 @@ const initialState: IHomeStore = {
   AddressVisitedRecently: INITIAL_ADDRESS,
   currentLocation: null,
   destination: null,
-  isLoading: false,
   routes: [],
-  services: null,
   serviceSelected: null,
   booking: null,
 };
@@ -38,17 +34,10 @@ const homeStore = {
       ...state,
       destination: payload,
     }),
-    setIsLoading: (state: IHomeStore, payload) => ({
-      ...state,
-      isLoading: payload,
-    }),
+
     setRoutes: (state: IHomeStore, payload) => ({
       ...state,
       routes: payload,
-    }),
-    setServices: (state: IHomeStore, payload) => ({
-      ...state,
-      services: payload,
     }),
     setServiceSelected: (state: IHomeStore, payload) => ({
       ...state,
@@ -67,13 +56,6 @@ const homeStore = {
     }),
   },
   effects: dispatch => ({
-    async getUser() {
-      try {
-        const response = await apiClient.get('/users');
-      } catch (error) {
-        throw error;
-      }
-    },
     async getCurrentLocationName(payload) {
       try {
         const response = await apiClient.post(
@@ -109,14 +91,6 @@ const homeStore = {
           `/maps/route?p0=${currentLocation.fullAddress}&p1=${destination.fullAddress}`,
         );
         dispatch.homeStore.setRoutes(response.data.coordinates);
-      } catch (error) {
-        throw error;
-      }
-    },
-    async getServices() {
-      try {
-        const response = await apiClient.get(`/services`);
-        dispatch.homeStore.setServices(response.data.services);
       } catch (error) {
         throw error;
       }

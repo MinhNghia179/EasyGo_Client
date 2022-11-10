@@ -1,10 +1,8 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { PermissionsAndroid, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import { useDispatch, useSelector } from 'react-redux';
 import InputText from '../../components/Input/InputText';
-import { MapV2 } from '../../components/Map/MapV2';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Route } from '../../constants/constant';
@@ -66,8 +64,6 @@ const HomeDetailScreen = (props: IProps) => {
           onChange={setAddress}
         />
       </View>
-
-      <MapV2 />
 
       <AddressVisitedRecentlyListing addressList={AddressVisitedRecently} />
 
