@@ -11,6 +11,9 @@ const Route = {
   ACTIVITY: 'Activity',
   ACCOUNT: 'Account',
   MESSAGE: 'Message',
+  // Booking
+  BOOKING: 'BOOKING',
+  BOOKING_DETAILS_SCREEN: 'BOOKING_DETAILS_SCREEN',
 };
 
 export const APP_NAME = 'App đặt xe';

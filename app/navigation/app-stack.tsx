@@ -3,7 +3,7 @@ import React from 'react';
 import { Route } from '../constants/constant';
 import { noHeaderNavigationConfig } from './navigation-options';
 import NavTabStack from './NavTabStack';
-import { HomeStack } from './stacks';
+import { BookingStack, HomeStack } from './stacks';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +16,9 @@ const AppStack = () => {
         name={Route.MAIN_APP}
         component={NavTabStack}></Stack.Screen>
       <Stack.Screen name={Route.HOME} component={HomeStack}></Stack.Screen>
+      <Stack.Screen
+        name={Route.BOOKING}
+        component={BookingStack}></Stack.Screen>
     </Stack.Navigator>
   );
 };
