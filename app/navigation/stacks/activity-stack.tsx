@@ -1,19 +1,19 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { BookingStackRoute } from '../../constants/constant';
-import BookingDetailsScreen from '../../screen/Booking/BookingDetailsScreen';
+import { ActivityStackRoute } from '../../constants/constant';
+import ActivityScreen from '../../screen/Activity/ActivityScreen';
 import { noHeaderNavigationConfig } from '../navigation-options';
 
 const Stack = createStackNavigator();
 
-const BookingStack = () => {
+const ActivityStack = () => {
   return (
     <Stack.Navigator screenOptions={noHeaderNavigationConfig}>
       <Stack.Screen
-        component={BookingDetailsScreen}
-        name={BookingStackRoute.DASHBOARD}></Stack.Screen>
+        component={ActivityScreen}
+        name={ActivityStackRoute.DASHBOARD}></Stack.Screen>
     </Stack.Navigator>
   );
 };
 
-export default BookingStack;
+export default ActivityStack;

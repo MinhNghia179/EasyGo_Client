@@ -2,13 +2,10 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Route } from '../constants/constant';
-import AccountScreen from '../screen/Account/AccountScreen';
-import ActivityScreen from '../screen/Activity/ActivityScreen';
-import MessageScreen from '../screen/Message/MessageScreen';
-import PaymentScreen from '../screen/Payment/PaymentScreen';
 import { Colors } from '../styles/colors';
 import IconSizes from '../styles/icon-size';
-import { HomeStack } from './stacks';
+import { ActivityStack, HomeStack, MessageStack, PaymentStack } from './stacks';
+import AccountStack from './stacks/account-stack';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -25,9 +22,9 @@ const NavTabStack = () => {
         borderTopColor: Colors.Grey400,
         borderTopWidth: 0.5,
       }}
-      initialRouteName={Route.HOME}>
+      initialRouteName={Route.HOME_STACK}>
       <Tab.Screen
-        name={Route.HOME}
+        name={Route.HOME_STACK}
         component={HomeStack}
         options={{
           tabBarLabel: 'Home',
@@ -36,8 +33,8 @@ const NavTabStack = () => {
         }}></Tab.Screen>
 
       <Tab.Screen
-        name={Route.ACTIVITY}
-        component={ActivityScreen}
+        name={Route.ACTIVITY_STACK}
+        component={ActivityStack}
         options={{
           tabBarLabel: 'Activity',
           tabBarColor: Colors.Text.Primary,
@@ -45,8 +42,8 @@ const NavTabStack = () => {
         }}></Tab.Screen>
 
       <Tab.Screen
-        name={Route.PAYMENT}
-        component={PaymentScreen}
+        name={Route.PAYMENT_STACK}
+        component={PaymentStack}
         options={{
           tabBarLabel: 'Payment',
           tabBarColor: Colors.Text.Primary,
@@ -56,8 +53,8 @@ const NavTabStack = () => {
         }}></Tab.Screen>
 
       <Tab.Screen
-        name={Route.MESSAGE}
-        component={MessageScreen}
+        name={Route.MESSAGE_STACK}
+        component={MessageStack}
         options={{
           tabBarLabel: 'Message',
           tabBarColor: Colors.Text.Primary,
@@ -65,8 +62,8 @@ const NavTabStack = () => {
         }}></Tab.Screen>
 
       <Tab.Screen
-        name={Route.ACCOUNT}
-        component={AccountScreen}
+        name={Route.ACCOUNT_STACK}
+        component={AccountStack}
         options={{
           tabBarLabel: 'Account',
           tabBarColor: Colors.Text.Primary,

@@ -8,7 +8,7 @@ import Checkbox from '../../components/Checkbox/Checkbox';
 import InputText from '../../components/Input/InputText';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
-import { Route } from '../../constants/constant';
+import { HomeStackRoute } from '../../constants/constant';
 import navigationService from '../../navigation/navigation-service';
 import { IRootDispatch } from '../../redux/root-store';
 import { Colors } from '../../styles/colors';
@@ -23,10 +23,10 @@ const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onSignIn = async () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       await dispatch.authStore.doSignIn({ userName });
-      navigationService.navigate(Route.HOME_DETAIL_SCREEN, {});
+      navigationService.navigate(HomeStackRoute.DASHBOARD, {});
     } catch (error) {
       console.error(error);
     } finally {
@@ -35,7 +35,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <SafeAreaContainer>
+    <SafeAreaContainer contentType="scrollview">
       <View
         style={[
           styles.p_medium,

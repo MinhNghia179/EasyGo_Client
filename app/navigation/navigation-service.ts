@@ -1,6 +1,6 @@
 import { CommonActions } from '@react-navigation/native';
 import React from 'react';
-import { Route } from '../constants/constant';
+import { HomeStackRoute, LoginStackRoute, Route } from '../constants/constant';
 
 const navigationRef: any = React.createRef();
 
@@ -30,11 +30,11 @@ function _getNavigation(route: string, params: any) {
   let navRoute = route;
 
   switch (route) {
-    case Route.HOME_DETAIL_SCREEN:
+    case HomeStackRoute.DASHBOARD:
       {
         navRoute = Route.APP;
         navParams = {
-          screen: Route.HOME,
+          screen: Route.HOME_STACK,
           params: {
             screen: route,
             params: params,
@@ -42,20 +42,8 @@ function _getNavigation(route: string, params: any) {
         };
       }
       break;
-    case Route.CURRENT_LOCATION:
-      {
-        navRoute = Route.APP;
-        navParams = {
-          screen: Route.HOME,
-          params: {
-            screen: route,
-            params: params,
-          },
-        };
-      }
-      break;
-    case Route.LOGIN: {
-      navRoute = Route.NON_AUTH;
+    case LoginStackRoute.LOGIN: {
+      navRoute = Route.LOGIN_STACK;
       navParams = {
         params: {
           screen: route,
