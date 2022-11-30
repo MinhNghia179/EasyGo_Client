@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Platform,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { hp, wp } from '../../services/response-screen-service';
 import { Colors } from '../../styles/colors';
 import IconSizes from '../../styles/icon-size';
@@ -71,7 +65,9 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
     rightIconColor = Colors.BlueGrey1000,
     rightIconOnPress,
     contentType = 'scrollview',
-    headerStyle = {},
+    headerStyle = {
+      backgroundColor: Colors.White,
+    },
     bottom,
     absoluteBottom = false,
     stickyBottom,
@@ -89,8 +85,6 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
 
   const viewStyle = {
     backgroundColor: backgroundColor,
-    paddingTop:
-      Platform.OS === 'android' ? hp(50 - StatusBar.currentHeight) : hp(50),
     ...styles.flex,
   };
 
@@ -117,7 +111,7 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
           style={{
             ...styles.flex_row,
             paddingHorizontal: wp(13),
-            paddingVertical: hp(10),
+            paddingVertical: hp(20),
             ...borderedStyle,
             ...headerStyle,
           }}>

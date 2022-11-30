@@ -1,122 +1,60 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
-import { useDispatch } from 'react-redux';
-import LinkButton from '../../components/Button/LinkButton';
-import PrimaryButton from '../../components/Button/PrimaryButton';
-import Checkbox from '../../components/Checkbox/Checkbox';
-import InputText from '../../components/Input/InputText';
+import { ImageBackground, View } from 'react-native';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
-import { HomeStackRoute } from '../../constants/constant';
-import navigationService from '../../navigation/navigation-service';
-import { IRootDispatch } from '../../redux/root-store';
 import { Colors } from '../../styles/colors';
-import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
+import FormLogin from './components/FormLogin';
+import LoginWithPhoneNumber from './components/LoginWithPhoneNumber';
 
 const LoginScreen = () => {
-  const dispatch = useDispatch<IRootDispatch>();
-
-  const [userName, setUserName] = useState<string>('');
-  const [isChecked, setIsChecked] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const onSignIn = async () => {
-    setIsLoading(true);
-    try {
-      await dispatch.authStore.doSignIn({ userName });
-      navigationService.navigate(HomeStackRoute.DASHBOARD, {});
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const [isLoginWithMobilePhone, setIsLoginWithMobilePhone] =
+    useState<boolean>(false);
 
   return (
     <SafeAreaContainer contentType="scrollview">
-      <View
+      <ImageBackground
+        source={{
+          uri: 'https://media.istockphoto.com/id/165792741/vi/vec-to/b%E1%BA%A3n-%C4%91%E1%BB%93-th%C3%A0nh-ph%E1%BB%91-tr%E1%BB%ABu-t%C6%B0%E1%BB%A3ng.jpg?s=612x612&w=is&k=20&c=1b8cNO9_WIesjxFlensz2nm_pMt1j0HMp6ju5rv9GUg=',
+        }}
+        resizeMode="cover"
         style={[
-          styles.p_medium,
-          styles.flex_col,
-          styles.jus_evenly,
           {
             flex: 1,
           },
         ]}>
-        <Text type="headline" fontWeight="bold" textAlign="center">
-          EASY GO
-        </Text>
-        <View>
-          <InputText
-            isRequired
-            leftIcon={<Icon name="user" size={IconSizes.medium} />}
-            label="Username"
-            value={userName}
-            onChange={setUserName}
-          />
-          <View
-            style={[styles.flex_row, styles.jus_between, styles.alg_center]}>
-            <Checkbox
-              label="Save your uId"
-              checked={isChecked}
-              checkedColor={Colors.Green600}
-              onPress={() => setIsChecked(!isChecked)}
-            />
-            <LinkButton>Forgot uID</LinkButton>
+        <View
+          style={[
+            styles.p_medium,
+            styles.flex_col,
+            styles.jus_evenly,
+            {
+              flex: 1,
+            },
+          ]}>
+          <Text
+            type="headline"
+            fontWeight="bold"
+            textAlign="center"
+            color={Colors.Blue600}>
+            EASY GO
+          </Text>
+
+          <View style={[styles.bg_white, styles.p_large, styles.rounded]}>
+            {isLoginWithMobilePhone ? (
+              <LoginWithPhoneNumber
+                onBack={() => setIsLoginWithMobilePhone(false)}
+              />
+            ) : (
+              <FormLogin
+                onSelectLoginWithPhoneNumber={() =>
+                  setIsLoginWithMobilePhone(true)
+                }
+              />
+            )}
           </View>
         </View>
-
-        <View>
-          <PrimaryButton
-            loading={isLoading}
-            onPress={onSignIn}
-            disable={!userName}>
-            Login
-          </PrimaryButton>
-          <View
-            style={[
-              styles.flex_row,
-              styles.alg_center,
-              styles.mt_medium,
-              styles.jus_around,
-              styles.mv_medium,
-            ]}>
-            <View
-              style={[
-                styles.mv_small,
-                {
-                  height: 1,
-                  elevation: 2,
-                  backgroundColor: '#AAAAAA',
-                  width: '40%',
-                },
-              ]}></View>
-            <Text>or</Text>
-            <View
-              style={[
-                styles.mv_small,
-                {
-                  height: 1,
-                  elevation: 2,
-                  backgroundColor: '#AAAAAA',
-                  width: '40%',
-                },
-              ]}></View>
-          </View>
-          <PrimaryButton color={Colors.Red500}>
-            Sign in with google
-          </PrimaryButton>
-        </View>
-
-        <View style={[styles.flex_col, styles.jus_center, styles.alg_center]}>
-          <LinkButton color={Colors.Text.Primary}>
-            Don't have an account?
-          </LinkButton>
-          <LinkButton color={Colors.Text.Primary}>Register Account</LinkButton>
-        </View>
-      </View>
+      </ImageBackground>
     </SafeAreaContainer>
   );
 };

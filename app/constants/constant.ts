@@ -18,6 +18,7 @@ const BookingStackRoute = {
 };
 const LoginStackRoute = {
   LOGIN: 'Login',
+  FORGOT_PASSWORD: 'FORGOT_PASSWORD',
 };
 const AccountStackRoute = {
   DASHBOARD: 'dashboard',

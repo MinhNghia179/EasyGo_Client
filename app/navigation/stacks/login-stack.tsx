@@ -1,6 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { LoginStackRoute } from '../../constants/constant';
+import ForgotPassword from '../../screen/Login/ForgotPassword';
 import LoginScreen from '../../screen/Login/LoginScreen';
 import { noHeaderNavigationConfig } from '../navigation-options';
 
@@ -14,6 +15,9 @@ const LoginStack = () => {
       <Stack.Screen
         name={LoginStackRoute.LOGIN}
         component={LoginScreen}></Stack.Screen>
+      <Stack.Screen
+        name={LoginStackRoute.FORGOT_PASSWORD}
+        component={ForgotPassword}></Stack.Screen>
     </Stack.Navigator>
   );
 };
