@@ -9,6 +9,8 @@ import styles from '../../../styles/style-sheet';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Text } from '../../../components/Text';
+import { LoginStackRoute } from '../../../constants/constant';
+import navigationService from '../../../navigation/navigation-service';
 
 interface IProps {
   onSelectLoginWithPhoneNumber: () => void;
@@ -20,6 +22,10 @@ const FormLogin = (props: IProps) => {
   const [emailAddress, setEmailAddress] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const navigateToForgotPassWord = () => {
+    navigationService.navigate(LoginStackRoute.FORGOT_PASSWORD, {});
+  };
 
   return (
     <>
@@ -79,7 +85,10 @@ const FormLogin = (props: IProps) => {
           Login
         </PrimaryButton>
         <View style={[styles.flex, styles.alg_center, styles.mv_large]}>
-          <LinkButton type="footnote" color={Colors.Grey500}>
+          <LinkButton
+            type="footnote"
+            color={Colors.Grey500}
+            onPress={navigateToForgotPassWord}>
             Forgot your password?
           </LinkButton>
         </View>

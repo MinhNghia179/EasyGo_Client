@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
-import { Platform, ScrollView, StyleSheet, View } from 'react-native';
+import {
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { hp, wp } from '../../services/response-screen-service';
 import { Colors } from '../../styles/colors';
 import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
 import { Text } from '../Text';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface ISafeAreaViewProps {
   backgroundColor?: Colors | string;
@@ -91,6 +98,24 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
   const showHeader = left || leftIconName || title || right || rightIconName;
   const ContentView = contentType === 'view' ? View : ScrollView;
 
+  const getIconName = () => {
+    let icon = null;
+    switch (leftIconName) {
+      case 'back': {
+        icon = (
+          <Icon
+            name="arrow-back"
+            size={IconSizes.x_small}
+            color={Colors.Grey500}
+          />
+        );
+      }
+    }
+    return (
+      <TouchableOpacity onPress={leftIconOnPress}>{icon}</TouchableOpacity>
+    );
+  };
+
   const borderedStyle = headerBordered
     ? {
         borderBottomWidth: StyleSheet.hairlineWidth,
@@ -115,8 +140,13 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
             ...borderedStyle,
             ...headerStyle,
           }}>
-          <View style={{ width: leftIconName ? leftIconSize : undefined }}>
-            {leftIconName ? null : left}
+          <View
+            style={[
+              styles.flex,
+              styles.jus_center,
+              { width: leftIconName ? leftIconSize : undefined },
+            ]}>
+            {leftIconName ? getIconName() : left}
           </View>
 
           {/* Title */}

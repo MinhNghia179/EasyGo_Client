@@ -43,8 +43,19 @@ function _getNavigation(route: string, params: any) {
       }
       break;
     case LoginStackRoute.LOGIN: {
-      navRoute = Route.LOGIN_STACK;
+      navRoute = Route.APP;
       navParams = {
+        screen: Route.LOGIN_STACK,
+        params: {
+          screen: route,
+          params: params,
+        },
+      };
+    }
+    case LoginStackRoute.FORGOT_PASSWORD: {
+      navRoute = Route.APP;
+      navParams = {
+        screen: Route.LOGIN_STACK,
         params: {
           screen: route,
           params: params,

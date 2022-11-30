@@ -8,6 +8,8 @@ import styles from '../../styles/style-sheet';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PrimaryButton from '../../components/Button/PrimaryButton';
+import { LoginStackRoute } from '../../constants/constant';
+import navigationService from '../../navigation/navigation-service';
 import IconSizes from '../../styles/icon-size';
 
 const ForgotPassword = () => {
@@ -16,6 +18,10 @@ const ForgotPassword = () => {
   return (
     <SafeAreaContainer
       contentType="scrollview"
+      leftIconName="back"
+      leftIconOnPress={() => {
+        navigationService.navigate(LoginStackRoute.LOGIN, {});
+      }}
       backgroundColor={Colors.BlueGrey100}
       title="Reset Password">
       <View style={[styles.p_medium]}>
