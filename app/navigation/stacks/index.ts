@@ -5,6 +5,7 @@ import LoginStack from './login-stack';
 import MessageStack from './message-stack';
 import PaymentStack from './payment-stack';
 import ActivityStack from './activity-stack';
+import CoverAppStack from './cover-app-stack';
 
 export {
   HomeStack,
@@ -14,4 +15,5 @@ export {
   PaymentStack,
   MessageStack,
   ActivityStack,
+  CoverAppStack,
 };

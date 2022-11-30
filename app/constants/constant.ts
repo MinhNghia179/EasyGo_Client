@@ -6,7 +6,8 @@ const Route = {
   ACCOUNT_STACK: 'AccountStack',
   PAYMENT_STACK: 'PaymentStack',
   ACTIVITY_STACK: 'ActivityStack',
-  MESSAGE_STACK: 'MESSAGE_STACK',
+  MESSAGE_STACK: 'MessageStack',
+  COVER_APP_STACK: 'CoverAppStack',
 };
 
 const HomeStackRoute = {
@@ -30,6 +31,9 @@ const ActivityStackRoute = {
 const MessageStackRoute = {
   DASHBOARD: 'dashboard',
 };
+const CoverAppRoute = {
+  INTRO: 'INTRO',
+};
 
 const STEP_DETAILS = {
   PICK_UP_LOCATION: 'PICK_UP_LOCATION',
@@ -47,4 +51,5 @@ export {
   PaymentStackRoute,
   ActivityStackRoute,
   MessageStackRoute,
+  CoverAppRoute,
 };

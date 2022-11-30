@@ -57,7 +57,7 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
   const [keyBoardVisible, setKeyBoardVisible] = useState<boolean>(false);
 
   const {
-    backgroundColor,
+    backgroundColor = Colors.White,
     left,
     title,
     leftIconSize = IconSizes.small,
