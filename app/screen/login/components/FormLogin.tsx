@@ -79,7 +79,9 @@ const FormLogin = (props: IProps) => {
           Login
         </PrimaryButton>
         <View style={[styles.flex, styles.alg_center, styles.mv_large]}>
-          <LinkButton color={Colors.Grey500}>Forgot your password?</LinkButton>
+          <LinkButton type="footnote" color={Colors.Grey500}>
+            Forgot your password?
+          </LinkButton>
         </View>
       </View>
     </>
