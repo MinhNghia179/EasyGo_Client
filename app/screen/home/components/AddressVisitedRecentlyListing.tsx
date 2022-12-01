@@ -21,7 +21,10 @@ const AddressVisitedRecentlyListing: React.FC<IProps> = ({
   addressList,
 }) => {
   return (
-    <View style={[styles.p_medium]}>
+    <>
+      <Text fontWeight="bold" type="subhead">
+        Locations
+      </Text>
       {map(addressList, (one, index) => {
         return (
           <TouchableOpacity key={index} onPress={() => onSelectAddress(one)}>
@@ -30,7 +33,7 @@ const AddressVisitedRecentlyListing: React.FC<IProps> = ({
                 styles.flex_row,
                 styles.alg_center,
                 styles.jus_between,
-                styles.pv_medium,
+                styles.pv_small,
               ]}>
               <View style={[styles.flex_row, styles.alg_center]}>
                 <View
@@ -68,7 +71,7 @@ const AddressVisitedRecentlyListing: React.FC<IProps> = ({
           </TouchableOpacity>
         );
       })}
-    </View>
+    </>
   );
 };
 

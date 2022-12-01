@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions } from 'react-native';
 import BingMapsView, { BingMapsProps } from 'react-native-bing-maps';
 import Geolocation from 'react-native-geolocation-service';
 import { useDispatch } from 'react-redux';
 import { ILocation } from '../../interfaces/home-interfaces';
 import { IRootDispatch } from '../../redux/root-store';
-import styles from '../../styles/style-sheet';
 import { GOOGLE_API_KEY } from '../../variables/app-config';
 
 const iconSVG =
@@ -51,31 +50,15 @@ const BingMap = (props: IProps) => {
   }, []);
 
   return (
-    <View style={[styles.jus_center, styles.alg_center, styles.flex_1]}>
-      <BingMapsView
-        credentialsKey={GOOGLE_API_KEY}
-        buildingsVisible={false}
-        transitFeaturesVisible
-        businessLandmarksVisible
-        compassButtonVisible
-        tiltButtonVisible
-        zoomButtonsVisible
-        mapLocation={{
-          lat: lat,
-          long: long,
-          zoom: zoom,
-        }}
-        pins={[
-          {
-            lat: lat,
-            long: long,
-            icon: iconSVG,
-          },
-        ]}
-        routes={routes}
-        style={{ height, width, marginVertical: 20 }}
-      />
-    </View>
+    <BingMapsView
+      credentialsKey={GOOGLE_API_KEY}
+      buildingsVisible={false}
+      transitFeaturesVisible
+      businessLandmarksVisible
+      compassButtonVisible
+      tiltButtonVisible
+      zoomButtonsVisible
+    />
   );
 };
 

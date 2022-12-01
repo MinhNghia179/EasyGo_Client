@@ -15,7 +15,26 @@ export interface IHomeStore {
 }
 
 const initialState: IHomeStore = {
-  AddressVisitedRecently: INITIAL_ADDRESS,
+  AddressVisitedRecently: [
+    {
+      shortAddress: '68 Cầu Giấy',
+      fullAddress: '68 Cầu giấy, Phường Quan Hoa, Quận Cầu Giấy',
+      lat: '',
+      lng: '',
+    },
+    {
+      shortAddress: '219 Trung Kính',
+      fullAddress: '219 Trung Kính, Phường Yên Hòa',
+      lat: '',
+      lng: '',
+    },
+    {
+      shortAddress: '107 Đặng Văn Ngữ',
+      fullAddress: '107 Đặng Văn Ngữ, Nam Đồng, Đống Đá',
+      lat: '',
+      lng: '',
+    },
+  ],
   currentLocation: null,
   destination: null,
   routes: [],

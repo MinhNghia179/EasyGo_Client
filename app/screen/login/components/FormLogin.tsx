@@ -9,7 +9,7 @@ import styles from '../../../styles/style-sheet';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Text } from '../../../components/Text';
-import { LoginStackRoute } from '../../../constants/constant';
+import { HomeStackRoute, LoginStackRoute } from '../../../constants/constant';
 import navigationService from '../../../navigation/navigation-service';
 
 interface IProps {
@@ -81,7 +81,12 @@ const FormLogin = (props: IProps) => {
             leftIcon={<Icon name="lock" size={IconSizes.x_small} />}
           />
         </View>
-        <PrimaryButton color={Colors.Green600} loading={isLoading}>
+        <PrimaryButton
+          color={Colors.Green600}
+          loading={isLoading}
+          onPress={() =>
+            navigationService.navigate(HomeStackRoute.DASHBOARD, {})
+          }>
           Login
         </PrimaryButton>
         <View style={[styles.flex, styles.alg_center, styles.mv_large]}>
