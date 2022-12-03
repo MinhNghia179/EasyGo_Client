@@ -72,6 +72,25 @@ const MessageScreen = () => {
           </View>
         </View>
 
+        <Checkbox
+          label="Account and password "
+          checked={isChecked}
+          onPress={() => setIsChecked(!isChecked)}
+        />
+
+        <Checkbox
+          label="Account and password "
+          checked={isChecked}
+          checkedColor={Colors.Green600}
+          onPress={() => setIsChecked(!isChecked)}
+        />
+        <Checkbox
+          label="Account and password "
+          checked={isChecked}
+          checkedColor={Colors.Red700}
+          onPress={() => setIsChecked(!isChecked)}
+        />
+
         <MapView
           provider={PROVIDER_GOOGLE}
           style={{

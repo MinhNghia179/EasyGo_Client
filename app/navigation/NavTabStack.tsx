@@ -4,7 +4,13 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { Route } from '../constants/constant';
 import { Colors } from '../styles/colors';
 import IconSizes from '../styles/icon-size';
-import { ActivityStack, HomeStack, MessageStack, PaymentStack } from './stacks';
+import {
+  ActivityStack,
+  BookingStack,
+  HomeStack,
+  MessageStack,
+  PaymentStack,
+} from './stacks';
 import AccountStack from './stacks/account-stack';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -25,7 +31,7 @@ const NavTabStack = () => {
       initialRouteName={Route.HOME_STACK}>
       <Tab.Screen
         name={Route.HOME_STACK}
-        component={HomeStack}
+        component={BookingStack}
         options={{
           tabBarLabel: 'Home',
           tabBarColor: Colors.Text.Primary,

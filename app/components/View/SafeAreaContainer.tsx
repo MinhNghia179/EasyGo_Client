@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { hp, wp } from '../../services/response-screen-service';
 import { Colors } from '../../styles/colors';
 import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
 import { Text } from '../Text';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface ISafeAreaViewProps {
   backgroundColor?: Colors | string;
@@ -20,7 +20,7 @@ interface ISafeAreaViewProps {
   leftIconName?: 'back' | 'check' | 'close';
   leftIconColor?: Colors;
   leftIconOnPress?: () => void;
-  title?: string;
+  title?: string | React.ReactNode;
   numberOfLineTitle?: number;
   titleColor?: Colors;
   right?: React.ReactNode;
@@ -106,7 +106,7 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
           <Icon
             name="arrow-back"
             size={IconSizes.x_small}
-            color={Colors.Grey500}
+            color={Colors.Green600}
           />
         );
       }
@@ -135,10 +135,12 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
         <View
           style={{
             ...styles.flex_row,
-            paddingHorizontal: wp(13),
-            paddingVertical: hp(20),
+            paddingHorizontal: wp(15),
+            paddingVertical: hp(18),
             ...borderedStyle,
             ...headerStyle,
+            justifyContent: 'space-between',
+            alignContent: 'center',
           }}>
           <View
             style={[
@@ -168,7 +170,11 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
 
           {/* Right Icon */}
           <View style={{ width: rightIconName ? rightIconSize : undefined }}>
-            {rightIconName ? null : right}
+            {right && (
+              <TouchableOpacity onPress={rightIconOnPress}>
+                {right}
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       )}
@@ -189,7 +195,7 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
       <ContentView
         keyboardShouldPersistTaps="handled"
         style={{ ...styles.flex, ...additionalStyles }}
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ flexGrow: 1, flex: 1 }}
         bounces={true}>
         {children}
         {bottom && (
@@ -215,10 +221,10 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
               position: absoluteBottom ? 'absolute' : 'relative',
               bottom: 0,
               width: '100%',
-              marginBottom:
-                Platform.OS === 'android'
-                  ? hp(50)
-                  : hp(keyBoardVisible ? 30 : 50),
+              // marginBottom:
+              //   Platform.OS === 'android'
+              //     ? hp(30)
+              //     : hp(keyBoardVisible ? 30 : 50),
 
               ...stickyBottomStyle,
             },
