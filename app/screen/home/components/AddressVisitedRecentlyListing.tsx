@@ -21,7 +21,7 @@ const AddressVisitedRecentlyListing: React.FC<IProps> = ({
   addressList,
 }) => {
   return (
-    <>
+    <View style={[styles.mv_medium]}>
       <Text fontWeight="bold" type="subhead">
         Locations
       </Text>
@@ -71,7 +71,7 @@ const AddressVisitedRecentlyListing: React.FC<IProps> = ({
           </TouchableOpacity>
         );
       })}
-    </>
+    </View>
   );
 };
 

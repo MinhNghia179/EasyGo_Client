@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 import { useSelector } from 'react-redux';
-import { Avatar } from '../../components/Avatar';
-import InputText from '../../components/Input/InputText';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { IRootState } from '../../redux/root-store';
@@ -25,48 +22,40 @@ const HomeDetailScreen = (props: IProps) => {
   );
 
   return (
-    <SafeAreaContainer
-      contentType="scrollview"
-      backgroundColor={Colors.Grey000}>
+    <SafeAreaContainer contentType="scrollview" backgroundColor={Colors.White}>
       <HeaderDetailsSection onPressShowMap={() => {}} />
       <View style={[styles.p_medium]}>
-        <Text type="headline" fontWeight="bold" color={Colors.BlueGrey800}>
-          EASY GO
-        </Text>
-        <View style={[styles.mv_medium, styles.flex_row, styles.alg_center]}>
-          <View>
-            <Avatar
-              style={[styles.rounded]}
-              imageSize={wp(35)}
-              source={{ uri: 'https://randomuser.me/api/portraits/men/36.jpg' }}
-              position="bottom-left"
-            />
-          </View>
-          <View style={[styles.ml_small]}>
-            <Text type="callout">
-              Hi, <Text fontWeight="bold">Minh Nghia</Text>.
-            </Text>
-            <Text>Let's discover a new adventure!</Text>
-          </View>
-        </View>
         <View>
-          <InputText
-            style={[styles.shadow]}
-            leftIcon={
+          <TouchableOpacity
+            style={[
+              styles.b_small,
+              styles.rounded,
+              styles.p_small,
+              styles.flex_row,
+              styles.alg_center,
+              {
+                borderColor: Colors.Grey300,
+              },
+            ]}>
+            <View
+              style={[
+                {
+                  width: wp(20),
+                  height: wp(20),
+                },
+              ]}>
               <Icon
                 name="location-pin"
-                size={IconSizes.small}
+                size={IconSizes.x_small}
                 color={Colors.Red300}
               />
-            }
-            placeholder="Where you want to go?"
-            value={address}
-            onChange={setAddress}
-          />
+            </View>
+            <Text type="footnote">Where you want to go?</Text>
+          </TouchableOpacity>
         </View>
-        <Divider style={[styles.mv_small]} color={Colors.Black} />
+
         <AddressVisitedRecentlyListing addressList={AddressVisitedRecently} />
-        <Divider style={[styles.mv_small]} color={Colors.Black} />
+
         <Text fontWeight="bold" type="subhead">
           Add more ways to move
         </Text>

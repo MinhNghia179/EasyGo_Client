@@ -11,26 +11,33 @@ const Route = {
 };
 
 const HomeStackRoute = {
-  DASHBOARD: 'dashboard',
+  DASHBOARD: 'Dashboard',
 };
 const BookingStackRoute = {
-  DASHBOARD: 'dashboard',
+  DASHBOARD: 'Dashboard',
+  SET_ROUTE: 'SetRoute',
+  CANCEL_TRIP: 'CancelTrip',
+  RATE_DRIVER: 'RateDriver',
+  BOOKING_DETAILS: 'BookingDetails',
+  FINISH_BOOKING: 'FinishBooking',
 };
 const LoginStackRoute = {
   LOGIN: 'Login',
-  FORGOT_PASSWORD: 'FORGOT_PASSWORD',
+  FORGOT_PASSWORD: 'ForgotPassword',
 };
 const AccountStackRoute = {
-  DASHBOARD: 'dashboard',
+  DASHBOARD: 'Dashboard',
 };
 const PaymentStackRoute = {
-  DASHBOARD: 'dashboard',
+  DASHBOARD: 'Dashboard',
+  ADD_NEW_CARD: 'AddNewCard',
+  CHOOSE_PAYMENT_METHOD: 'ChoosePaymentMethod',
 };
 const ActivityStackRoute = {
-  DASHBOARD: 'dashboard',
+  DASHBOARD: 'Dashboard',
 };
 const MessageStackRoute = {
-  DASHBOARD: 'dashboard',
+  DASHBOARD: 'Dashboard',
 };
 const CoverAppRoute = {
   INTRO: 'INTRO',
