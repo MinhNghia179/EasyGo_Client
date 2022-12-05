@@ -33,7 +33,7 @@ const BookingInfo = (props: IProps) => {
   };
 
   return (
-    <View style={[styles.p_medium]}>
+    <>
       <View style={[styles.flex_row, styles.alg_center]}>
         <Icon
           name="my-location"
@@ -66,7 +66,7 @@ const BookingInfo = (props: IProps) => {
       </View>
       {_renderItem('Service', 'GrabCar')}
       <PrimaryButton color={Colors.Green600}>Send Pickup Request</PrimaryButton>
-    </View>
+    </>
   );
 };
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 import { Avatar } from '../../../components/Avatar';
+import PrimaryButton from '../../../components/Button/PrimaryButton';
 import { Text } from '../../../components/Text';
 import { wp } from '../../../services/response-screen-service';
 import { Colors } from '../../../styles/colors';
-import styles from '../../../styles/style-sheet';
-import Icon from 'react-native-vector-icons/AntDesign';
 import IconSizes from '../../../styles/icon-size';
-import PrimaryButton from '../../../components/Button/PrimaryButton';
+import styles from '../../../styles/style-sheet';
 
 interface IProps {}
 

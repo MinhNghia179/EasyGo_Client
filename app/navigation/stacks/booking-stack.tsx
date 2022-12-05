@@ -14,11 +14,8 @@ const BookingStack = () => {
       screenOptions={noHeaderNavigationConfig}
       initialRouteName={BookingStackRoute.CANCEL_TRIP}>
       <Stack.Screen
-        component={RateDriverScreen}
-        name={BookingStackRoute.CANCEL_TRIP}></Stack.Screen>
-      {/* <Stack.Screen
         component={CreateBookingGuidPanel}
-        name={BookingStackRoute.DASHBOARD}></Stack.Screen> */}
+        name={BookingStackRoute.DASHBOARD}></Stack.Screen>
     </Stack.Navigator>
   );
 };
