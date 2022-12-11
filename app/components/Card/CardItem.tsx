@@ -17,6 +17,7 @@ interface IProps {
   isCustom?: boolean;
   hasBorderRadius?: boolean;
   hasShadow?: boolean;
+  underline?: boolean;
   onPress?: () => void;
 }
 
@@ -33,6 +34,7 @@ const CardItem = (props: IProps) => {
     hasBorderRadius,
     hasShadow,
     rightIconName,
+    underline,
   } = props;
 
   const renderRightIcon = () => {
@@ -58,11 +60,13 @@ const CardItem = (props: IProps) => {
       activeOpacity={0.7}
       {...(!isCustom && { onPress: onPress })}
       style={[
-        styles.p_12,
+        styles.pv_12,
+        !underline && styles.p_12,
         hasBorderRadius && styles.rounded_small,
         hasShadow && styles.shadow,
         {
           backgroundColor: Colors.White,
+          borderBottomWidth: underline && 0.1,
         },
         style,
       ]}>

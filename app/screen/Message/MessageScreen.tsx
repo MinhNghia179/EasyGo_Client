@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import Toast from 'react-native-root-toast';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { Avatar } from '../../components/Avatar';
@@ -14,15 +15,14 @@ import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
 
+const LATITUDE = 21.02593;
+const LONGITUDE = 105.81327;
+
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
 
-interface IProps {}
-
-const HomeScreen = (props: IProps) => {
-  const {} = props;
-
+const MessageScreen = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('nguyenminhnghia.thd@gmail.com');
@@ -53,17 +53,11 @@ const HomeScreen = (props: IProps) => {
     setRefresh(true);
     wait(1000).then(() => setRefresh(false));
   }, []);
-
   return (
     <SafeAreaContainer
       title="Finance Export"
       onRefresh={onRefresh}
-      refreshing={refresh}
-      stickyBottom={
-        <PrimaryButton onPress={() => console.log('Minh Nghia 179')}>
-          Action Bottom
-        </PrimaryButton>
-      }>
+      refreshing={refresh}>
       <View style={[styles.mb_x2_large, styles.p_small]}>
         <View style={[styles.mb_medium]}>
           <Text
@@ -78,7 +72,40 @@ const HomeScreen = (props: IProps) => {
           </View>
         </View>
 
-        <PrimaryButton onPress={() => setVisibleModal(true)}>
+        <Checkbox
+          label="Account and password "
+          checked={isChecked}
+          onPress={() => setIsChecked(!isChecked)}
+        />
+
+        <Checkbox
+          label="Account and password "
+          checked={isChecked}
+          checkedColor={Colors.Green600}
+          onPress={() => setIsChecked(!isChecked)}
+        />
+        <Checkbox
+          label="Account and password "
+          checked={isChecked}
+          checkedColor={Colors.Red700}
+          onPress={() => setIsChecked(!isChecked)}
+        />
+
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={{
+            height: 300,
+          }}
+          initialRegion={{
+            latitude: LATITUDE,
+            longitude: LONGITUDE,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
+          }}></MapView>
+
+        <PrimaryButton
+          style={[styles.mt_medium]}
+          onPress={() => setVisibleModal(true)}>
           Show bottom sheet modal
         </PrimaryButton>
 
@@ -169,4 +196,4 @@ const HomeScreen = (props: IProps) => {
   );
 };
 
-export default HomeScreen;
+export default MessageScreen;

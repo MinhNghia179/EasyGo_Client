@@ -1,4 +1,4 @@
-package com.flippinggame.newarchitecture;
+package com.EasyGo.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.flippinggame.BuildConfig;
-import com.flippinggame.newarchitecture.components.MainComponentsRegistry;
-import com.flippinggame.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.EasyGo.BuildConfig;
+import com.EasyGo.newarchitecture.components.MainComponentsRegistry;
+import com.EasyGo.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

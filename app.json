@@ -1,4 +1,11 @@
 {
-  "name": "FlippingGame",
-  "displayName": "FlippingGame"
+  "name": "EasyGo",
+  "displayName": "EasyGo",
+  "android": {
+    "config":{
+      "googleMaps":{
+        "apiKey":"AIzaSyDNI_ZWPqvdS6r6gPVO50I4TlYkfkZdXh8"
+      }
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
+interface IProps {}
 
-const IntroScreen = () => {
+const IntroScreen: React.FC<IProps> = () => {
   return <div>IntroScreen</div>;
 };
 

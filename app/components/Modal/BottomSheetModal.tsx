@@ -4,12 +4,12 @@ import { TouchableOpacity, View } from 'react-native';
 import { Animation } from 'react-native-animatable';
 import { Divider } from 'react-native-elements';
 import Modal from 'react-native-modal';
+import Icon from 'react-native-vector-icons/EvilIcons';
 import { wp } from '../../services/response-screen-service';
 import { Colors } from '../../styles/colors';
+import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
 import { Text } from '../Text';
-import Icon from 'react-native-vector-icons/EvilIcons';
-import IconSizes from '../../styles/icon-size';
 
 interface IProps {
   title?: string;

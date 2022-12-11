@@ -338,6 +338,7 @@ const Paddings = StyleSheet.create({
 const Backgrounds = StyleSheet.create({
   bg_white: { backgroundColor: Colors.White },
   bg_black: { backgroundColor: Colors.Black },
+  bg_transparent: { backgroundColor: 'transparent' },
 });
 
 const Radius = StyleSheet.create({
@@ -361,9 +362,9 @@ const Flexes = StyleSheet.create({
 
   flex_wrap: { flexWrap: 'wrap' },
 
-  flex_row: { flexDirection: 'row' },
+  flex_row: { flexDirection: 'row', display: 'flex' },
   flex_row_rev: { flexDirection: 'row-reverse' },
-  flex_col: { flexDirection: 'column' },
+  flex_col: { flexDirection: 'column', display: 'flex' },
   flex_col_rev: { flexDirection: 'column-reverse' },
 
   jus_end: { justifyContent: 'flex-end' },
@@ -378,6 +379,10 @@ const Flexes = StyleSheet.create({
   alg_center: { alignItems: 'center' },
   alg_stretch: { alignItems: 'stretch' },
   alg_base: { alignItems: 'baseline' },
+
+  align_self_start: { alignSelf: 'flex-start' },
+  align_self_end: { alignSelf: 'flex-end' },
+  align_self_center: { alignSelf: 'center' },
 
   centered: {
     justifyContent: 'center',

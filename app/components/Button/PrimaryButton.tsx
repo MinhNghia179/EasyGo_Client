@@ -1,26 +1,35 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, ButtonProps } from 'react-native-elements';
+import { IconNode } from 'react-native-elements/dist/icons/Icon';
 import { Colors } from '../../styles/colors';
 
-interface IProps {
+interface IProps extends ButtonProps {
   onPress?: () => void;
   color?: string;
-  style?: any;
+  icon?: IconNode;
+  style?: Object;
   children?: React.ReactElement | string;
   disable?: boolean;
   loading?: boolean;
-  size?: 'small' | 'medium' | 'large' | number;
 }
 
 const PrimaryButton = (props: IProps) => {
-  const { onPress, color, children, style, disable, loading, size } = props;
+  const { onPress, color, children, style, disable, loading, icon, ...other } =
+    props;
 
   return (
-    <View style={style}>
+    <View
+      style={[
+        style,
+        {
+          overflow: 'hidden',
+        },
+      ]}>
       <Button
         type="solid"
         title={children}
+        icon={icon}
         buttonStyle={{
           backgroundColor: color ? color : Colors.Blue600,
           borderColor: 'transparent',
@@ -31,6 +40,7 @@ const PrimaryButton = (props: IProps) => {
         titleStyle={{
           color: Colors.White,
         }}
+        {...other}
       />
     </View>
   );

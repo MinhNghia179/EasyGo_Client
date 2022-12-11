@@ -1,19 +1,27 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import {Route} from '../constants/constant';
-import AppStack from './app-stack';
-import {noHeaderNavigationConfig} from './navigation-options';
+import { Route } from '../constants/constant';
+import { noHeaderNavigationConfig } from './navigation-options';
+import navigationService from './navigation-service';
+import NavTabStack from './NavTabStack';
+import { BookingStack, LoginStack } from './stacks';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationService.navigationRef}>
       <Stack.Navigator
         screenOptions={noHeaderNavigationConfig}
-        initialRouteName={Route.APP}>
-        <Stack.Screen name={Route.APP} component={AppStack}></Stack.Screen>
+        initialRouteName={Route.LOGIN_STACK}>
+        <Stack.Screen
+          name={Route.LOGIN_STACK}
+          component={LoginStack}></Stack.Screen>
+        <Stack.Screen name={Route.APP} component={NavTabStack}></Stack.Screen>
+        <Stack.Screen
+          name={Route.BOOKING_STACK}
+          component={BookingStack}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

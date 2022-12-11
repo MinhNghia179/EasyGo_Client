@@ -40,7 +40,7 @@ const AppText = (props: IAppTextProps) => {
     ...data
   } = props;
 
-  const textStyle: [any] = [{ color }];
+  const textStyle: [any] = [{ color: color || Colors.Text.Primary }];
 
   textStyle.push({
     fontWeight,
