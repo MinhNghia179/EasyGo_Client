@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinkButton from '../../../components/Button/LinkButton';
 import PrimaryButton from '../../../components/Button/PrimaryButton';
 import InputText from '../../../components/Input/InputText';
+import { Text } from '../../../components/Text';
+import { HomeStackRoute, LoginStackRoute } from '../../../constants/constant';
+import navigationService from '../../../navigation/navigation-service';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Text } from '../../../components/Text';
-import { HomeStackRoute, LoginStackRoute } from '../../../constants/constant';
-import navigationService from '../../../navigation/navigation-service';
-
 interface IProps {
   onSelectLoginWithPhoneNumber: () => void;
 }
+
+const horizontalStyles = {
+  height: 1,
+  elevation: 2,
+  backgroundColor: '#AAAAAA',
+  width: '40%',
+};
 
 const FormLogin = (props: IProps) => {
   const { onSelectLoginWithPhoneNumber } = props;
@@ -25,6 +31,10 @@ const FormLogin = (props: IProps) => {
 
   const navigateToForgotPassWord = () => {
     navigationService.navigate(LoginStackRoute.FORGOT_PASSWORD, {});
+  };
+
+  const onSubmit = () => {
+    navigationService.navigate(HomeStackRoute.DASHBOARD, {});
   };
 
   return (
@@ -43,27 +53,9 @@ const FormLogin = (props: IProps) => {
           styles.jus_around,
           styles.mv_large,
         ]}>
-        <View
-          style={[
-            styles.mv_small,
-            {
-              height: 1,
-              elevation: 2,
-              backgroundColor: '#AAAAAA',
-              width: '40%',
-            },
-          ]}></View>
+        <View style={[styles.mv_small, horizontalStyles]}></View>
         <Text type="subhead">OR</Text>
-        <View
-          style={[
-            styles.mv_small,
-            {
-              height: 1,
-              elevation: 2,
-              backgroundColor: '#AAAAAA',
-              width: '40%',
-            },
-          ]}></View>
+        <View style={[styles.mv_small, horizontalStyles]}></View>
       </View>
 
       <View style={[styles.flex_col, styles.jus_center]}>
@@ -84,9 +76,7 @@ const FormLogin = (props: IProps) => {
         <PrimaryButton
           color={Colors.Green600}
           loading={isLoading}
-          onPress={() =>
-            navigationService.navigate(HomeStackRoute.DASHBOARD, {})
-          }>
+          onPress={onSubmit}>
           Login
         </PrimaryButton>
         <View style={[styles.flex, styles.alg_center, styles.mv_large]}>

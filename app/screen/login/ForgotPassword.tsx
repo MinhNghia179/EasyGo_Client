@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import PrimaryButton from '../../components/Button/PrimaryButton';
 import InputText from '../../components/Input/InputText';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
-import { Colors } from '../../styles/colors';
-import styles from '../../styles/style-sheet';
-
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import PrimaryButton from '../../components/Button/PrimaryButton';
 import { LoginStackRoute } from '../../constants/constant';
 import navigationService from '../../navigation/navigation-service';
+import { Colors } from '../../styles/colors';
 import IconSizes from '../../styles/icon-size';
+import styles from '../../styles/style-sheet';
 
 const ForgotPassword = () => {
   const [emailAddress, setEmailAddress] = useState<string>('');
 
   return (
     <SafeAreaContainer
-      contentType="scrollview"
+      contentType="scrollView"
       leftIconName="back"
       leftIconOnPress={() => {
         navigationService.navigate(LoginStackRoute.LOGIN, {});

@@ -14,12 +14,11 @@ const HomeStackRoute = {
   DASHBOARD: 'Dashboard',
 };
 const BookingStackRoute = {
-  DASHBOARD: 'Dashboard',
-  SET_ROUTE: 'SetRoute',
-  CANCEL_TRIP: 'CancelTrip',
-  RATE_DRIVER: 'RateDriver',
+  CREATE_BOOKING_GUID: 'CreateBookingGuid',
   BOOKING_DETAILS: 'BookingDetails',
+  CANCEL_TRIP: 'CancelTrip',
   FINISH_BOOKING: 'FinishBooking',
+  RATE_DRIVER: 'RateDriver',
 };
 const LoginStackRoute = {
   LOGIN: 'Login',

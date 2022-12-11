@@ -36,7 +36,7 @@ const LinkButton = (props: IProps) => {
       {...(underline && { textDecorationLine: 'underline' })}
       color={disable ? Colors.Text.GreySecondary : color}
       type={type}
-      style={[style]}>
+      style={{ ...style }}>
       {children}
     </Text>
   );

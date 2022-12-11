@@ -1,7 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 
-const PickUpLocationSection = () => {
+interface IProps {}
+
+const PickUpLocationSection = (props: IProps) => {
   return <View>PickUpLocationSection</View>;
 };
 

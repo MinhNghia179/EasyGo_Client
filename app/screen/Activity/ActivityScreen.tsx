@@ -1,51 +1,62 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import Icon from 'react-native-vector-icons/Octicons';
-import PrimaryButton from '../../components/Button/PrimaryButton';
+import { Tab, TabView } from 'react-native-elements';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { Colors } from '../../styles/colors';
-import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
-
 interface IProps {}
+
+export enum ActivityTabPage {
+  Complete = 0,
+  Activity = 1,
+  Cancel = 2,
+}
 
 const ActivityScreen = (props: IProps) => {
   const {} = props;
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [selectedTabPage, setSelectedTabPage] = useState<ActivityTabPage>(0);
+
+  const onChangeTab = () => {};
 
   return (
     <SafeAreaContainer
-      left={
-        <Text fontWeight="bold" type="headline">
-          Activity
-        </Text>
-      }
-      right={
-        <PrimaryButton
-          color={Colors.Cyan100}
-          style={[styles.rounded_full]}
-          icon={
-            <Icon
-              name="history"
-              size={IconSizes.x2_small}
-              style={[styles.mr_small]}
+      contentType="scrollView"
+      title="Ride History"
+      headerBordered
+      leftIconName="back">
+      <Tab
+        value={selectedTabPage}
+        onChange={setSelectedTabPage}
+        indicatorStyle={{
+          backgroundColor: Colors.Green400,
+        }}>
+        {['Complete', 'Activity', 'Cancel'].map((tab, index) => {
+          return (
+            <Tab.Item
+              title={tab}
+              key={index}
+              titleStyle={[styles.fs_11]}
+              containerStyle={[
+                {
+                  backgroundColor: Colors.White,
+                },
+              ]}
             />
-          }>
-          <Text type="footnote" fontWeight="bold">
-            History
-          </Text>
-        </PrimaryButton>
-      }>
-      <View style={[styles.flex_col, styles.alg_center, styles.jus_center]}>
-        <Text type="headline" fontWeight="bold">
-          No activity yet
-        </Text>
-        <View style={[styles.mt_small]}>
-          <Text type="footnote">Learn what's new with EasyGo now.</Text>
-        </View>
-      </View>
+          );
+        })}
+      </Tab>
+      <TabView value={selectedTabPage} onChange={setSelectedTabPage}>
+        <TabView.Item>
+          <Text>Recent</Text>
+        </TabView.Item>
+        <TabView.Item>
+          <Text>Favorite</Text>
+        </TabView.Item>
+        <TabView.Item>
+          <Text>Cart</Text>
+        </TabView.Item>
+      </TabView>
     </SafeAreaContainer>
   );
 };

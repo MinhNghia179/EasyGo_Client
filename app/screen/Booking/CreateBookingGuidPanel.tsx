@@ -1,27 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import { useDispatch } from 'react-redux';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
-import { IRootDispatch } from '../../redux/root-store';
 import { Colors } from '../../styles/colors';
 import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
+import StickyBottomDetailsPanel from './components/StickyBottomDetailsPanel';
 
 interface IProps {}
 
 const CreateBookingGuidPanel = () => {
-  const dispatch = useDispatch<IRootDispatch>();
-
-  const [step, setStep] = useState<string>('');
-
   return (
     <SafeAreaContainer
-      contentType="scrollview"
-      headerBordered
+      contentType="scrollView"
       leftIconName="back"
+      headerBordered
+      stickyBottom={<StickyBottomDetailsPanel />}
       title={
         <View style={[styles.flex_row, styles.alg_center]}>
           <Icon

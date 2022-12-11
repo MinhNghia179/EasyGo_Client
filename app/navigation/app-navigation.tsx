@@ -5,7 +5,7 @@ import { Route } from '../constants/constant';
 import { noHeaderNavigationConfig } from './navigation-options';
 import navigationService from './navigation-service';
 import NavTabStack from './NavTabStack';
-import { LoginStack } from './stacks';
+import { BookingStack, LoginStack } from './stacks';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +19,9 @@ const AppNavigator = () => {
           name={Route.LOGIN_STACK}
           component={LoginStack}></Stack.Screen>
         <Stack.Screen name={Route.APP} component={NavTabStack}></Stack.Screen>
+        <Stack.Screen
+          name={Route.BOOKING_STACK}
+          component={BookingStack}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

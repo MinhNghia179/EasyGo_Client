@@ -7,6 +7,7 @@ interface IProps {}
 
 const SelectServiceSection = (props: IProps) => {
   const {} = props;
+
   return (
     <View>
       <Text textAlign="center">Suggested Car</Text>

@@ -338,6 +338,7 @@ const Paddings = StyleSheet.create({
 const Backgrounds = StyleSheet.create({
   bg_white: { backgroundColor: Colors.White },
   bg_black: { backgroundColor: Colors.Black },
+  bg_transparent: { backgroundColor: 'transparent' },
 });
 
 const Radius = StyleSheet.create({
@@ -378,6 +379,10 @@ const Flexes = StyleSheet.create({
   alg_center: { alignItems: 'center' },
   alg_stretch: { alignItems: 'stretch' },
   alg_base: { alignItems: 'baseline' },
+
+  align_self_start: { alignSelf: 'flex-start' },
+  align_self_end: { alignSelf: 'flex-end' },
+  align_self_center: { alignSelf: 'center' },
 
   centered: {
     justifyContent: 'center',

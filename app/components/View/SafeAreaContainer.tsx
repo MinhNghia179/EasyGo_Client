@@ -35,7 +35,7 @@ interface ISafeAreaViewProps {
     | 'plusIcon';
   rightIconColor?: Colors;
   rightIconOnPress?: () => void;
-  contentType: 'view' | 'scrollview';
+  contentType: 'view' | 'scrollView';
   bottom?: React.ReactNode;
   stickyBottom?: React.ReactNode;
   stickyBottomStyle?: { [key: string]: any };
@@ -71,7 +71,7 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
     rightIconName,
     rightIconColor = Colors.BlueGrey1000,
     rightIconOnPress,
-    contentType = 'scrollview',
+    contentType = 'scrollView',
     headerStyle = {
       backgroundColor: Colors.White,
     },

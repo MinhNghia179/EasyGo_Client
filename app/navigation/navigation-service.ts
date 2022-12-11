@@ -1,6 +1,11 @@
 import { CommonActions } from '@react-navigation/native';
 import React from 'react';
-import { HomeStackRoute, LoginStackRoute, Route } from '../constants/constant';
+import {
+  BookingStackRoute,
+  HomeStackRoute,
+  LoginStackRoute,
+  Route,
+} from '../constants/constant';
 
 const navigationRef: any = React.createRef();
 
@@ -56,6 +61,15 @@ function _getNavigation(route: string, params: any) {
       navRoute = Route.APP;
       navParams = {
         screen: Route.LOGIN_STACK,
+        params: {
+          screen: route,
+          params: params,
+        },
+      };
+    }
+    case BookingStackRoute.CREATE_BOOKING_GUID: {
+      navRoute = Route.BOOKING_STACK;
+      navParams = {
         params: {
           screen: route,
           params: params,

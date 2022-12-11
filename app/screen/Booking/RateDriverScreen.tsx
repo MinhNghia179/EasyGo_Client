@@ -12,7 +12,7 @@ interface IProps {}
 const RateDriverScreen = (props: IProps) => {
   return (
     <SafeAreaContainer
-      contentType="scrollview"
+      contentType="scrollView"
       leftIconName="back"
       headerBordered
       title="Rate Driver">

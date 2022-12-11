@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { useSelector } from 'react-redux';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
+import { BookingStackRoute } from '../../constants/constant';
+import navigationService from '../../navigation/navigation-service';
 import { IRootState } from '../../redux/root-store';
 import { wp } from '../../services/response-screen-service';
 import { Colors } from '../../styles/colors';
@@ -21,38 +23,41 @@ const HomeDetailScreen = (props: IProps) => {
     (state: IRootState) => state.homeStore,
   );
 
+  const navigateToBookingScreen = () => {
+    navigationService.navigate(BookingStackRoute.CREATE_BOOKING_GUID, {});
+  };
+
   return (
-    <SafeAreaContainer contentType="scrollview" backgroundColor={Colors.White}>
+    <SafeAreaContainer contentType="scrollView" backgroundColor={Colors.White}>
       <HeaderDetailsSection onPressShowMap={() => {}} />
       <View style={[styles.p_medium]}>
-        <View>
-          <TouchableOpacity
+        <TouchableOpacity
+          style={[
+            styles.b_small,
+            styles.rounded,
+            styles.p_small,
+            styles.flex_row,
+            styles.alg_center,
+            {
+              borderColor: Colors.Grey300,
+            },
+          ]}
+          onPress={navigateToBookingScreen}>
+          <View
             style={[
-              styles.b_small,
-              styles.rounded,
-              styles.p_small,
-              styles.flex_row,
-              styles.alg_center,
               {
-                borderColor: Colors.Grey300,
+                width: wp(20),
+                height: wp(20),
               },
             ]}>
-            <View
-              style={[
-                {
-                  width: wp(20),
-                  height: wp(20),
-                },
-              ]}>
-              <Icon
-                name="location-pin"
-                size={IconSizes.x_small}
-                color={Colors.Red300}
-              />
-            </View>
-            <Text type="footnote">Where you want to go?</Text>
-          </TouchableOpacity>
-        </View>
+            <Icon
+              name="location-pin"
+              size={IconSizes.x_small}
+              color={Colors.Red300}
+            />
+          </View>
+          <Text type="footnote">Where you want to go?</Text>
+        </TouchableOpacity>
 
         <AddressVisitedRecentlyListing addressList={AddressVisitedRecently} />
 

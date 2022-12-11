@@ -1,11 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import LinkButton from '../../../../components/Button/LinkButton';
-import { Colors } from '../../../../styles/colors';
-import styles from '../../../../styles/style-sheet';
-import PaymentMethodSection from '../PaymentMethodSection';
-import PickUpLocationSection from '../PickUpLocationSection';
-import SelectServiceSection from '../SelectServiceSection';
+import LinkButton from '../../../components/Button/LinkButton';
+import { Colors } from '../../../styles/colors';
+import styles from '../../../styles/style-sheet';
+import { BookingGuidStep } from '../utils/constant';
 
 interface IProps {
   setVisibleConfirmModal?: () => void;
@@ -18,16 +16,26 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
 }) => {
   const renderStepDetails = () => {
     switch (step) {
-      case '': {
-        return <PickUpLocationSection />;
+      case BookingGuidStep.SET_ROUTE: {
+        break;
       }
-      case '': {
-        return <SelectServiceSection />;
+      case BookingGuidStep.SELECT_SERVICE: {
+        break;
       }
-      case '': {
-        return <PaymentMethodSection />;
+      case BookingGuidStep.PAYMENT_METHOD: {
+        break;
+      }
+      case BookingGuidStep.BOOKING_DETAILS: {
+        break;
+      }
+      case BookingGuidStep.SEARCHING_RIDE: {
+        break;
+      }
+      case BookingGuidStep.DRIVER_INFO: {
+        break;
       }
     }
+    return <></>;
   };
 
   return (

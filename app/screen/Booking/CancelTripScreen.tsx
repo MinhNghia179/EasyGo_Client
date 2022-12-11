@@ -10,7 +10,7 @@ interface IProps {}
 const CancelTripScreen = (props: IProps) => {
   return (
     <SafeAreaContainer
-      contentType="scrollview"
+      contentType="scrollView"
       leftIconName="back"
       headerBordered
       title="Cancel Trip">

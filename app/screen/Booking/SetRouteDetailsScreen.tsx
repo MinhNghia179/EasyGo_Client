@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
-import { IRootDispatch } from '../../redux/root-store';
 import styles from '../../styles/style-sheet';
 
 interface IProps {}
 
-const CreateBookingGuidPanel = () => {
-  const dispatch = useDispatch<IRootDispatch>();
-
-  const [step, setStep] = useState<string>('');
-
+const SetRouteDetailsScreen: React.FC<IProps> = () => {
   return (
     <SafeAreaContainer
-      contentType="scrollview"
+      contentType="scrollView"
       headerBordered
       leftIconName="back"
       title={
@@ -24,8 +18,12 @@ const CreateBookingGuidPanel = () => {
             Set Destination
           </Text>
         </View>
-      }></SafeAreaContainer>
+      }>
+      <View style={[styles.p_medium]}>
+        <Text>Set Destination</Text>
+      </View>
+    </SafeAreaContainer>
   );
 };
 
-export default CreateBookingGuidPanel;
+export default SetRouteDetailsScreen;
