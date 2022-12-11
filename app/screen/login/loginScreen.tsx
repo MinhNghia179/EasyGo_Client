@@ -12,7 +12,7 @@ const LoginScreen = () => {
     useState<boolean>(false);
 
   return (
-    <SafeAreaContainer contentType="scrollview">
+    <SafeAreaContainer contentType="scrollView">
       <ImageBackground
         source={{
           uri: 'https://media.istockphoto.com/id/165792741/vi/vec-to/b%E1%BA%A3n-%C4%91%E1%BB%93-th%C3%A0nh-ph%E1%BB%91-tr%E1%BB%ABu-t%C6%B0%E1%BB%A3ng.jpg?s=612x612&w=is&k=20&c=1b8cNO9_WIesjxFlensz2nm_pMt1j0HMp6ju5rv9GUg=',

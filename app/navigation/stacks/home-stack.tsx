@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { HomeStackRoute } from '../../constants/constant';
-import HomeScreen from '../../screen/Home/HomeDetailScreen';
+import HomeDetailScreen from '../../screen/home/HomeDetailScreen';
 import { noHeaderNavigationConfig } from '../navigation-options';
 
 const Stack = createStackNavigator();
@@ -13,7 +13,7 @@ const HomeStack = () => {
       screenOptions={noHeaderNavigationConfig}>
       <Stack.Screen
         name={HomeStackRoute.DASHBOARD}
-        component={HomeScreen}></Stack.Screen>
+        component={HomeDetailScreen}></Stack.Screen>
     </Stack.Navigator>
   );
 };

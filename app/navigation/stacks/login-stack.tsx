@@ -2,7 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { LoginStackRoute } from '../../constants/constant';
 import ForgotPassword from '../../screen/Login/ForgotPassword';
-import LoginScreen from '../../screen/Login/LoginScreen';
+import LoginScreen from '../../screen/Login/loginScreen';
 import { noHeaderNavigationConfig } from '../navigation-options';
 
 const Stack = createStackNavigator();
