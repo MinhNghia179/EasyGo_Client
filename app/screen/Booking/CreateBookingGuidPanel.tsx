@@ -11,7 +11,9 @@ import StickyBottomDetailsPanel from './components/StickyBottomDetailsPanel';
 
 interface IProps {}
 
-const CreateBookingGuidPanel = () => {
+const CreateBookingGuidPanel = (props: IProps) => {
+  const {} = props;
+
   return (
     <SafeAreaContainer
       contentType="scrollView"

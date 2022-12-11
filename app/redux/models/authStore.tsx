@@ -1,11 +1,15 @@
 import { IUser } from '../../interfaces/auth-interface';
+import { IAddress } from '../../interfaces/home-interfaces';
 import apiClient from '../../services/api-client';
+
 export interface IAuthStore {
   portalUser: IUser;
+  currentLocation: IAddress;
 }
 
 const initialState: IAuthStore = {
   portalUser: null,
+  currentLocation: null,
 };
 
 const authStore = {
@@ -14,6 +18,10 @@ const authStore = {
     setPortalUser: (state: IAuthStore, payload) => ({
       ...state,
       portalUser: payload,
+    }),
+    setCurrentLocation: (state: IAuthStore, payload: IAddress) => ({
+      ...state,
+      currentLocation: payload,
     }),
   },
   effects: dispatch => ({

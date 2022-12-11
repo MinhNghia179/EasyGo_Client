@@ -90,9 +90,14 @@ const HeaderDetailsSection: React.FC<IProps> = ({ onPressShowMap }) => {
             styles.ml_small,
             {
               backgroundColor: Colors.Grey400,
+              flexShrink: 1,
             },
           ]}>
-          <Text color={Colors.White} type="subhead" fontWeight="bold">
+          <Text
+            color={Colors.White}
+            type="subhead"
+            fontWeight="bold"
+            numberOfLines={1}>
             68 Ngõ 68 Đường Cầu Giấy, Quan Hoa, Hà Nội,...
           </Text>
         </View>

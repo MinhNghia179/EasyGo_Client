@@ -1,14 +1,12 @@
+export interface ICoordinates {
+  latitude: number;
+  longitude: number;
+}
+
 export interface IAddress {
   shortAddress?: string;
   fullAddress?: string;
-  lat?: string;
-  lng?: string;
-}
-
-export interface ILocation {
-  lat: number | string;
-  long: number | string;
-  fullAddress?: string;
+  location?: ICoordinates;
 }
 
 export interface IBooking {

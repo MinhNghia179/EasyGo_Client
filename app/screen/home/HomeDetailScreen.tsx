@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { BookingStackRoute } from '../../constants/constant';
 import navigationService from '../../navigation/navigation-service';
-import { IRootState } from '../../redux/root-store';
+import { IRootDispatch, IRootState } from '../../redux/root-store';
 import { wp } from '../../services/response-screen-service';
 import { Colors } from '../../styles/colors';
 import IconSizes from '../../styles/icon-size';
@@ -18,6 +18,11 @@ interface IProps {}
 const HomeDetailScreen = (props: IProps) => {
   const {} = props;
 
+  const dispatch = useDispatch<IRootDispatch>();
+  const { currentLocation } = useSelector(
+    (state: IRootState) => state.authStore,
+  );
+
   const [address, setAddress] = useState<string>('');
   const { AddressVisitedRecently } = useSelector(
     (state: IRootState) => state.homeStore,
@@ -26,6 +31,16 @@ const HomeDetailScreen = (props: IProps) => {
   const navigateToBookingScreen = () => {
     navigationService.navigate(BookingStackRoute.CREATE_BOOKING_GUID, {});
   };
+
+  useEffect(() => {
+    const coordinates = {
+      latitude: 21.04019487714218,
+      longitude: 105.77289286780346,
+    };
+    dispatch.map.getCurrentLocationName(coordinates);
+  }, []);
+
+  console.log(currentLocation);
 
   return (
     <SafeAreaContainer contentType="scrollView" backgroundColor={Colors.White}>

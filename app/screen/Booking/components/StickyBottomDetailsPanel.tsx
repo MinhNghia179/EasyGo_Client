@@ -1,38 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import LinkButton from '../../../components/Button/LinkButton';
 import { Colors } from '../../../styles/colors';
 import styles from '../../../styles/style-sheet';
+import BookingInfo from '../steps/BookingInfo';
+import DriverInfo from '../steps/DriverInfo';
+import PaymentMethodSection from '../steps/PaymentMethodSection';
+import PickUpLocationSection from '../steps/PickUpLocationSection';
+import SearchingRide from '../steps/SearchingRide';
+import SelectServiceSection from '../steps/SelectServiceSection';
 import { BookingGuidStep } from '../utils/constant';
 
 interface IProps {
   setVisibleConfirmModal?: () => void;
-  step?: string;
 }
 
 const StickyBottomDetailsPanel: React.FC<IProps> = ({
   setVisibleConfirmModal,
-  step,
 }) => {
-  const renderStepDetails = () => {
+  const [step, setStep] = useState<string>(BookingGuidStep.SET_ROUTE);
+
+  const renderStepDetails = (): JSX.Element => {
     switch (step) {
       case BookingGuidStep.SET_ROUTE: {
-        break;
+        return <PickUpLocationSection />;
       }
       case BookingGuidStep.SELECT_SERVICE: {
-        break;
+        return <SelectServiceSection />;
       }
       case BookingGuidStep.PAYMENT_METHOD: {
-        break;
+        return <PaymentMethodSection />;
       }
       case BookingGuidStep.BOOKING_DETAILS: {
-        break;
+        return <BookingInfo />;
       }
       case BookingGuidStep.SEARCHING_RIDE: {
-        break;
+        return <SearchingRide />;
       }
       case BookingGuidStep.DRIVER_INFO: {
-        break;
+        return <DriverInfo />;
       }
     }
     return <></>;
