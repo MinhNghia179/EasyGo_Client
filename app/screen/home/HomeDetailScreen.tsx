@@ -1,109 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo';
+import React from 'react';
+import { ScrollView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import LinkButton from '../../components/Button/LinkButton';
+import PrimaryButton from '../../components/Button/PrimaryButton';
+import { ActionModal } from '../../components/Modal';
 import { Text } from '../../components/Text';
 import { SafeAreaContainer } from '../../components/View';
 import { BookingStackRoute } from '../../constants/constant';
 import navigationService from '../../navigation/navigation-service';
 import { IRootDispatch, IRootState } from '../../redux/root-store';
-import { wp } from '../../services/response-screen-service';
+import {
+  currentPosition,
+  requestLocationPermission,
+} from '../../services/device-service';
 import { Colors } from '../../styles/colors';
-import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
-import AddressVisitedRecentlyListing from './components/AddressVisitedRecentlyListing';
+import BodyDetailsSection from './components/BodyDetailsSection';
 import HeaderDetailsSection from './components/HeaderDetailsSection';
+
 interface IProps {}
 
 const HomeDetailScreen = (props: IProps) => {
   const {} = props;
 
   const dispatch = useDispatch<IRootDispatch>();
-  const { currentLocation } = useSelector(
-    (state: IRootState) => state.authStore,
-  );
 
-  const [address, setAddress] = useState<string>('');
-  const { AddressVisitedRecently } = useSelector(
-    (state: IRootState) => state.homeStore,
+  const { currentLocation, AddressVisitedRecently } = useSelector(
+    (state: IRootState) => ({
+      currentLocation: state.authStore.currentLocation,
+      AddressVisitedRecently: state.homeStore.AddressVisitedRecently,
+    }),
   );
 
   const navigateToBookingScreen = () => {
     navigationService.navigate(BookingStackRoute.CREATE_BOOKING_GUID, {});
   };
 
-  useEffect(() => {
-    const coordinates = {
-      latitude: 21.04019487714218,
-      longitude: 105.77289286780346,
-    };
-    dispatch.map.getCurrentLocationName(coordinates);
-  }, []);
+  const allowToEnableLocation = async () => {
+    const isGranted = await requestLocationPermission();
+    if (isGranted) {
+      const response = await currentPosition();
+      if (response) {
+        await dispatch.map.getCurrentLocationName(response);
+      }
+    }
+  };
 
-  console.log(currentLocation);
+  const doNotAllow = () => {};
 
   return (
     <SafeAreaContainer contentType="scrollView" backgroundColor={Colors.White}>
       <HeaderDetailsSection onPressShowMap={() => {}} />
-      <View style={[styles.p_medium]}>
-        <TouchableOpacity
-          style={[
-            styles.b_small,
-            styles.rounded,
-            styles.p_small,
-            styles.flex_row,
-            styles.alg_center,
-            {
-              borderColor: Colors.Grey300,
-            },
-          ]}
-          onPress={navigateToBookingScreen}>
-          <View
-            style={[
-              {
-                width: wp(20),
-                height: wp(20),
-              },
-            ]}>
-            <Icon
-              name="location-pin"
-              size={IconSizes.x_small}
-              color={Colors.Red300}
-            />
-          </View>
-          <Text type="footnote">Where you want to go?</Text>
-        </TouchableOpacity>
-
-        <AddressVisitedRecentlyListing addressList={AddressVisitedRecently} />
-
-        <Text fontWeight="bold" type="subhead">
-          Add more ways to move
+      <BodyDetailsSection
+        navigateToBookingScreen={navigateToBookingScreen}
+        AddressVisitedRecently={AddressVisitedRecently}
+      />
+      <ActionModal isVisible={!currentLocation} title="Enable your location">
+        <Text type="footnote">
+          This app requires that location services are turned on your device and
+          for this app. You must enable them in Settings before using this app
         </Text>
-
-        <TouchableOpacity
-          style={[
-            styles.p_medium,
-            styles.rounded,
-            styles.mt_medium,
-            styles.mb_medium,
-            {
-              backgroundColor: Colors.Green100,
-            },
-          ]}>
-          <Text type="footnote">Car rental by the hour</Text>
-        </TouchableOpacity>
-
-        <View style={[styles.flex_row, styles.jus_between, styles.alg_center]}>
-          <Text fontWeight="bold" type="subhead">
-            Move to favorite places
-          </Text>
-          <Icon
-            name="chevron-with-circle-right"
-            color={Colors.Black}
-            size={IconSizes.x_small}
-          />
+        <View style={[styles.flex_col, styles.alg_center, styles.jus_between]}>
+          <PrimaryButton
+            style={[styles.mv_medium]}
+            onPress={allowToEnableLocation}>
+            Allow only while using the app
+          </PrimaryButton>
+          <LinkButton onPress={doNotAllow}>Don't allow this app</LinkButton>
         </View>
-      </View>
+      </ActionModal>
     </SafeAreaContainer>
   );
 };

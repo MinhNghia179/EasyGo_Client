@@ -1,7 +1,7 @@
 import { map } from 'lodash';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { IAddress, ILocation } from '../../../interfaces/home-interfaces';
+import { IAddress } from '../../../interfaces/home-interfaces';
 
 import { Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -13,7 +13,7 @@ import styles from '../../../styles/style-sheet';
 
 interface IProps {
   onSelectAddress?: (value: IAddress) => void;
-  addressList?: ILocation[];
+  addressList?: IAddress[];
 }
 
 const AddressVisitedRecentlyListing: React.FC<IProps> = ({
@@ -21,7 +21,7 @@ const AddressVisitedRecentlyListing: React.FC<IProps> = ({
   addressList,
 }) => {
   return (
-    <View style={[styles.mv_medium]}>
+    <View style={[styles.mv_small]}>
       <Text fontWeight="bold" type="subhead">
         Locations
       </Text>

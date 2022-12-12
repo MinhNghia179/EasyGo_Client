@@ -136,7 +136,7 @@ const SafeAreaContainer = (props: ISafeAreaViewProps) => {
           style={{
             ...styles.flex_row,
             paddingHorizontal: wp(15),
-            paddingVertical: hp(18),
+            paddingVertical: hp(16),
             ...borderedStyle,
             ...headerStyle,
             justifyContent: 'space-between',

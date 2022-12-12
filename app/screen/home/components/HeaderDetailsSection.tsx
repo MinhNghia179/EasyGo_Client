@@ -17,17 +17,23 @@ interface IProps {
 
 const HeaderDetailsSection: React.FC<IProps> = ({ onPressShowMap }) => {
   const { currentLocation } = useSelector(
-    (state: IRootState) => state.homeStore,
+    (state: IRootState) => state.authStore,
   );
 
   return (
-    <View style={[styles.p_medium]}>
-      <Text type="headline" fontWeight="bold" color={Colors.BlueGrey800}>
+    <View
+      style={[
+        styles.p_medium,
+        {
+          backgroundColor: Colors.Green,
+        },
+      ]}>
+      <Text type="headline" fontWeight="bold" color={Colors.White}>
         EASY GO
       </Text>
       <View
         style={[
-          styles.mv_medium,
+          styles.mv_small,
           styles.flex_row,
           styles.alg_center,
           styles.jus_between,
@@ -40,10 +46,10 @@ const HeaderDetailsSection: React.FC<IProps> = ({ onPressShowMap }) => {
             position="bottom-left"
           />
           <View style={[styles.ml_small]}>
-            <Text type="callout">
+            <Text type="callout" color={Colors.White}>
               Hi, <Text fontWeight="bold">Minh Nghia</Text>.
             </Text>
-            <Text>Let's discover a new adventure!</Text>
+            <Text color={Colors.White}>Let's discover a new adventure!</Text>
           </View>
         </View>
         <TouchableOpacity>
@@ -54,12 +60,26 @@ const HeaderDetailsSection: React.FC<IProps> = ({ onPressShowMap }) => {
           />
         </TouchableOpacity>
       </View>
-      <View style={[styles.flex_row, styles.jus_between, styles.mt_small]}>
+      <View style={[styles.flex_row, styles.alg_center, styles.mt_x2_small]}>
+        <TouchableOpacity style={[styles.mr_x_small]}>
+          <Icon name="my-location" size={IconSizes.x_small} />
+        </TouchableOpacity>
+        <Text
+          color={Colors.White}
+          type="caption1"
+          fontWeight="bold"
+          numberOfLines={1}>
+          {currentLocation?.fullAddress || 'Loading...'}
+        </Text>
+      </View>
+      <View style={[styles.flex_row, styles.jus_between, styles.mt_medium]}>
         <View>
-          <Text type="headline" fontWeight="bold">
+          <Text type="subhead" fontWeight="bold" color={Colors.White}>
             Move
           </Text>
-          <Text type="subhead">We will take you anywhere!</Text>
+          <Text type="subhead" color={Colors.White}>
+            We will take you anywhere!
+          </Text>
         </View>
         <View style={[styles.p_small]}>
           <PrimaryButton
@@ -77,29 +97,6 @@ const HeaderDetailsSection: React.FC<IProps> = ({ onPressShowMap }) => {
               Show map
             </Text>
           </PrimaryButton>
-        </View>
-      </View>
-      <View style={[styles.flex_row, styles.alg_center, styles.mt_small]}>
-        <TouchableOpacity>
-          <Icon name="my-location" size={IconSizes.small} />
-        </TouchableOpacity>
-        <View
-          style={[
-            styles.rounded_full,
-            styles.p_small,
-            styles.ml_small,
-            {
-              backgroundColor: Colors.Grey400,
-              flexShrink: 1,
-            },
-          ]}>
-          <Text
-            color={Colors.White}
-            type="subhead"
-            fontWeight="bold"
-            numberOfLines={1}>
-            68 Ngõ 68 Đường Cầu Giấy, Quan Hoa, Hà Nội,...
-          </Text>
         </View>
       </View>
     </View>

@@ -166,6 +166,7 @@ const Background = {
 enum Other {
   Black = '#000',
   White = '#fff',
+  Green = '#33a852',
 }
 
 export const Colors = {

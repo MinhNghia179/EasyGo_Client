@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Animation } from 'react-native-animatable';
-import { Divider } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import { Text } from '../../components/Text';
 import { wp } from '../../services/response-screen-service';
