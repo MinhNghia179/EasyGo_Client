@@ -12,7 +12,7 @@ import { IRootDispatch, IRootState } from '../../redux/root-store';
 import {
   currentPosition,
   requestLocationPermission,
-} from '../../services/device-service';
+} from '../../services/geolocation-service';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
 import BodyDetailsSection from './components/BodyDetailsSection';

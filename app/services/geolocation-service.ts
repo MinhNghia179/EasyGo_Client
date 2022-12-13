@@ -40,3 +40,18 @@ export const currentPosition = async () => {
   }
   return null;
 };
+
+export const watchPosition = async () => {
+  const position: Geolocation.GeoPosition = await new Promise(
+    (resolve, reject) => {
+      Geolocation.watchPosition(resolve, reject, config);
+    },
+  );
+  if (position) {
+    const coordinates: ICoordinates = {
+      latitude: position?.coords?.latitude,
+      longitude: position?.coords?.longitude,
+    };
+    return coordinates;
+  }
+};
