@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import LinkButton from '../../components/Button/LinkButton';
 import PrimaryButton from '../../components/Button/PrimaryButton';
@@ -13,6 +13,10 @@ import {
   currentPosition,
   requestLocationPermission,
 } from '../../services/geolocation-service';
+import {
+  autoSuggestLocationBySearchName,
+  getCurrentLocationByCoordinates,
+} from '../../services/google-map-service';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
 import BodyDetailsSection from './components/BodyDetailsSection';
@@ -41,16 +45,25 @@ const HomeDetailScreen = (props: IProps) => {
     if (isGranted) {
       const response = await currentPosition();
       if (response) {
-        await dispatch.map.getCurrentLocationName(response);
+        const address = await getCurrentLocationByCoordinates(response);
+        dispatch.authStore.setCurrentLocation(address);
       }
     }
   };
 
   const doNotAllow = () => {};
 
+  const findRoutes = async () => {
+    const payload = {
+      addressName: '68',
+      userLocation: currentLocation.location,
+    };
+    await autoSuggestLocationBySearchName(payload);
+  };
+
   return (
     <SafeAreaContainer contentType="scrollView" backgroundColor={Colors.White}>
-      <HeaderDetailsSection onPressShowMap={() => {}} />
+      <HeaderDetailsSection onPressShowMap={findRoutes} />
       <BodyDetailsSection
         navigateToBookingScreen={navigateToBookingScreen}
         AddressVisitedRecently={AddressVisitedRecently}
