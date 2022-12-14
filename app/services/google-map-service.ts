@@ -39,13 +39,37 @@ export const autoSuggestLocationBySearchName = async (payload: {
       `${GOOGLE_BASE_URL}/Autosuggest?query=${addressName}&userLocation=${userLocation.latitude},${userLocation.longitude}&includeEntityTypes=Address,Place&key=${GOOGLE_REST_API_KEY}`,
     );
     const addresses = response.data.resourceSets[0].resources[0].value;
-    console.log(addresses);
+    return addresses.map(one => {
+      return {
+        shortAddress: one.address.addressLine,
+        fullAddress: one.address.formattedAddress,
+      };
+    });
   } catch (error) {
     console.error(error);
     return null;
   }
 };
 
-export const getCurrentLocationByName = async () => {};
+export const getCurrentLocationByName = async (payload: {
+  addressName: string;
+}) => {
+  try {
+    const { addressName } = payload;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
-export const getRoutes = async () => {};
+export const getRoutes = async (payload: {
+  pickUpLocation: ICoordinates;
+  destinationLocation: ICoordinates;
+}) => {
+  try {
+    const { pickUpLocation, destinationLocation } = payload;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
