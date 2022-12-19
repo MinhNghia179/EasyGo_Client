@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { IAddress } from '../interfaces/home-interfaces';
 import { GOOGLE_BASE_URL, GOOGLE_REST_API_KEY } from '../variables/app-config';
 import { ICoordinates } from './../interfaces/home-interfaces';
 
 export const getCurrentLocationByCoordinates = async (
   payload: ICoordinates,
-): Promise<IAddress> => {
+) => {
   try {
     const response = await axios.get(
       `${GOOGLE_BASE_URL}/Locations/${payload.latitude},${payload.longitude}?key=${GOOGLE_REST_API_KEY}`,
@@ -39,13 +38,63 @@ export const autoSuggestLocationBySearchName = async (payload: {
       `${GOOGLE_BASE_URL}/Autosuggest?query=${addressName}&userLocation=${userLocation.latitude},${userLocation.longitude}&includeEntityTypes=Address,Place&key=${GOOGLE_REST_API_KEY}`,
     );
     const addresses = response.data.resourceSets[0].resources[0].value;
-    console.log(addresses);
+    return addresses.map(
+      ({ address }) =>
+        ({
+          shortAddress: address.addressLine,
+          fullAddress: address.formattedAddress,
+        } as { shortAddress: string; fullAddress: string }),
+    );
   } catch (error) {
     console.error(error);
     return null;
   }
 };
 
-export const getCurrentLocationByName = async () => {};
+export const getCurrentLocationByName = async (payload: {
+  name: string;
+  userLocation: ICoordinates;
+}) => {
+  const MAX_RESULTS = 1;
+  const { name, userLocation } = payload;
+  try {
+    const response = await axios.get(
+      `${GOOGLE_BASE_URL}/Locations/VN?q=${name}&maxResults=${MAX_RESULTS}&userLocation=${userLocation.latitude},${userLocation.longitude}&key=${GOOGLE_REST_API_KEY}`,
+    );
+    return response.data.resourceSets[0].resources[0].point.coordinates;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
-export const getRoutes = async () => {};
+export const getRoutes = async () => {
+  const pickup = {
+    latitude: 21.03251544712208,
+    longitude: 105.8015918169498,
+  };
+  const dropOff = {
+    latitude: 21.030705729729053,
+    longitude: 105.81272021333663,
+  };
+  try {
+    const response = await axios.get(
+      `${GOOGLE_BASE_URL}/Routes?wp.0=${pickup.latitude}, ${pickup.longitude}&wp.1=${dropOff.latitude}, ${dropOff.longitude}&key=${GOOGLE_REST_API_KEY}`,
+    );
+    const routeInfo = response.data.resourceSets[0].resources[0];
+    const { travelDistance, travelDuration, travelDurationTraffic, routeLegs } =
+      routeInfo;
+    const routes = routeLegs[0].itineraryItems.map(({ maneuverPoint }) => ({
+      ...maneuverPoint.coordinates,
+    }));
+    return {
+      travelDistance,
+      travelDuration,
+      travelDurationTraffic,
+      routes,
+    };
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
