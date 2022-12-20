@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {
   NavigationParams,
@@ -14,6 +13,7 @@ import { IRootState } from '../../redux/root-store';
 import { Colors } from '../../styles/colors';
 import IconSizes from '../../styles/icon-size';
 import styles from '../../styles/style-sheet';
+import MapViewSection from './components/MapViewSection';
 import StickyBottomDetailsPanel from './components/StickyBottomDetailsPanel';
 
 interface IProps {
@@ -46,7 +46,7 @@ const CreateBookingGuidPanel = (props: IProps) => {
           </Text>
         </View>
       }>
-      <MapView style={[styles.flex_1]} />
+      <MapViewSection />
     </SafeAreaContainer>
   );
 };
