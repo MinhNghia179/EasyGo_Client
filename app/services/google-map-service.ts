@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { GOOGLE_BASE_URL, GOOGLE_REST_API_KEY } from '../variables/app-config';
-import { ICoordinates } from './../interfaces/home-interfaces';
+import { IAddress, ICoordinates } from './../interfaces/home-interfaces';
 
 export const getCurrentLocationByCoordinates = async (
   payload: ICoordinates,
@@ -51,17 +51,18 @@ export const autoSuggestLocationBySearchName = async (payload: {
   }
 };
 
-export const getCurrentLocationByName = async (payload: {
-  name: string;
-  userLocation: ICoordinates;
-}) => {
-  const MAX_RESULTS = 1;
-  const { name, userLocation } = payload;
+export const getCurrentLocationByName = async (payload: { name: string }) => {
+  const { name } = payload;
   try {
     const response = await axios.get(
-      `${GOOGLE_BASE_URL}/Locations/VN?q=${name}&maxResults=${MAX_RESULTS}&userLocation=${userLocation.latitude},${userLocation.longitude}&key=${GOOGLE_REST_API_KEY}`,
+      `${GOOGLE_BASE_URL}/Locations?CountryRegion=VN&locality=Somewhere&addressLine=${name}&key=${GOOGLE_REST_API_KEY}`,
     );
-    return response.data.resourceSets[0].resources[0].point.coordinates;
+    const resource = response.data.resourceSets[0].resources[0];
+    return {
+      location: resource.point.coordinates,
+      fullAddress: resource.name,
+      shortAddress: resource.address.addressLine,
+    } as IAddress;
   } catch (error) {
     console.error(error);
     return null;

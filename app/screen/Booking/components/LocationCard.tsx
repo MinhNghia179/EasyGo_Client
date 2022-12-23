@@ -20,7 +20,11 @@ const LocationCard = (props: IProps) => {
 
   return (
     <>
-      {!!label && <Text type="caption1">{label}</Text>}
+      {!!label && (
+        <Text type="caption1" fontWeight="bold">
+          {label}
+        </Text>
+      )}
       <TouchableOpacity
         onPress={onPress}
         style={[
@@ -40,16 +44,21 @@ const LocationCard = (props: IProps) => {
           <>
             <View style={[styles.flex_row, styles.alg_center]}>
               <Icon
-                style={[styles.mh_medium]}
+                style={[styles.mh_12]}
                 name="search-location"
                 size={IconSizes.x_small}
                 color={Colors.Blue300}
               />
-              <View>
-                <Text type="footnote" fontWeight="bold">
+              <View
+                style={[
+                  {
+                    flexShrink: 1,
+                  },
+                ]}>
+                <Text type="caption1" fontWeight="bold">
                   {address?.shortAddress}
                 </Text>
-                <Text type="footnote">{address?.fullAddress}</Text>
+                <Text type="caption1">{address?.fullAddress}</Text>
               </View>
             </View>
           </>

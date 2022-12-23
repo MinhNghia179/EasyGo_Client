@@ -9,6 +9,13 @@ export interface IAddress {
   location?: ICoordinates;
 }
 
+export interface IRegion {
+  latitude: number;
+  longitude: number;
+  latitudeDelta: number;
+  longitudeDelta: number;
+}
+
 export interface IBooking {
   id_booking: string;
   number: number;

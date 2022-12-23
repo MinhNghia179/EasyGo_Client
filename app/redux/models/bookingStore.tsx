@@ -1,14 +1,20 @@
-import { IBooking, IBookTracking } from '../../interfaces/booking-interface';
+import {
+  IBooking,
+  IBookTracking,
+  ICreateBookingWizard,
+} from '../../interfaces/booking-interface';
 import apiClient from '../../services/api-client';
 
 export interface IBookingStore {
   bookingDetails: IBooking;
   bookTracking: IBookTracking;
+  createBookingWizard: ICreateBookingWizard;
 }
 
 const initialState: IBookingStore = {
   bookingDetails: null,
   bookTracking: null,
+  createBookingWizard: null,
 };
 
 const bookingStore = {
@@ -21,6 +27,13 @@ const bookingStore = {
     setBookTracking: (state: IBookTracking, payload: IBookTracking) => ({
       ...state,
       bookTracking: payload,
+    }),
+    setCreateBookingWizard: (
+      state: IBookingStore,
+      payload: ICreateBookingWizard,
+    ) => ({
+      ...state,
+      createBookingWizard: payload,
     }),
   },
   effects: dispatch => ({

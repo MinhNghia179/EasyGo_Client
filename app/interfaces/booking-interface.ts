@@ -17,3 +17,12 @@ export interface IBookTracking {
   bookingDetails: IBooking;
   status: BookingStatus;
 }
+
+export interface ICreateBookingWizard {
+  pickUp: IAddress;
+  dropOff: IAddress;
+  createAt: Date;
+  userId: string;
+  userName: string;
+  serviceId: number;
+}

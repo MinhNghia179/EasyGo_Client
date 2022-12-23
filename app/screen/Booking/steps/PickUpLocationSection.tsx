@@ -23,8 +23,11 @@ const PickUpLocationSection = (props: IProps) => {
   const [addNoteVisible, setAddNoteVisible] = useState<boolean>(false);
   const [noteText, setNoteText] = useState<string>('');
 
-  const { currentLocation } = useSelector(
-    (state: IRootState) => state.authStore,
+  const { currentLocation, createBookingWizard } = useSelector(
+    (state: IRootState) => ({
+      currentLocation: state.authStore.currentLocation,
+      createBookingWizard: state.bookingStore.createBookingWizard,
+    }),
   );
 
   return (
@@ -34,15 +37,14 @@ const PickUpLocationSection = (props: IProps) => {
       </Text>
       <Divider style={[styles.mv_small]} />
       <LocationCard
-        label="Pick up"
-        onPress={onOpenSearchAddressModal}
+        label="Pick up (Current Location)"
         address={currentLocation}
       />
-      <Divider style={[styles.mv_small]} />
+      <View style={[styles.mv_x_small]} />
       <LocationCard
         label="Drop off"
         onPress={onOpenSearchAddressModal}
-        address={currentLocation}
+        address={createBookingWizard?.dropOff}
       />
       <Divider style={[styles.mv_x2_small]} />
       <View style={[styles.mv_medium, styles.flex_row, styles.alg_center]}>
