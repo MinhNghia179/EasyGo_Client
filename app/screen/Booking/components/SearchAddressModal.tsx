@@ -64,12 +64,11 @@ const SearchAddressModal = (props: IProps) => {
   const handleOnSelect = async (name: string) => {
     try {
       const response = await getCurrentLocationByName({ name });
-      const payload = {
+      dispatch.bookingStore.setCreateBookingWizard({
         ...createBookingWizard,
         pickUp: currentLocation,
         dropOff: response,
-      };
-      dispatch.bookingStore.setCreateBookingWizard(payload);
+      });
       handleOnClose();
     } catch (error) {
       Toast.show(error.message);

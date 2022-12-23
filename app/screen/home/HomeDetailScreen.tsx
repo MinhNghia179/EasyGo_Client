@@ -29,14 +29,18 @@ const HomeDetailScreen = (props: IProps) => {
 
   const dispatch = useDispatch<IRootDispatch>();
 
-  const { currentLocation, AddressVisitedRecently } = useSelector(
-    (state: IRootState) => ({
+  const { currentLocation, AddressVisitedRecently, createBookingWizard } =
+    useSelector((state: IRootState) => ({
       currentLocation: state.authStore.currentLocation,
       AddressVisitedRecently: state.homeStore.AddressVisitedRecently,
-    }),
-  );
+      createBookingWizard: state.bookingStore.createBookingWizard,
+    }));
 
   const navigateToBookingScreen = () => {
+    dispatch.bookingStore.setCreateBookingWizard({
+      ...createBookingWizard,
+      pickUp: currentLocation,
+    });
     navigationService.navigate(BookingStackRoute.CREATE_BOOKING_GUID, {});
   };
 

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Polyline } from 'react-native-maps';
+import Toast from 'react-native-root-toast';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useSelector } from 'react-redux';
-import { IRootState } from '../../../redux/root-store';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRootDispatch, IRootState } from '../../../redux/root-store';
+import { getRoutes } from '../../../services/google-map-service';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
@@ -19,21 +21,42 @@ const initialRegion = {
 };
 
 const MapViewSection = () => {
-  const { createBookingWizard, currentLocation } = useSelector(
-    (state: IRootState) => ({
-      createBookingWizard: state.bookingStore.createBookingWizard,
-      currentLocation: state.authStore.currentLocation,
-    }),
-  );
+  const dispatch = useDispatch<IRootDispatch>();
+  const { createBookingWizard } = useSelector((state: IRootState) => ({
+    createBookingWizard: state.bookingStore.createBookingWizard,
+  }));
+
+  const getRoutesForBooking = async () => {
+    try {
+      const response = await getRoutes({
+        pickup: createBookingWizard?.pickUp?.location,
+        dropOff: createBookingWizard?.dropOff?.location,
+      });
+      dispatch.bookingStore.setCreateBookingWizard({
+        ...createBookingWizard,
+        routeInfo: response,
+      });
+    } catch (error) {
+      Toast.show(error);
+    }
+  };
+
+  useEffect(() => {
+    getRoutesForBooking();
+  }, [createBookingWizard?.dropOff]);
 
   return (
     <View style={[styles.flex_1]}>
-      <MapView region={initialRegion} style={[styles.flex_1]}>
-        {currentLocation && currentLocation?.location && (
+      <MapView
+        zoomEnabled
+        zoomControlEnabled
+        region={initialRegion}
+        style={[styles.flex_1]}>
+        {!!createBookingWizard && createBookingWizard?.pickUp && (
           <Marker
-            coordinate={currentLocation?.location}
-            title={currentLocation?.shortAddress}
-            description={currentLocation?.fullAddress}>
+            coordinate={createBookingWizard?.pickUp?.location}
+            title={createBookingWizard?.pickUp?.shortAddress}
+            description={createBookingWizard?.pickUp?.fullAddress}>
             <Icon
               name="my-location"
               color={Colors.Blue300}
@@ -47,12 +70,21 @@ const MapViewSection = () => {
             title={createBookingWizard?.dropOff?.shortAddress}
             description={createBookingWizard?.dropOff?.fullAddress}>
             <Icon
-              name="my-location"
-              color={Colors.Blue300}
+              name="location-searching"
+              color={Colors.Red500}
               size={IconSizes.x_small}
             />
           </Marker>
         )}
+        {!!createBookingWizard &&
+          !!createBookingWizard?.dropOff &&
+          !!createBookingWizard?.pickUp && (
+            <Polyline
+              coordinates={createBookingWizard?.routeInfo?.routes || []}
+              strokeColor={Colors.Green}
+              strokeWidth={3}
+            />
+          )}
       </MapView>
     </View>
   );

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IRouteInfo } from '../interfaces/booking-interface';
 import { GOOGLE_BASE_URL, GOOGLE_REST_API_KEY } from '../variables/app-config';
 import { IAddress, ICoordinates } from './../interfaces/home-interfaces';
 
@@ -58,10 +59,14 @@ export const getCurrentLocationByName = async (payload: { name: string }) => {
       `${GOOGLE_BASE_URL}/Locations?CountryRegion=VN&locality=Somewhere&addressLine=${name}&key=${GOOGLE_REST_API_KEY}`,
     );
     const resource = response.data.resourceSets[0].resources[0];
+    const location = {
+      latitude: resource.point.coordinates[0],
+      longitude: resource.point.coordinates[1],
+    };
     return {
-      location: resource.point.coordinates,
       fullAddress: resource.name,
       shortAddress: resource.address.addressLine,
+      location,
     } as IAddress;
   } catch (error) {
     console.error(error);
@@ -69,15 +74,11 @@ export const getCurrentLocationByName = async (payload: { name: string }) => {
   }
 };
 
-export const getRoutes = async () => {
-  const pickup = {
-    latitude: 21.03251544712208,
-    longitude: 105.8015918169498,
-  };
-  const dropOff = {
-    latitude: 21.030705729729053,
-    longitude: 105.81272021333663,
-  };
+export const getRoutes = async (payload: {
+  pickup: ICoordinates;
+  dropOff: ICoordinates;
+}) => {
+  const { pickup, dropOff } = payload;
   try {
     const response = await axios.get(
       `${GOOGLE_BASE_URL}/Routes?wp.0=${pickup.latitude}, ${pickup.longitude}&wp.1=${dropOff.latitude}, ${dropOff.longitude}&key=${GOOGLE_REST_API_KEY}`,
@@ -86,14 +87,15 @@ export const getRoutes = async () => {
     const { travelDistance, travelDuration, travelDurationTraffic, routeLegs } =
       routeInfo;
     const routes = routeLegs[0].itineraryItems.map(({ maneuverPoint }) => ({
-      ...maneuverPoint.coordinates,
+      latitude: maneuverPoint.coordinates[0],
+      longitude: maneuverPoint.coordinates[1],
     }));
     return {
       travelDistance,
       travelDuration,
       travelDurationTraffic,
       routes,
-    };
+    } as IRouteInfo;
   } catch (error) {
     console.error(error);
     return null;

@@ -85,11 +85,14 @@ const BottomSheetModal = (props: IProps) => {
               {!!title ? (
                 _.isString(title) ? (
                   <View style={[styles.flex, styles.flex_col]}>
-                    <Text type="callout" fontWeight="bold" color={Colors.Black}>
+                    <Text
+                      type="footnote"
+                      fontWeight="bold"
+                      color={Colors.Black}>
                       {title}
                     </Text>
                     {!!description && (
-                      <Text type="subhead" color={Colors.Text.Primary}>
+                      <Text type="caption1" color={Colors.Text.Primary}>
                         {description}
                       </Text>
                     )}
@@ -117,7 +120,7 @@ const BottomSheetModal = (props: IProps) => {
           {hasDivider && <Divider />}
 
           {!!children && (
-            <View style={[styles.ph_medium, styles.pv_large]}>{children}</View>
+            <View style={[styles.ph_medium, styles.pv_medium]}>{children}</View>
           )}
         </View>
       )}

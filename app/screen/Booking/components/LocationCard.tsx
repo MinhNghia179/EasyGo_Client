@@ -33,7 +33,7 @@ const LocationCard = (props: IProps) => {
           {
             backgroundColor: Colors.Grey100,
             borderWidth: 1,
-            borderColor: isNotLocation ? Colors.Red500 : Colors.Green500,
+            borderColor: isNotLocation ? Colors.Red500 : Colors.Green,
           },
         ]}>
         {isNotLocation ? (
