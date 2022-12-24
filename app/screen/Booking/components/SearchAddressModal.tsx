@@ -14,6 +14,7 @@ import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import {
   autoSuggestLocationBySearchName,
   getCurrentLocationByName,
+  getRoutes,
 } from '../../../services/google-map-service';
 import { wp } from '../../../services/response-screen-service';
 import { Colors } from '../../../styles/colors';
@@ -64,10 +65,15 @@ const SearchAddressModal = (props: IProps) => {
   const handleOnSelect = async (name: string) => {
     try {
       const response = await getCurrentLocationByName({ name });
+      const routeInfo = await getRoutes({
+        pickup: createBookingWizard?.pickUp?.location,
+        dropOff: response?.location,
+      });
       dispatch.bookingStore.setCreateBookingWizard({
         ...createBookingWizard,
         pickUp: currentLocation,
         dropOff: response,
+        routeInfo: routeInfo,
       });
       handleOnClose();
     } catch (error) {

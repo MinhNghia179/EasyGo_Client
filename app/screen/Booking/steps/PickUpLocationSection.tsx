@@ -74,38 +74,44 @@ const PickUpLocationSection = (props: IProps) => {
         address={createBookingWizard?.dropOff}
       />
       <Divider style={[styles.mv_x2_small]} />
-      <View
-        style={[
-          styles.jus_between,
-          styles.mv_x2_small,
-          styles.mt_small,
-          styles.flex_row,
-          {
-            flexWrap: 'wrap',
-          },
-        ]}>
-        <Item
-          label="Distance"
-          value={round(createBookingWizard?.routeInfo?.travelDistance, 2)}
-          unit="km"
-          iconName="road"
-        />
-        <Item
-          label="Duration"
-          value={round(createBookingWizard?.routeInfo?.travelDuration / 60, 1)}
-          unit="minute"
-          iconName="hourglass-half"
-        />
-        <Item
-          label="Duration Traffic"
-          value={round(
-            createBookingWizard?.routeInfo?.travelDurationTraffic / 60,
-            1,
-          )}
-          unit="minute"
-          iconName="clock-o"
-        />
-      </View>
+      {createBookingWizard && createBookingWizard.routeInfo && (
+        <View
+          style={[
+            styles.jus_between,
+            styles.mv_x2_small,
+            styles.mt_small,
+            styles.flex_row,
+            {
+              flexWrap: 'wrap',
+            },
+          ]}>
+          <Item
+            label="Distance"
+            value={round(createBookingWizard?.routeInfo?.travelDistance, 2)}
+            unit="km"
+            iconName="road"
+          />
+          <Item
+            label="Duration"
+            value={round(
+              createBookingWizard?.routeInfo?.travelDuration / 60,
+              1,
+            )}
+            unit="minute"
+            iconName="hourglass-half"
+          />
+          <Item
+            label="Duration Traffic"
+            value={round(
+              createBookingWizard?.routeInfo?.travelDurationTraffic / 60,
+              1,
+            )}
+            unit="minute"
+            iconName="clock-o"
+          />
+        </View>
+      )}
+
       <View style={[styles.mv_12, styles.flex_row, styles.alg_center]}>
         <Icon
           name="pencil"

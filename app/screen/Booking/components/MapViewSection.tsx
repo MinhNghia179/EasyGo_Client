@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
-import Toast from 'react-native-root-toast';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useDispatch, useSelector } from 'react-redux';
-import { IRootDispatch, IRootState } from '../../../redux/root-store';
-import { getRoutes } from '../../../services/google-map-service';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../../../redux/root-store';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
@@ -21,29 +19,9 @@ const initialRegion = {
 };
 
 const MapViewSection = () => {
-  const dispatch = useDispatch<IRootDispatch>();
   const { createBookingWizard } = useSelector((state: IRootState) => ({
     createBookingWizard: state.bookingStore.createBookingWizard,
   }));
-
-  const getRoutesForBooking = async () => {
-    try {
-      const response = await getRoutes({
-        pickup: createBookingWizard?.pickUp?.location,
-        dropOff: createBookingWizard?.dropOff?.location,
-      });
-      dispatch.bookingStore.setCreateBookingWizard({
-        ...createBookingWizard,
-        routeInfo: response,
-      });
-    } catch (error) {
-      Toast.show(error);
-    }
-  };
-
-  useEffect(() => {
-    getRoutesForBooking();
-  }, [createBookingWizard?.dropOff]);
 
   return (
     <View style={[styles.flex_1]}>
@@ -52,7 +30,7 @@ const MapViewSection = () => {
         zoomControlEnabled
         region={initialRegion}
         style={[styles.flex_1]}>
-        {!!createBookingWizard && createBookingWizard?.pickUp && (
+        {createBookingWizard && createBookingWizard?.pickUp && (
           <Marker
             coordinate={createBookingWizard?.pickUp?.location}
             title={createBookingWizard?.pickUp?.shortAddress}
@@ -64,7 +42,7 @@ const MapViewSection = () => {
             />
           </Marker>
         )}
-        {!!createBookingWizard && !!createBookingWizard?.dropOff && (
+        {createBookingWizard && !!createBookingWizard?.dropOff && (
           <Marker
             coordinate={createBookingWizard?.dropOff?.location}
             title={createBookingWizard?.dropOff?.shortAddress}
@@ -76,7 +54,7 @@ const MapViewSection = () => {
             />
           </Marker>
         )}
-        {!!createBookingWizard &&
+        {createBookingWizard &&
           !!createBookingWizard?.dropOff &&
           !!createBookingWizard?.pickUp && (
             <Polyline
