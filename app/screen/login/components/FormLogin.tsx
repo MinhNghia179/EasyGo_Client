@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import Toast from 'react-native-root-toast';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useDispatch } from 'react-redux';
 import LinkButton from '../../../components/Button/LinkButton';
 import PrimaryButton from '../../../components/Button/PrimaryButton';
 import InputText from '../../../components/Input/InputText';
 import { Text } from '../../../components/Text';
 import { HomeStackRoute, LoginStackRoute } from '../../../constants/constant';
 import navigationService from '../../../navigation/navigation-service';
+import { IRootDispatch } from '../../../redux/root-store';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
@@ -25,6 +28,8 @@ const horizontalStyles = {
 const FormLogin = (props: IProps) => {
   const { onSelectLoginWithPhoneNumber } = props;
 
+  const dispatch = useDispatch<IRootDispatch>();
+
   const [emailAddress, setEmailAddress] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -33,8 +38,16 @@ const FormLogin = (props: IProps) => {
     navigationService.navigate(LoginStackRoute.FORGOT_PASSWORD, {});
   };
 
-  const onSubmit = () => {
-    navigationService.navigate(HomeStackRoute.DASHBOARD, {});
+  const onSubmit = async () => {
+    setIsLoading(true);
+    try {
+      await dispatch.authStore.doSignIn({ email: emailAddress, password });
+      navigationService.navigate(HomeStackRoute.DASHBOARD, {});
+    } catch (error) {
+      Toast.show(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

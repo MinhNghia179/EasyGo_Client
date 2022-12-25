@@ -13,8 +13,8 @@ interface IProps {}
 
 const DriverInfo = (props: IProps) => {
   return (
-    <View style={[styles.p_medium]}>
-      <Text color={Colors.Black} type="footnote">
+    <>
+      <Text color={Colors.Black} type="footnote" fontWeight="bold">
         Nearest driver found, will reach in 01:00 min
       </Text>
       <View
@@ -71,7 +71,7 @@ const DriverInfo = (props: IProps) => {
       <PrimaryButton style={[styles.mt_medium]} color={Colors.Red300}>
         Cancel Ride
       </PrimaryButton>
-    </View>
+    </>
   );
 };
 

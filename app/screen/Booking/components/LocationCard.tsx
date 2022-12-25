@@ -37,7 +37,7 @@ const LocationCard = (props: IProps) => {
           },
         ]}>
         {isNotLocation ? (
-          <Text color={Colors.Red400} type="footnote">
+          <Text color={Colors.Red400} type="caption1">
             Please select {label.toLowerCase()} location
           </Text>
         ) : (

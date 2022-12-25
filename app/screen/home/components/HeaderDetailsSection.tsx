@@ -16,9 +16,10 @@ interface IProps {
 }
 
 const HeaderDetailsSection: React.FC<IProps> = ({ onPressShowMap }) => {
-  const { currentLocation } = useSelector(
-    (state: IRootState) => state.authStore,
-  );
+  const { currentLocation, portalUser } = useSelector((state: IRootState) => ({
+    currentLocation: state.authStore.currentLocation,
+    portalUser: state.authStore.portalUser,
+  }));
 
   return (
     <View
@@ -47,7 +48,7 @@ const HeaderDetailsSection: React.FC<IProps> = ({ onPressShowMap }) => {
           />
           <View style={[styles.ml_small]}>
             <Text type="callout" color={Colors.White}>
-              Hi, <Text fontWeight="bold">Minh Nghia</Text>.
+              Hi, <Text fontWeight="bold">{portalUser?.username}</Text>
             </Text>
             <Text color={Colors.White}>Let's discover a new adventure!</Text>
           </View>

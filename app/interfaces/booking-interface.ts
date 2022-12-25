@@ -33,4 +33,5 @@ export interface ICreateBookingWizard {
   userName: string;
   serviceId: number;
   routeInfo: IRouteInfo;
+  note: string;
 }

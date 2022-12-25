@@ -2,14 +2,15 @@ import { round } from 'lodash';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Divider } from 'react-native-elements';
+import Toast from 'react-native-root-toast';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LinkButton from '../../../components/Button/LinkButton';
 import PrimaryButton from '../../../components/Button/PrimaryButton';
 import InputText from '../../../components/Input/InputText';
 import { BottomSheetModal } from '../../../components/Modal';
 import { Text } from '../../../components/Text';
-import { IRootState } from '../../../redux/root-store';
+import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
@@ -17,6 +18,7 @@ import LocationCard from '../components/LocationCard';
 
 interface IProps {
   onOpenSearchAddressModal: () => void;
+  nextStep: () => void;
 }
 
 interface IIteamProps {
@@ -49,10 +51,13 @@ const Item = (props: IIteamProps) => {
 };
 
 const PickUpLocationSection = (props: IProps) => {
-  const { onOpenSearchAddressModal } = props;
+  const { onOpenSearchAddressModal, nextStep } = props;
+
+  const dispatch = useDispatch<IRootDispatch>();
 
   const [addNoteVisible, setAddNoteVisible] = useState<boolean>(false);
   const [noteText, setNoteText] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { currentLocation, createBookingWizard } = useSelector(
     (state: IRootState) => ({
@@ -60,6 +65,31 @@ const PickUpLocationSection = (props: IProps) => {
       createBookingWizard: state.bookingStore.createBookingWizard,
     }),
   );
+
+  const handleOnClose = () => {
+    setNoteText('');
+    setAddNoteVisible(false);
+  };
+
+  const onSaveNote = () => {
+    dispatch.bookingStore.setCreateBookingWizard({
+      ...createBookingWizard,
+      note: noteText,
+    });
+    handleOnClose();
+  };
+
+  const handleNextStep = async () => {
+    setIsLoading(true);
+    try {
+      await dispatch.serviceStore.doGetServiceList();
+      nextStep();
+    } catch (error) {
+      Toast.show(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -122,7 +152,11 @@ const PickUpLocationSection = (props: IProps) => {
           Additional notes about the pick up point for the driver
         </LinkButton>
       </View>
-      <PrimaryButton color={Colors.Green}>
+
+      <PrimaryButton
+        loading={isLoading}
+        color={Colors.Green}
+        onPress={handleNextStep}>
         Choose this pick up point
       </PrimaryButton>
 
@@ -131,18 +165,18 @@ const PickUpLocationSection = (props: IProps) => {
         isVisible={addNoteVisible}
         title="Add notes"
         description="Additional notes about the pick up point for the driver"
-        onClose={() => setAddNoteVisible(false)}>
+        onClose={handleOnClose}>
         <InputText
           style={[styles.mv_small]}
-          value={noteText}
+          value={noteText || createBookingWizard?.note}
           onChange={setNoteText}
           placeholder="Type note"
         />
         <PrimaryButton
           disable={!noteText}
           color={Colors.Green}
-          onPress={() => {}}>
-          Save
+          onPress={onSaveNote}>
+          Confirm
         </PrimaryButton>
       </BottomSheetModal>
     </>

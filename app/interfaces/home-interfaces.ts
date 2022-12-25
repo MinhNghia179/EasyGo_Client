@@ -29,9 +29,9 @@ export interface IBooking {
 }
 
 export interface IService {
-  id_service: number;
-  name: string;
-  active: number;
+  id: number;
+  describe: string;
   price: number;
-  detail: string;
+  name: string;
+  createdAt: any;
 }

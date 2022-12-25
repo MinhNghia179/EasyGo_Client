@@ -52,7 +52,6 @@ const LoginScreen = () => {
                 }
               />
             )}
-
             <View style={[styles.flex, styles.alg_center, styles.mt_large]}>
               <Text type="footnote" textAlign="center">
                 By creating an account, you agree to our Terms of Service and

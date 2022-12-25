@@ -25,17 +25,13 @@ const authStore = {
     }),
   },
   effects: dispatch => ({
-    async doSignIn(payload) {
+    async doSignIn(payload: { email: string; password: string }) {
       try {
-        const response = await apiClient.post(
-          `/users/login?id=${payload.userName}`,
-        );
-
+        const response = await apiClient.post(`/user/login`, payload);
         if (response.status === 200) {
-          apiClient.setSession(response.data.session_id);
+          apiClient.setSession(response.data.result.session_id);
         }
-
-        dispatch.authStore.setPortalUser(response.data.info);
+        dispatch.authStore.setPortalUser(response.data.result.info);
       } catch (error) {
         throw error;
       }

@@ -27,24 +27,39 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
       case BookingGuidStep.SET_ROUTE: {
         return (
           <PickUpLocationSection
+            nextStep={() => setStep(BookingGuidStep.SELECT_SERVICE)}
             onOpenSearchAddressModal={() => setSearchAddressModalVisible(true)}
           />
         );
       }
       case BookingGuidStep.SELECT_SERVICE: {
-        return <SelectServiceSection />;
+        return (
+          <SelectServiceSection
+            nextStep={() => setStep(BookingGuidStep.PAYMENT_METHOD)}
+            prevStep={() => setStep(BookingGuidStep.SET_ROUTE)}
+          />
+        );
       }
       case BookingGuidStep.PAYMENT_METHOD: {
-        return <PaymentMethodSection />;
-      }
-      case BookingGuidStep.BOOKING_DETAILS: {
-        return <BookingInfo />;
+        return (
+          <PaymentMethodSection
+            nextStep={setStep}
+            prevStep={() => setStep(BookingGuidStep.SELECT_SERVICE)}
+          />
+        );
       }
       case BookingGuidStep.SEARCHING_RIDE: {
-        return <SearchingRide />;
+        return (
+          <SearchingRide
+            nextStep={() => setStep(BookingGuidStep.DRIVER_INFO)}
+          />
+        );
       }
       case BookingGuidStep.DRIVER_INFO: {
         return <DriverInfo />;
+      }
+      case BookingGuidStep.BOOKING_DETAILS: {
+        return <BookingInfo />;
       }
     }
   };

@@ -2,15 +2,17 @@ import React from 'react';
 import { View } from 'react-native';
 
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import LinkButton from '../../../components/Button/LinkButton';
+import PrimaryButton from '../../../components/Button/PrimaryButton';
 import { Text } from '../../../components/Text';
 import { Colors } from '../../../styles/colors';
 import styles from '../../../styles/style-sheet';
 
-interface IProps {}
+interface IProps {
+  nextStep: () => void;
+}
 
 const SearchingRide = (props: IProps) => {
-  const {} = props;
+  const { nextStep } = props;
 
   return (
     <>
@@ -23,15 +25,13 @@ const SearchingRide = (props: IProps) => {
             It may take some times...
           </Text>
         </View>
-        <LinkButton color={Colors.Red600} type="subhead">
-          Cancel
-        </LinkButton>
       </View>
-      <View style={[styles.mt_small]}>
+      <View style={[styles.mt_small, styles.pv_medium]}>
         <SkeletonPlaceholder borderRadius={4}>
           <SkeletonPlaceholder.Item height={10} />
         </SkeletonPlaceholder>
       </View>
+      <PrimaryButton color={Colors.Red600}>Cancel</PrimaryButton>
     </>
   );
 };
