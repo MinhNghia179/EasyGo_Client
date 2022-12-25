@@ -22,7 +22,7 @@ const SearchingRide = (props: IProps) => {
             Searching Ride
           </Text>
           <Text type="footnote" color={Colors.Text.GreySecondary}>
-            It may take some times...
+            Looking for the nearest driver for you. It may take some times...
           </Text>
         </View>
       </View>

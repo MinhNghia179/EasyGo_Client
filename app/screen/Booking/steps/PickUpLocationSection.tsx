@@ -40,7 +40,7 @@ const Item = (props: IIteamProps) => {
           size={IconSizes.x2_small}
         />
       )}
-      <Text type="caption1">
+      <Text type="caption1" color={Colors.Text.GreySecondary}>
         {label}: &nbsp;
         <Text fontWeight="bold">
           {value || 0.0}({unit})
