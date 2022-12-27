@@ -82,7 +82,9 @@ const PickUpLocationSection = (props: IProps) => {
   const handleNextStep = async () => {
     setIsLoading(true);
     try {
-      await dispatch.serviceStore.doGetServiceList();
+      await dispatch.serviceStore.doGetServiceList({
+        distance: createBookingWizard?.routeInfo?.travelDistance,
+      });
       nextStep();
     } catch (error) {
       Toast.show(error);

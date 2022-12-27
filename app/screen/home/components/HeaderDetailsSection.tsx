@@ -10,6 +10,7 @@ import { wp } from '../../../services/response-screen-service';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
+import { greetingTime } from '../../../utils/constant';
 
 interface IProps {
   onPressShowMap: () => void;
@@ -48,7 +49,8 @@ const HeaderDetailsSection: React.FC<IProps> = ({ onPressShowMap }) => {
           />
           <View style={[styles.ml_small]}>
             <Text type="callout" color={Colors.White}>
-              Hi, <Text fontWeight="bold">{portalUser?.username}</Text>
+              {greetingTime()},&nbsp;
+              <Text fontWeight="bold">{portalUser?.username}</Text>
             </Text>
             <Text color={Colors.White}>Let's discover a new adventure!</Text>
           </View>

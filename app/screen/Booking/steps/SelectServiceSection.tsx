@@ -11,6 +11,7 @@ import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
+import { numberWithCommas } from '../../../utils/constant';
 import { BookingGuidStep } from '../utils/constant';
 
 interface IProps {
@@ -140,8 +141,9 @@ const SelectServiceSection = (props: IProps) => {
                 <Text
                   fontWeight="bold"
                   type="footnote"
+                  textDecorationLine="underline"
                   color={Colors.Text.GreySecondary}>
-                  {one.price}đ
+                  {numberWithCommas(one.totalPrice)}đ
                 </Text>
               </TouchableOpacity>
               <Divider />

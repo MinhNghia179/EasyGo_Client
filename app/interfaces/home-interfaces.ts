@@ -34,4 +34,5 @@ export interface IService {
   price: number;
   name: string;
   createdAt: any;
+  totalPrice?: number;
 }

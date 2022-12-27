@@ -29,7 +29,7 @@ const authStore = {
       try {
         const response = await apiClient.post(`/user/login`, payload);
         if (response.status === 200) {
-          apiClient.setSession(response.data.result.session_id);
+          apiClient.setSession(response.data.result.sessionId);
         }
         dispatch.authStore.setPortalUser(response.data.result.info);
       } catch (error) {

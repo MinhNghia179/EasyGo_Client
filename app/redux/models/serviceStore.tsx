@@ -18,9 +18,9 @@ const serviceStore = {
     }),
   },
   effects: dispatch => ({
-    async doGetServiceList(): Promise<void> {
+    async doGetServiceList(payload: { distance: number }): Promise<void> {
       try {
-        const response = await apiClient.get(`/service`);
+        const response = await apiClient.post(`/service/distance`, payload);
         dispatch.serviceStore.setServices(response.data.result);
       } catch (error) {
         throw error;

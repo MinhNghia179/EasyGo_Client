@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import LinkButton from '../../components/Button/LinkButton';
@@ -13,10 +13,7 @@ import {
   currentPosition,
   requestLocationPermission,
 } from '../../services/geolocation-service';
-import {
-  autoSuggestLocationBySearchName,
-  getCurrentLocationByCoordinates,
-} from '../../services/google-map-service';
+import { getCurrentLocationByCoordinates } from '../../services/google-map-service';
 import { Colors } from '../../styles/colors';
 import styles from '../../styles/style-sheet';
 import BodyDetailsSection from './components/BodyDetailsSection';
@@ -35,6 +32,8 @@ const HomeDetailScreen = (props: IProps) => {
       AddressVisitedRecently: state.homeStore.AddressVisitedRecently,
       createBookingWizard: state.bookingStore.createBookingWizard,
     }));
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigateToBookingScreen = () => {
     dispatch.bookingStore.setCreateBookingWizard({
@@ -55,19 +54,26 @@ const HomeDetailScreen = (props: IProps) => {
     }
   };
 
+  const suggestMoreLocation = async () => {
+    setIsLoading(true);
+    try {
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const doNotAllow = () => {};
 
-  const findRoutes = async () => {
-    const payload = {
-      addressName: '68',
-      userLocation: currentLocation.location,
-    };
-    await autoSuggestLocationBySearchName(payload);
-  };
+  useEffect(() => {
+    if (currentLocation) {
+      suggestMoreLocation();
+    }
+  }, [currentLocation]);
 
   return (
     <SafeAreaContainer contentType="scrollView" backgroundColor={Colors.White}>
-      <HeaderDetailsSection onPressShowMap={findRoutes} />
+      <HeaderDetailsSection onPressShowMap={() => {}} />
       <BodyDetailsSection
         navigateToBookingScreen={navigateToBookingScreen}
         AddressVisitedRecently={AddressVisitedRecently}

@@ -30,8 +30,8 @@ const FormLogin = (props: IProps) => {
 
   const dispatch = useDispatch<IRootDispatch>();
 
-  const [emailAddress, setEmailAddress] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [emailAddress, setEmailAddress] = useState<string>('thanh@gmail.com');
+  const [password, setPassword] = useState<string>('123456789');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigateToForgotPassWord = () => {
