@@ -1,9 +1,4 @@
-import { BookingStatus } from '../enum/booking-enum';
 import { IAddress, ICoordinates } from './home-interfaces';
-
-export interface IBooking {
-  bookingId: string;
-}
 
 export interface IOrder {
   userId: string;
@@ -11,11 +6,6 @@ export interface IOrder {
   serviceId: string;
   pickUpLocation: IAddress;
   destinationLocation: IAddress;
-}
-
-export interface IBookTracking {
-  bookingDetails: IBooking;
-  status: BookingStatus;
 }
 
 export interface IRouteInfo {
@@ -31,7 +21,8 @@ export interface ICreateBookingWizard {
   createAt: Date;
   userId: string;
   userName: string;
-  serviceId: number;
+  serviceId: string;
   routeInfo: IRouteInfo;
   note: string;
+  totalPrice: number;
 }

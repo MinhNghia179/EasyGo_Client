@@ -1,33 +1,24 @@
-import {
-  IBooking,
-  IBookTracking,
-  ICreateBookingWizard,
-} from '../../interfaces/booking-interface';
+import { ICreateBookingWizard } from '../../interfaces/booking-interface';
 import apiClient from '../../services/api-client';
 
 export interface IBookingStore {
-  bookingDetails: IBooking;
-  bookTracking: IBookTracking;
+  bookingDetails: any;
   createBookingWizard: ICreateBookingWizard;
 }
 
 const initialState: IBookingStore = {
   bookingDetails: null,
-  bookTracking: null,
   createBookingWizard: null,
 };
 
 const bookingStore = {
   state: initialState,
   reducers: {
-    setBookingDetails: (state: IBookingStore, payload: IBooking) => ({
+    setBookingDetails: (state: IBookingStore, payload: any) => ({
       ...state,
       bookingDetails: payload,
     }),
-    setBookTracking: (state: IBookTracking, payload: IBookTracking) => ({
-      ...state,
-      bookTracking: payload,
-    }),
+
     setCreateBookingWizard: (
       state: IBookingStore,
       payload: ICreateBookingWizard,
@@ -37,10 +28,17 @@ const bookingStore = {
     }),
   },
   effects: dispatch => ({
-    async doCreateBookingDetails(payload): Promise<void> {
+    async doCreateBookingDetails(payload, rootState): Promise<void> {
+      const { pickUp, dropOff, serviceId, totalPrice } =
+        rootState.bookingStore.createBookingWizard;
       try {
-        const response = await apiClient.post(`/booking/create`, payload);
-        dispatch.bookingStore.setBookingDetails(response.data.booking);
+        const response = await apiClient.post(`/booking/create`, {
+          pickUp: pickUp.location,
+          dropOff: dropOff.location,
+          serviceId,
+          totalPrice,
+        });
+        dispatch.bookingStore.setBookingDetails(response.data.result.booking);
       } catch (error) {
         throw error;
       }

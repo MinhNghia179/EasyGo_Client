@@ -7,13 +7,9 @@ import { Text } from '../../../components/Text';
 import { Colors } from '../../../styles/colors';
 import styles from '../../../styles/style-sheet';
 
-interface IProps {
-  nextStep: () => void;
-}
+interface IProps {}
 
 const SearchingRide = (props: IProps) => {
-  const { nextStep } = props;
-
   return (
     <>
       <View style={[styles.flex_row, styles.alg_center, styles.jus_between]}>

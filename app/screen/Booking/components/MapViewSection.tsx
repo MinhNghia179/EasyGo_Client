@@ -21,8 +21,8 @@ const MapViewSection = () => {
   );
 
   const initialRegion = {
-    latitude: currentLocation?.location?.latitude,
-    longitude: currentLocation?.location?.longitude,
+    latitude: currentLocation?.location?.latitude || 21.030813822253087,
+    longitude: currentLocation?.location?.longitude || 105.7994291596386,
     latitudeDelta: latDelta,
     longitudeDelta: longDelta,
   };

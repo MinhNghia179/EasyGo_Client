@@ -29,10 +29,9 @@ export interface IBooking {
 }
 
 export interface IService {
-  id: number;
+  id: string;
   describe: string;
   price: number;
   name: string;
-  createdAt: any;
   totalPrice?: number;
 }

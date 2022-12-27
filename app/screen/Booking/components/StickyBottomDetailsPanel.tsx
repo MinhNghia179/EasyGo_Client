@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Colors } from '../../../styles/colors';
 import styles from '../../../styles/style-sheet';
-import DriverInfo from '../steps/DriverInfo';
+import BookingInfo from '../steps/BookingInfo';
 import PickUpLocationSection from '../steps/PickUpLocationSection';
 import SearchingRide from '../steps/SearchingRide';
 import SelectServiceSection from '../steps/SelectServiceSection';
@@ -40,11 +40,9 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
           prevStep={() => setStep(BookingGuidStep.SET_ROUTE)}
         />
       )}
-      {step === BookingGuidStep.SEARCHING_RIDE && (
-        <SearchingRide nextStep={() => setStep(BookingGuidStep.DRIVER_INFO)} />
-      )}
+      {step === BookingGuidStep.SEARCHING_RIDE && <SearchingRide />}
 
-      {step === BookingGuidStep.DRIVER_INFO && <DriverInfo />}
+      {step === BookingGuidStep.BOOKING_INFO && <BookingInfo />}
 
       <SearchAddressModal
         isOpen={searchAddressModalVisible}

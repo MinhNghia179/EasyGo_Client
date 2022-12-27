@@ -1,37 +1,70 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import { Divider } from 'react-native-elements';
 import Toast from 'react-native-root-toast';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { useDispatch, useSelector } from 'react-redux';
+import { Avatar } from '../../../components/Avatar';
 import PrimaryButton from '../../../components/Button/PrimaryButton';
+import { PointLocationIcon } from '../../../components/common';
 import { Text } from '../../../components/Text';
-import { IRootState } from '../../../redux/root-store';
+import { HomeStackRoute } from '../../../constants/constant';
+import navigationService from '../../../navigation/navigation-service';
+import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import { wp } from '../../../services/response-screen-service';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
-import { BookingGuidStep } from '../utils/constant';
+import CancelBookingModal from '../components/CancelBookingModal';
 
-interface IProps {
-  nextStep: (value: string) => void;
-  prevStep: () => void;
+interface IProps {}
+
+interface IItemProps {
+  label: string;
+  icon: React.ReactNode;
+  onPress: () => void;
 }
 
+const Item = ({ label, icon, onPress }: IItemProps) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={[
+        styles.flex_row,
+        styles.alg_center,
+        styles.mh_x_small,
+        styles.p_small,
+        styles.rounded_small,
+        styles.b_small,
+        {
+          borderColor: Colors.Green,
+        },
+      ]}>
+      <Text>{label}</Text>
+      <View style={[styles.ph_x2_small]}>{icon}</View>
+    </TouchableOpacity>
+  );
+};
+
 const BookingInfo = (props: IProps) => {
-  const { nextStep, prevStep } = props;
+  const {} = props;
+  const dispatch = useDispatch<IRootDispatch>();
 
   const { createBookingWizard } = useSelector((state: IRootState) => ({
     createBookingWizard: state.bookingStore.createBookingWizard,
   }));
 
+  const [cancelBookingModalVisible, setCancelBookingModalVisible] =
+    useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const onConfirm = () => {
+
+  const handleCancelBooking = async () => {
     setIsLoading(true);
     try {
-      nextStep(BookingGuidStep.SEARCHING_RIDE);
-      setTimeout(() => {
-        nextStep(BookingGuidStep.DRIVER_INFO);
-      }, 3000);
+      await dispatch.bookingStore.doCancelBooking({ idBooking: '' });
+      dispatch.bookingStore.setCreateBookingWizard(null);
+      dispatch.bookingStore.setBookingDetails(null);
+      navigationService.navigate(HomeStackRoute.DASHBOARD, {});
     } catch (error) {
       Toast.show(error);
     } finally {
@@ -39,84 +72,130 @@ const BookingInfo = (props: IProps) => {
     }
   };
 
-  const _renderItem = (label, value) => {
-    return (
-      <View
-        style={[
-          styles.mv_small,
-          {
-            width: wp(200),
-          },
-        ]}>
-        <Text type="subhead" color={Colors.Text.GreySecondary}>
-          {label}
-        </Text>
-        <Text type="footnote" fontWeight="bold" color={Colors.Text.DarkBlue}>
-          {value}
-        </Text>
-      </View>
-    );
-  };
-
   return (
     <>
-      <View style={[styles.flex_row, styles.alg_center]}>
-        <Icon
-          name="my-location"
-          color={Colors.Red300}
-          size={IconSizes.x2_small}
-          style={[styles.mr_small]}
-        />
-        <Text type="footnote">{createBookingWizard?.pickUp?.fullAddress}</Text>
+      <Text color={Colors.Black} type="footnote" fontWeight="bold">
+        Nearest driver found, will reach in 01:00 min
+      </Text>
+      <View
+        style={[
+          styles.mv_medium,
+          styles.flex_row,
+          styles.jus_between,
+          styles.alg_center,
+        ]}>
+        <View style={[styles.flex_row]}>
+          <Avatar
+            style={[styles.rounded_full]}
+            imageSize={wp(35)}
+            source={{ uri: 'https://randomuser.me/api/portraits/men/36.jpg' }}
+            position="bottom-left"
+          />
+          <View style={[styles.ml_small]}>
+            <Text color={Colors.Green600} fontWeight="bold" type="subhead">
+              Vindel Huskel
+            </Text>
+            <Text color={Colors.Text.GreySecondary} type="caption2">
+              Ride complete: 250 +
+            </Text>
+          </View>
+        </View>
+        <View>
+          <Text color={Colors.Green600} fontWeight="bold" type="subhead">
+            (4.8)
+          </Text>
+          <Text color={Colors.Text.GreySecondary} type="caption2">
+            Rating
+          </Text>
+        </View>
       </View>
-      <View style={[styles.flex_row, styles.alg_center]}>
-        <Icon
-          name="location-on"
-          color={Colors.Green300}
-          size={IconSizes.x2_small}
-          style={[styles.mr_small]}
-        />
-        <Text type="footnote">{createBookingWizard?.dropOff?.fullAddress}</Text>
+      <View style={[styles.flex_row, styles.jus_between, styles.alg_center]}>
+        <View>
+          <Text type="caption1" color={Colors.Text.GreySecondary}>
+            Yamaha Sirius
+          </Text>
+          <Text type="footnote" color={Colors.Black}>
+            (JDG-4565998)
+          </Text>
+        </View>
+        <View style={[styles.flex_row]}>
+          <Item
+            label="Call Now"
+            onPress={() => {}}
+            icon={
+              <Icon name="phone" color={Colors.Black} size={IconSizes.small} />
+            }
+          />
+          <Item
+            label="Message"
+            onPress={() => {}}
+            icon={
+              <Icon
+                name="message1"
+                style={[styles.mr_medium]}
+                color={Colors.Black}
+                size={IconSizes.small}
+              />
+            }
+          />
+        </View>
       </View>
-      <View style={[styles.flex_row]}>
-        {_renderItem('Estimated Time', '1hr 10min')}
-        {_renderItem('Total Destination', '34km')}
-      </View>
-      <View style={[styles.flex_row]}>
-        {_renderItem('Fare Estimate', '$ 125.25')}
-        {_renderItem('Travel Costs', '$ 125.25')}
-      </View>
-      {_renderItem('Service', 'GrabCar')}
-      <View style={[styles.mv_medium]}>
-        <Text fontWeight="bold" type="footnote">
-          Payment (No card at the moment)
-        </Text>
+      <View style={[styles.mv_small, styles.shadowCard]}>
+        <View style={[styles.flex_row]}>
+          <PointLocationIcon size="medium" style={[styles.mh_small]} />
+          <Text type="caption1" fontWeight="bold">
+            {createBookingWizard?.pickUp?.fullAddress}
+          </Text>
+        </View>
+        <View style={[styles.mv_x_small]} />
+        <View style={[styles.flex_row]}>
+          <PointLocationIcon
+            size="medium"
+            style={[styles.mh_small]}
+            color={Colors.Red300}
+          />
+          <Text type="caption1" fontWeight="bold">
+            {createBookingWizard?.dropOff?.fullAddress}
+          </Text>
+        </View>
       </View>
       <View
         style={[
           styles.flex_row,
-          styles.p_small,
-          styles.rounded_small,
-          styles.b_small,
-          {
-            borderColor: Colors.Blue600,
-          },
+          styles.jus_around,
+          styles.alg_center,
+          styles.mv_small,
+          styles.p_12,
+          styles.shadowCard,
         ]}>
-        <PrimaryButton
-          onPress={prevStep}
-          color={Colors.Red500}
-          style={[styles.flex_1]}>
-          Prev Step
-        </PrimaryButton>
-        <View style={[styles.mh_x2_small]}></View>
-        <PrimaryButton
-          loading={isLoading}
-          style={[styles.flex_1]}
-          color={Colors.Green}
-          onPress={onConfirm}>
-          Booking Now
-        </PrimaryButton>
+        <View style={[styles.flex_row, styles.alg_center]}>
+          <Text fontWeight="bold" type="callout" color={Colors.Text.Primary}>
+            Cash
+          </Text>
+          <Icon
+            style={[styles.mh_small]}
+            name="circledown"
+            size={IconSizes.x_small}
+            color={Colors.Green400}
+          />
+        </View>
+        <Divider width={1} orientation="vertical" color={Colors.Black} />
+        <Text fontWeight="bold" type="callout" color={Colors.Text.Primary}>
+          100
+        </Text>
       </View>
+      <PrimaryButton
+        color={Colors.Red300}
+        onPress={() => setCancelBookingModalVisible(true)}>
+        Cancel Ride
+      </PrimaryButton>
+
+      <CancelBookingModal
+        isLoading={isLoading}
+        visible={cancelBookingModalVisible}
+        onClose={() => setCancelBookingModalVisible(false)}
+        onCancelBooking={handleCancelBooking}
+      />
     </>
   );
 };

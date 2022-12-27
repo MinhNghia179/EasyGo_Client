@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PrimaryButton from '../../../components/Button/PrimaryButton';
 import { BottomSheetModal } from '../../../components/Modal';
 import { Text } from '../../../components/Text';
+import { IService } from '../../../interfaces/home-interfaces';
 import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
@@ -31,28 +32,22 @@ const SelectServiceSection = (props: IProps) => {
     }),
   );
 
-  const [selectedService, setSelectedService] = useState<number>(
-    null || createBookingWizard?.serviceId,
-  );
+  const [selectedService, setSelectedService] = useState<IService>(null);
   const [paymentMethodModalVisible, setPaymentMethodVisible] =
     useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onConfirm = async () => {
-    setIsLoading(true);
     dispatch.bookingStore.setCreateBookingWizard({
       ...createBookingWizard,
-      serviceId: selectedService,
+      serviceId: selectedService?.id,
+      totalPrice: selectedService?.totalPrice,
     });
+    nextStep(BookingGuidStep.SEARCHING_RIDE);
     try {
-      nextStep(BookingGuidStep.SEARCHING_RIDE);
-      setTimeout(() => {
-        nextStep(BookingGuidStep.DRIVER_INFO);
-      }, 3000);
+      await dispatch.bookingStore.doCreateBookingDetails({});
+      nextStep(BookingGuidStep.BOOKING_INFO);
     } catch (error) {
       Toast.show(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -96,7 +91,7 @@ const SelectServiceSection = (props: IProps) => {
             <>
               <TouchableOpacity
                 key={one.id}
-                onPress={() => setSelectedService(one.id)}
+                onPress={() => setSelectedService(one)}
                 style={[
                   styles.flex_row,
                   styles.alg_center,
@@ -105,7 +100,7 @@ const SelectServiceSection = (props: IProps) => {
                   styles.rounded_small,
                   {
                     backgroundColor:
-                      selectedService === one?.id
+                      selectedService?.id === one?.id
                         ? Colors.Grey000
                         : Colors.White,
                   },

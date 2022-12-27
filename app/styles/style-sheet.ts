@@ -411,6 +411,16 @@ const Shadow = {
     shadowRadius: 2,
     elevation: 5,
   },
+  shadowCard: {
+    shadowColor: Colors.Grey400,
+    shadowOffset: {
+      width: 1,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 2,
+  },
 };
 
 const Borders = StyleSheet.create({
