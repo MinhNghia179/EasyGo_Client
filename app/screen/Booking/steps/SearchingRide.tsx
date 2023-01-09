@@ -1,9 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
-
+import { Image, View } from 'react-native';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import PrimaryButton from '../../../components/Button/PrimaryButton';
 import { Text } from '../../../components/Text';
+import { wp } from '../../../services/response-screen-service';
 import { Colors } from '../../../styles/colors';
 import styles from '../../../styles/style-sheet';
 
@@ -13,7 +14,21 @@ const SearchingRide = (props: IProps) => {
   return (
     <>
       <View style={[styles.flex_row, styles.alg_center, styles.jus_between]}>
-        <View>
+        <Image
+          style={[
+            {
+              width: wp(150),
+              height: wp(150),
+            },
+          ]}
+          source={require('../../../assets/image/icon_driver.gif')}
+        />
+        <View
+          style={[
+            {
+              flexShrink: 1,
+            },
+          ]}>
           <Text fontWeight="bold" type="subhead">
             Searching Ride
           </Text>
@@ -22,12 +37,11 @@ const SearchingRide = (props: IProps) => {
           </Text>
         </View>
       </View>
-      <View style={[styles.mt_small, styles.pv_medium]}>
+      <View style={[styles.pv_small]}>
         <SkeletonPlaceholder borderRadius={4}>
           <SkeletonPlaceholder.Item height={10} />
         </SkeletonPlaceholder>
       </View>
-      <PrimaryButton color={Colors.Red600}>Cancel</PrimaryButton>
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { Divider } from 'react-native-elements';
-import Toast from 'react-native-root-toast';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
 import PrimaryButton from '../../../components/Button/PrimaryButton';
@@ -42,10 +42,18 @@ const SelectServiceSection = (props: IProps) => {
       serviceId: selectedService?.id,
       totalPrice: selectedService?.totalPrice,
     });
-    nextStep(BookingGuidStep.SEARCHING_RIDE);
     try {
       await dispatch.bookingStore.doCreateBookingDetails({});
-      nextStep(BookingGuidStep.BOOKING_INFO);
+      nextStep(BookingGuidStep.SEARCHING_RIDE);
+      setTimeout(() => {
+        Toast.show({
+          type: ALERT_TYPE.SUCCESS,
+          title: 'Acclaim!',
+          textBody:
+            'Congrats! The driver has been found and is coming to pick you up',
+        });
+        nextStep(BookingGuidStep.BOOKING_INFO);
+      }, 3000);
     } catch (error) {
       Toast.show(error);
     }
