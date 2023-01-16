@@ -1,4 +1,5 @@
 import { connect } from 'socket.io-client';
+import { SocketEvent } from '../constants/constant';
 import { SOCKET_API_URL } from '../variables/app-config';
 
 export const Socket = (userId: string) => {
@@ -7,11 +8,11 @@ export const Socket = (userId: string) => {
     jsonp: false,
   });
 
-  socket.on('connect', function () {
+  socket.on(SocketEvent.CONNECT, function () {
     console.log('Client has connected to the server');
     socket.emit('auth', userId);
   });
-  socket.on('disconnect', function () {
+  socket.on(SocketEvent.DISCONNECT, function () {
     console.log('The client has disconnected!');
   });
 

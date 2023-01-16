@@ -23,6 +23,6 @@ export interface ICreateBookingWizard {
   userName: string;
   serviceId: string;
   routeInfo: IRouteInfo;
-  note: string;
+  notes: string;
   totalPrice: number;
 }
