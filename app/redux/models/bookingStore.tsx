@@ -29,7 +29,7 @@ const bookingStore = {
   },
   effects: dispatch => ({
     async doCreateBookingDetails(payload, rootState): Promise<void> {
-      const { pickUp, dropOff, serviceId, totalPrice } =
+      const { pickUp, dropOff, serviceId, totalPrice, notes } =
         rootState.bookingStore.createBookingWizard;
       try {
         const response = await apiClient.post(`/booking/create`, {
@@ -37,6 +37,7 @@ const bookingStore = {
           dropOff: dropOff.location,
           serviceId,
           totalPrice,
+          notes,
         });
         dispatch.bookingStore.setBookingDetails(response.data.result.booking);
       } catch (error) {

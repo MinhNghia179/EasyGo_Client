@@ -48,6 +48,14 @@ const STEP_DETAILS = {
   PAYMENT: 'PAYMENT',
 };
 
+const SocketEvent = {
+  AUTH: 'auth',
+  CONNECT: 'connect',
+  DISCONNECT: 'disconnect',
+  SEND_BOOKING: 'send_booking',
+  SEND_DRIVER_INFO: 'send_driver',
+};
+
 export {
   Route,
   STEP_DETAILS,
@@ -59,4 +67,5 @@ export {
   ActivityStackRoute,
   MessageStackRoute,
   CoverAppRoute,
+  SocketEvent,
 };
