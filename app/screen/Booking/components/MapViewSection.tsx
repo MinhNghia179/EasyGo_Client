@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import { View } from 'react-native';
+import React from 'react';
+import { Image, View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useSelector } from 'react-redux';
-import { Text } from '../../../components/Text';
 import { IRootState } from '../../../redux/root-store';
+import { wp } from '../../../services/response-screen-service';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
@@ -13,10 +13,11 @@ const latDelta = 0.025;
 const longDelta = 0.025;
 
 const MapViewSection = () => {
-  const { createBookingWizard, currentLocation } = useSelector(
+  const { createBookingWizard, currentLocation, trackBooking } = useSelector(
     (state: IRootState) => ({
       createBookingWizard: state.bookingStore.createBookingWizard,
       currentLocation: state.authStore.currentLocation,
+      trackBooking: state.bookingStore.trackBooking,
     }),
   );
 
@@ -55,6 +56,15 @@ const MapViewSection = () => {
               name="location-searching"
               color={Colors.Red500}
               size={IconSizes.x_small}
+            />
+          </Marker>
+        )}
+        {trackBooking && !!trackBooking?.driverPosition && (
+          <Marker coordinate={trackBooking?.driverPosition} title="Driver">
+            <Icon
+              name="motorcycle"
+              color={Colors.Red500}
+              size={IconSizes.small}
             />
           </Marker>
         )}

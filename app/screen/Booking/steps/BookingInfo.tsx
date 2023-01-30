@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Divider } from 'react-native-elements';
 import Toast from 'react-native-root-toast';
@@ -8,7 +8,8 @@ import { Avatar } from '../../../components/Avatar';
 import PrimaryButton from '../../../components/Button/PrimaryButton';
 import { PointLocationIcon } from '../../../components/common';
 import { Text } from '../../../components/Text';
-import { HomeStackRoute } from '../../../constants/constant';
+import { HomeStackRoute, SocketEvent } from '../../../constants/constant';
+import { ICoordinates } from '../../../interfaces/home-interfaces';
 import navigationService from '../../../navigation/navigation-service';
 import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import { wp } from '../../../services/response-screen-service';
@@ -48,22 +49,26 @@ const Item = ({ label, icon, onPress }: IItemProps) => {
 
 const BookingInfo = (props: IProps) => {
   const {} = props;
+
   const dispatch = useDispatch<IRootDispatch>();
 
-  const { createBookingWizard } = useSelector((state: IRootState) => ({
-    createBookingWizard: state.bookingStore.createBookingWizard,
-  }));
+  const { createBookingWizard, socket, trackBooking } = useSelector(
+    (state: IRootState) => ({
+      createBookingWizard: state.bookingStore.createBookingWizard,
+      socket: state.authStore.socket,
+      trackBooking: state.bookingStore.trackBooking,
+    }),
+  );
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cancelBookingModalVisible, setCancelBookingModalVisible] =
     useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleCancelBooking = async () => {
     setIsLoading(true);
     try {
       await dispatch.bookingStore.doCancelBooking({ idBooking: '' });
-      dispatch.bookingStore.setCreateBookingWizard(null);
-      dispatch.bookingStore.setBookingDetails(null);
+      dispatch.bookingStore.setClearState();
       navigationService.navigate(HomeStackRoute.DASHBOARD, {});
     } catch (error) {
       Toast.show(error);
@@ -71,6 +76,17 @@ const BookingInfo = (props: IProps) => {
       setIsLoading(false);
     }
   };
+
+  const handleTrackLocationOfDriver = (data: ICoordinates) => {
+    dispatch.bookingStore.setTrackBooking({
+      ...trackBooking,
+      driverPosition: data,
+    });
+  };
+
+  useEffect(() => {
+    socket?.on(SocketEvent.TRACK, data => handleTrackLocationOfDriver(data));
+  }, [socket]);
 
   return (
     <>

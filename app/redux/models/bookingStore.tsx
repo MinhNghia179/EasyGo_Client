@@ -1,14 +1,23 @@
 import { ICreateBookingWizard } from '../../interfaces/booking-interface';
+import { ICoordinates } from '../../interfaces/home-interfaces';
 import apiClient from '../../services/api-client';
 
 export interface IBookingStore {
   bookingDetails: any;
   createBookingWizard: ICreateBookingWizard;
+  trackBooking: {
+    bookingInfo: any;
+    driverPosition: ICoordinates;
+  };
 }
 
 const initialState: IBookingStore = {
   bookingDetails: null,
   createBookingWizard: null,
+  trackBooking: {
+    bookingInfo: null,
+    driverPosition: null,
+  },
 };
 
 const bookingStore = {
@@ -18,7 +27,6 @@ const bookingStore = {
       ...state,
       bookingDetails: payload,
     }),
-
     setCreateBookingWizard: (
       state: IBookingStore,
       payload: ICreateBookingWizard,
@@ -26,20 +34,26 @@ const bookingStore = {
       ...state,
       createBookingWizard: payload,
     }),
+    setTrackBooking: (state: IBookingStore, payload: any) => ({
+      ...state,
+      trackBooking: payload,
+    }),
+    setClearState: () => ({
+      state: initialState,
+    }),
   },
   effects: dispatch => ({
     async doCreateBookingDetails(payload, rootState): Promise<void> {
       const { pickUp, dropOff, serviceId, totalPrice, notes } =
         rootState.bookingStore.createBookingWizard;
       try {
-        const response = await apiClient.post(`/booking/create`, {
-          pickUp: pickUp.location,
-          dropOff: dropOff.location,
+        return await apiClient.post(`/booking/create`, {
+          pickUp: { ...pickUp.location, fullAddress: pickUp.fullAddress },
+          dropOff: { ...dropOff.location, fullAddress: dropOff.fullAddress },
           serviceId,
           totalPrice,
           notes,
         });
-        dispatch.bookingStore.setBookingDetails(response.data.result.booking);
       } catch (error) {
         throw error;
       }
