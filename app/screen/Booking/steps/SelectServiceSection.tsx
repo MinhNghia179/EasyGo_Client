@@ -38,8 +38,10 @@ const SelectServiceSection = (props: IProps) => {
   const [selectedService, setSelectedService] = useState<IService>(null);
   const [paymentMethodModalVisible, setPaymentMethodVisible] =
     useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onConfirm = async () => {
+    setIsLoading(true);
     dispatch.bookingStore.setCreateBookingWizard({
       ...createBookingWizard,
       serviceId: selectedService?.id,
@@ -49,7 +51,13 @@ const SelectServiceSection = (props: IProps) => {
       await dispatch.bookingStore.doCreateBookingDetails({});
       nextStep(BookingGuidStep.SEARCHING_RIDE);
     } catch (error) {
-      Toast.show(error);
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error!',
+        textBody: 'Oops, something went wrong! Please try again.',
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -223,6 +231,7 @@ const SelectServiceSection = (props: IProps) => {
             style={[styles.flex_1]}
             color={Colors.Green}
             onPress={onConfirm}
+            loading={isLoading}
             disabled={!selectedService}>
             Confirm Pick Up
           </PrimaryButton>
@@ -233,8 +242,11 @@ const SelectServiceSection = (props: IProps) => {
         onClose={() => setPaymentMethodVisible(false)}
         isVisible={paymentMethodModalVisible}
         title="Payment Methods"
-        description="Choose a payment method for the booking process"
-      />
+        description="Choose a payment method for the booking process">
+        <View style={[styles.p_medium]}>
+          <Text>No card at the moment</Text>
+        </View>
+      </BottomSheetModal>
     </>
   );
 };

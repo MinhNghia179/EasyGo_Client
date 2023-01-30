@@ -1,8 +1,8 @@
 import { debounce } from 'lodash';
 import React, { useCallback, useState } from 'react';
 import { FlatList, TouchableOpacity, View } from 'react-native';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { Divider } from 'react-native-elements';
-import Toast from 'react-native-root-toast';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,7 +56,11 @@ const SearchAddressModal = (props: IProps) => {
       });
       setAddressList(response);
     } catch (error) {
-      Toast.show(error.message);
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error!',
+        textBody: 'Oops, something went wrong! Please try again.',
+      });
     } finally {
       setIsLoading(false);
     }
@@ -77,7 +81,11 @@ const SearchAddressModal = (props: IProps) => {
       });
       handleOnClose();
     } catch (error) {
-      Toast.show(error.message);
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error!',
+        textBody: 'Oops, something went wrong! Please try again.',
+      });
     }
   };
 

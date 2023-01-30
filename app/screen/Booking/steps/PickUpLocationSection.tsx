@@ -1,8 +1,8 @@
 import { round } from 'lodash';
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { Divider } from 'react-native-elements';
-import Toast from 'react-native-root-toast';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useDispatch, useSelector } from 'react-redux';
 import LinkButton from '../../../components/Button/LinkButton';
@@ -74,7 +74,7 @@ const PickUpLocationSection = (props: IProps) => {
   const onSaveNote = () => {
     dispatch.bookingStore.setCreateBookingWizard({
       ...createBookingWizard,
-      note: noteText,
+      notes: noteText,
     });
     handleOnClose();
   };
@@ -87,7 +87,11 @@ const PickUpLocationSection = (props: IProps) => {
       });
       nextStep();
     } catch (error) {
-      Toast.show(error);
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error!',
+        textBody: 'Oops, something went wrong! Please try again.',
+      });
     } finally {
       setIsLoading(false);
     }
@@ -170,7 +174,7 @@ const PickUpLocationSection = (props: IProps) => {
         onClose={handleOnClose}>
         <InputText
           style={[styles.mv_small]}
-          value={noteText || createBookingWizard?.note}
+          value={noteText || createBookingWizard?.notes}
           onChange={setNoteText}
           placeholder="Type note"
         />

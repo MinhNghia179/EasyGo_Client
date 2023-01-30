@@ -1,11 +1,10 @@
 import { map } from 'lodash';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { IAddress } from '../../../interfaces/home-interfaces';
-
 import { Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 import { Text } from '../../../components/Text';
+import { IAddress } from '../../../interfaces/home-interfaces';
 import { wp } from '../../../services/response-screen-service';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
@@ -27,7 +26,7 @@ const AddressVisitedRecentlyListing: React.FC<IProps> = ({
       </Text>
       {map(addressList, (one, index) => {
         return (
-          <TouchableOpacity key={index} onPress={() => onSelectAddress(one)}>
+          <TouchableOpacity key={index}>
             <View
               style={[
                 styles.flex_row,

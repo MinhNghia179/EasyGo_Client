@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { Divider } from 'react-native-elements';
-import Toast from 'react-native-root-toast';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useDispatch, useSelector } from 'react-redux';
 import { Avatar } from '../../../components/Avatar';
@@ -71,7 +71,11 @@ const BookingInfo = (props: IProps) => {
       dispatch.bookingStore.setClearState();
       navigationService.navigate(HomeStackRoute.DASHBOARD, {});
     } catch (error) {
-      Toast.show(error);
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error!',
+        textBody: 'Oops, something went wrong! Please try again.',
+      });
     } finally {
       setIsLoading(false);
     }
