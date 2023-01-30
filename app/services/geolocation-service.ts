@@ -2,11 +2,11 @@ import { PermissionsAndroid } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import { ICoordinates } from '../interfaces/home-interfaces';
 
-const config = {
+export const config = {
   enableHighAccuracy: true,
-  timeout: 10000,
-  maximumAge: 10000,
-  distanceFilter: 1,
+  distanceFilter: 0,
+  interval: 5000,
+  fastestInterval: 2000,
 };
 
 export const requestLocationPermission = async () => {
