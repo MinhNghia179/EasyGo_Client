@@ -1,6 +1,6 @@
 import axios from 'axios';
+import Config from 'react-native-config';
 import { IRouteInfo } from '../interfaces/booking-interface';
-import { GOOGLE_BASE_URL, GOOGLE_REST_API_KEY } from '../variables/app-config';
 import { IAddress, ICoordinates } from './../interfaces/home-interfaces';
 
 export const getCurrentLocationByCoordinates = async (
@@ -8,7 +8,7 @@ export const getCurrentLocationByCoordinates = async (
 ) => {
   try {
     const response = await axios.get(
-      `${GOOGLE_BASE_URL}/Locations/${payload.latitude},${payload.longitude}?key=${GOOGLE_REST_API_KEY}`,
+      `${Config.GOOGLE_BASE_URL}/Locations/${payload.latitude},${payload.longitude}?key=${Config.GOOGLE_REST_API_KEY}`,
     );
     const addressDetails = response.data.resourceSets[0].resources[0].address;
     if (addressDetails) {
@@ -36,7 +36,7 @@ export const autoSuggestLocationBySearchName = async (payload: {
   const { addressName, userLocation } = payload;
   try {
     const response = await axios.get(
-      `${GOOGLE_BASE_URL}/Autosuggest?query=${addressName}&userLocation=${userLocation.latitude},${userLocation.longitude}&includeEntityTypes=Address,Place&key=${GOOGLE_REST_API_KEY}`,
+      `${Config.GOOGLE_BASE_URL}/Autosuggest?query=${addressName}&userLocation=${userLocation.latitude},${userLocation.longitude}&includeEntityTypes=Address,Place&key=${Config.GOOGLE_REST_API_KEY}`,
     );
     const addresses = response.data.resourceSets[0].resources[0].value;
     return addresses.map(
@@ -56,7 +56,7 @@ export const getCurrentLocationByName = async (payload: { name: string }) => {
   const { name } = payload;
   try {
     const response = await axios.get(
-      `${GOOGLE_BASE_URL}/Locations?CountryRegion=VN&locality=Somewhere&addressLine=${name}&key=${GOOGLE_REST_API_KEY}`,
+      `${Config.GOOGLE_BASE_URL}/Locations?CountryRegion=VN&locality=Somewhere&addressLine=${name}&key=${Config.GOOGLE_REST_API_KEY}`,
     );
     const resource = response.data.resourceSets[0].resources[0];
     const location = {
@@ -81,7 +81,7 @@ export const getRoutes = async (payload: {
   const { pickup, dropOff } = payload;
   try {
     const response = await axios.get(
-      `${GOOGLE_BASE_URL}/Routes?wp.0=${pickup.latitude}, ${pickup.longitude}&wp.1=${dropOff.latitude}, ${dropOff.longitude}&key=${GOOGLE_REST_API_KEY}`,
+      `${Config.GOOGLE_BASE_URL}/Routes?wp.0=${pickup.latitude}, ${pickup.longitude}&wp.1=${dropOff.latitude}, ${dropOff.longitude}&key=${Config.GOOGLE_REST_API_KEY}`,
     );
     const routeInfo = response.data.resourceSets[0].resources[0];
     const { travelDistance, travelDuration, travelDurationTraffic, routeLegs } =

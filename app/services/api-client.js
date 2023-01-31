@@ -1,13 +1,12 @@
 import axios from 'axios';
-import { API_URL } from '../variables/app-config';
-
+import Config from 'react-native-config';
 class ApiClient {
   client = {};
   session = '';
 
   constructor() {
     this.client = axios.create({
-      baseURL: API_URL,
+      baseURL: Config.API_URL,
       timeout: 1000,
       headers: {
         'X-Custom-Header': 'foobar',
@@ -18,7 +17,7 @@ class ApiClient {
 
   setSession(session) {
     this.client = axios.create({
-      baseURL: API_URL,
+      baseURL: Config.API_URL,
       timeout: 1000,
       headers: {
         'X-Custom-Header': 'foobar',

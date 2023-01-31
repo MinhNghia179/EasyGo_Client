@@ -1,10 +1,7 @@
 import axios from 'axios';
+import Config from 'react-native-config';
 import { ICoordinates } from '../../interfaces/home-interfaces';
 import apiClient from '../../services/api-client';
-import {
-  GOOGLE_BASE_URL,
-  GOOGLE_REST_API_KEY,
-} from '../../variables/app-config';
 
 export interface IMapStore {}
 
@@ -17,7 +14,7 @@ const map = {
     async getCurrentLocationName(payload: ICoordinates): Promise<void> {
       try {
         const response = await axios.get(
-          `${GOOGLE_BASE_URL}/Locations/${payload.latitude},${payload.longitude}?key=${GOOGLE_REST_API_KEY}`,
+          `${Config.GOOGLE_BASE_URL}/Locations/${payload.latitude},${payload.longitude}?key=${Config.GOOGLE_REST_API_KEY}`,
         );
         const addressDetails =
           response.data.resourceSets[0].resources[0].address;
