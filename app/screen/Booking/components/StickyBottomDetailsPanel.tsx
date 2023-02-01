@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { useDispatch, useSelector } from 'react-redux';
-import { BookingStatus, SocketEvent } from '../../../constants/constant';
+import {
+  BookingStatus,
+  HomeStackRoute,
+  SocketEvent,
+} from '../../../constants/constant';
 import { ICoordinates } from '../../../interfaces/home-interfaces';
+import navigationService from '../../../navigation/navigation-service';
 import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import { Colors } from '../../../styles/colors';
 import styles from '../../../styles/style-sheet';
@@ -53,6 +58,8 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
         title: 'Acclaim!',
         textBody: 'Congrats! Ride complete.',
       });
+      dispatch.bookingStore.setClearState();
+      navigationService.navigate(HomeStackRoute.DASHBOARD, {});
     }
   };
 
