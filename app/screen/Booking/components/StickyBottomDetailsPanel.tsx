@@ -32,7 +32,7 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
   const [searchAddressModalVisible, setSearchAddressModalVisible] =
     useState<boolean>(false);
 
-  const driverAcceptBooking = async (info: any) => {
+  const driverAcceptBooking = (info: any) => {
     dispatch.bookingStore.setTrackBooking({
       ...trackBooking,
       driverInfo: info,
@@ -46,7 +46,7 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
     });
   };
 
-  const driverFinishBooking = async (info: any) => {
+  const driverFinishBooking = (info: any) => {
     if (info?.status == BookingStatus.SUCCESS) {
       Toast.show({
         type: ALERT_TYPE.SUCCESS,
@@ -56,7 +56,7 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
     }
   };
 
-  const trackPosition = async (info: ICoordinates) => {
+  const trackPosition = (info: ICoordinates) => {
     dispatch.bookingStore.setTrackBooking({
       ...trackBooking,
       driverPosition: info,
