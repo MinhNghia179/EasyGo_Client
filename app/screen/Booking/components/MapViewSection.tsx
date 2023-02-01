@@ -1,10 +1,9 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../../redux/root-store';
-import { wp } from '../../../services/response-screen-service';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
@@ -47,6 +46,7 @@ const MapViewSection = () => {
             />
           </Marker>
         )}
+
         {createBookingWizard && !!createBookingWizard?.dropOff && (
           <Marker
             coordinate={createBookingWizard?.dropOff?.location}
@@ -59,15 +59,7 @@ const MapViewSection = () => {
             />
           </Marker>
         )}
-        {trackBooking && !!trackBooking?.driverPosition && (
-          <Marker coordinate={trackBooking?.driverPosition} title="Driver">
-            <Icon
-              name="motorcycle"
-              color={Colors.Red500}
-              size={IconSizes.small}
-            />
-          </Marker>
-        )}
+
         {createBookingWizard &&
           !!createBookingWizard?.dropOff &&
           !!createBookingWizard?.pickUp && (
@@ -77,6 +69,16 @@ const MapViewSection = () => {
               strokeWidth={3}
             />
           )}
+
+        {!!trackBooking && !!trackBooking?.driverPosition && (
+          <Marker coordinate={trackBooking?.driverPosition} title="Driver">
+            <Icon
+              name="motorcycle"
+              color={Colors.Red500}
+              size={IconSizes.small}
+            />
+          </Marker>
+        )}
       </MapView>
     </View>
   );

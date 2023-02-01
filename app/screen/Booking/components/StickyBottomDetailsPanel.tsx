@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
+import { useDispatch, useSelector } from 'react-redux';
+import { BookingStatus, SocketEvent } from '../../../constants/constant';
+import { ICoordinates } from '../../../interfaces/home-interfaces';
+import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import { Colors } from '../../../styles/colors';
 import styles from '../../../styles/style-sheet';
 import BookingInfo from '../steps/BookingInfo';
@@ -16,9 +21,55 @@ interface IProps {
 const StickyBottomDetailsPanel: React.FC<IProps> = ({
   setVisibleConfirmModal,
 }) => {
+  const dispatch = useDispatch<IRootDispatch>();
+
+  const { socket, trackBooking } = useSelector((state: IRootState) => ({
+    socket: state.authStore.socket,
+    trackBooking: state.bookingStore.trackBooking,
+  }));
+
   const [step, setStep] = useState<string>(BookingGuidStep.SET_ROUTE);
   const [searchAddressModalVisible, setSearchAddressModalVisible] =
     useState<boolean>(false);
+
+  const driverAcceptBooking = async (info: any) => {
+    dispatch.bookingStore.setTrackBooking({
+      ...trackBooking,
+      driverInfo: info,
+    });
+    setStep(BookingGuidStep.BOOKING_INFO);
+    Toast.show({
+      type: ALERT_TYPE.SUCCESS,
+      title: 'Acclaim!',
+      textBody:
+        'Congrats! The driver has been found and is coming to pick you up',
+    });
+  };
+
+  const driverFinishBooking = async (info: any) => {
+    if (info?.status == BookingStatus.SUCCESS) {
+      Toast.show({
+        type: ALERT_TYPE.SUCCESS,
+        title: 'Acclaim!',
+        textBody: 'Congrats! Ride complete.',
+      });
+    }
+  };
+
+  const trackPosition = async (info: ICoordinates) => {
+    dispatch.bookingStore.setTrackBooking({
+      ...trackBooking,
+      driverPosition: info,
+    });
+  };
+
+  useEffect(() => {
+    socket?.on(SocketEvent.SEND_DRIVER_INFO, data => driverAcceptBooking(data));
+
+    socket?.on(SocketEvent.FINISH_BOOKING, data => driverFinishBooking(data));
+
+    socket?.on(SocketEvent.TRACK, data => trackPosition(data));
+  }, [socket]);
 
   return (
     <View
@@ -34,12 +85,14 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
           onOpenSearchAddressModal={() => setSearchAddressModalVisible(true)}
         />
       )}
+
       {step === BookingGuidStep.SELECT_SERVICE && (
         <SelectServiceSection
           nextStep={setStep}
           prevStep={() => setStep(BookingGuidStep.SET_ROUTE)}
         />
       )}
+
       {step === BookingGuidStep.SEARCHING_RIDE && <SearchingRide />}
 
       {step === BookingGuidStep.BOOKING_INFO && <BookingInfo />}

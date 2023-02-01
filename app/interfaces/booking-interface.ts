@@ -26,3 +26,9 @@ export interface ICreateBookingWizard {
   notes: string;
   totalPrice: number;
 }
+
+export interface ITrackBooking {
+  bookingInfo: any;
+  driverPosition: ICoordinates;
+  driverInfo: any;
+}

@@ -1,14 +1,13 @@
-import { ICreateBookingWizard } from '../../interfaces/booking-interface';
-import { ICoordinates } from '../../interfaces/home-interfaces';
+import {
+  ICreateBookingWizard,
+  ITrackBooking,
+} from '../../interfaces/booking-interface';
 import apiClient from '../../services/api-client';
 
 export interface IBookingStore {
   bookingDetails: any;
   createBookingWizard: ICreateBookingWizard;
-  trackBooking: {
-    bookingInfo: any;
-    driverPosition: ICoordinates;
-  };
+  trackBooking: ITrackBooking;
 }
 
 const initialState: IBookingStore = {
@@ -17,6 +16,7 @@ const initialState: IBookingStore = {
   trackBooking: {
     bookingInfo: null,
     driverPosition: null,
+    driverInfo: null,
   },
 };
 
@@ -42,6 +42,7 @@ const bookingStore = {
       state: initialState,
     }),
   },
+
   effects: dispatch => ({
     async doCreateBookingDetails(payload, rootState): Promise<void> {
       const { pickUp, dropOff, serviceId, totalPrice, notes } =
@@ -58,28 +59,14 @@ const bookingStore = {
         throw error;
       }
     },
-    async doAcceptBooking(payload, rootState): Promise<void> {
+    async doCancelBooking(payload: {
+      bookingId: string;
+      driverId: string;
+    }): Promise<boolean> {
       try {
-        const response = await apiClient.post(
-          `/booking/acceptBooking?idBooking=${payload.idBooking}`,
+        return await apiClient.post(
+          `/booking/cancelBooking?bookingId=${payload.bookingId}&driverId=${payload.driverId}`,
         );
-        dispatch.bookingStore.setBookTracking({
-          bookingDetails: rootState.bookingStore.bookingDetails,
-          result: response.data.result,
-        });
-      } catch (error) {
-        throw error;
-      }
-    },
-    async doCancelBooking(payload): Promise<boolean> {
-      try {
-        const response = await apiClient.post(
-          `/booking/cancelBooking?idBooking=${payload.idBooking}`,
-        );
-        if (response.data.result) {
-          dispatch.bookingStore.setBookTracking(null);
-        }
-        return response.data.result;
       } catch (error) {
         return false;
       }

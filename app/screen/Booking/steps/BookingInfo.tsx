@@ -67,7 +67,10 @@ const BookingInfo = (props: IProps) => {
   const handleCancelBooking = async () => {
     setIsLoading(true);
     try {
-      await dispatch.bookingStore.doCancelBooking({ idBooking: '' });
+      await dispatch.bookingStore.doCancelBooking({
+        bookingId: '',
+        driverId: trackBooking?.driverInfo?.id,
+      });
       dispatch.bookingStore.setClearState();
       navigationService.navigate(HomeStackRoute.DASHBOARD, {});
     } catch (error) {
@@ -113,16 +116,16 @@ const BookingInfo = (props: IProps) => {
           />
           <View style={[styles.ml_small]}>
             <Text color={Colors.Green600} fontWeight="bold" type="subhead">
-              {trackBooking?.bookingInfo?.username}
+              {trackBooking?.driverInfo?.username}
             </Text>
             <Text color={Colors.Text.GreySecondary} type="caption2">
-              Ride complete: {trackBooking?.bookingInfo?.rideComplete} +
+              Ride complete: {trackBooking?.driverInfo?.rideComplete} +
             </Text>
           </View>
         </View>
         <View>
           <Text color={Colors.Green600} fontWeight="bold" type="subhead">
-            ({trackBooking?.bookingInfo?.rating})
+            ({trackBooking?.driverInfo?.rating})
           </Text>
           <Text color={Colors.Text.GreySecondary} type="caption2">
             Rating
@@ -132,10 +135,10 @@ const BookingInfo = (props: IProps) => {
       <View style={[styles.flex_row, styles.jus_between, styles.alg_center]}>
         <View>
           <Text type="caption1" color={Colors.Text.GreySecondary}>
-            {trackBooking?.bookingInfo?.typeTransport}
+            {trackBooking?.driverInfo?.typeTransport}
           </Text>
           <Text type="footnote" color={Colors.Black}>
-            ({trackBooking?.bookingInfo?.licensePlate})
+            ({trackBooking?.driverInfo?.licensePlate})
           </Text>
         </View>
         <View style={[styles.flex_row]}>

@@ -35,7 +35,7 @@ const authStore = {
     async doSignIn(payload: { email: string; password: string }) {
       try {
         const response = await apiClient.post(`/user/login`, payload);
-        const userId = response.data.result.info;
+        const userId = response.data.result.info.id;
 
         if (response.status === 200) {
           apiClient.setSession(response.data.result.sessionId);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { Divider } from 'react-native-elements';
@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import PrimaryButton from '../../../components/Button/PrimaryButton';
 import { BottomSheetModal } from '../../../components/Modal';
 import { Text } from '../../../components/Text';
-import { SocketEvent } from '../../../constants/constant';
 import { IService } from '../../../interfaces/home-interfaces';
 import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import { Colors } from '../../../styles/colors';
@@ -26,12 +25,10 @@ const SelectServiceSection = (props: IProps) => {
 
   const dispatch = useDispatch<IRootDispatch>();
 
-  const { services, createBookingWizard, socket, trackBooking } = useSelector(
+  const { services, createBookingWizard } = useSelector(
     (state: IRootState) => ({
       services: state.serviceStore.services,
       createBookingWizard: state.bookingStore.createBookingWizard,
-      socket: state.authStore.socket,
-      trackBooking: state.bookingStore.trackBooking,
     }),
   );
 
@@ -60,26 +57,6 @@ const SelectServiceSection = (props: IProps) => {
       setIsLoading(false);
     }
   };
-
-  const handleDriverAcceptBooking = (booking: any) => {
-    Toast.show({
-      type: ALERT_TYPE.SUCCESS,
-      title: 'Acclaim!',
-      textBody:
-        'Congrats! The driver has been found and is coming to pick you up',
-    });
-    dispatch.bookingStore.setTrackBooking({
-      ...trackBooking,
-      bookingInfo: booking,
-    });
-    nextStep(BookingGuidStep.BOOKING_INFO);
-  };
-
-  useEffect(() => {
-    socket?.on(SocketEvent.SEND_DRIVER_INFO, data =>
-      handleDriverAcceptBooking(data),
-    );
-  }, [socket]);
 
   return (
     <>
@@ -120,7 +97,7 @@ const SelectServiceSection = (props: IProps) => {
           services.map(one => (
             <>
               <TouchableOpacity
-                key={one.id}
+                key={one?.id}
                 onPress={() => setSelectedService(one)}
                 style={[
                   styles.flex_row,
@@ -219,6 +196,7 @@ const SelectServiceSection = (props: IProps) => {
             onPress={() => setPaymentMethodVisible(true)}
           />
         </View>
+
         <View style={[styles.flex_row]}>
           <PrimaryButton
             onPress={prevStep}

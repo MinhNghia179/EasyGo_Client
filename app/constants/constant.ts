@@ -54,7 +54,16 @@ const SocketEvent = {
   DISCONNECT: 'disconnect',
   SEND_BOOKING: 'send_booking',
   SEND_DRIVER_INFO: 'send_driver',
+  CANCEL_BOOKING: 'cancel_booking',
+  FINISH_BOOKING: 'finish_booking',
   TRACK: 'track',
+};
+
+const BookingStatus = {
+  CREATED: 'CREATED',
+  ACCEPT: 'ACCEPT',
+  REJECT: 'REJECT',
+  SUCCESS: 'SUCCESS',
 };
 
 export {
@@ -69,4 +78,5 @@ export {
   MessageStackRoute,
   CoverAppRoute,
   SocketEvent,
+  BookingStatus,
 };

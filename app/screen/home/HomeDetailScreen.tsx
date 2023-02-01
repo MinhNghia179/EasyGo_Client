@@ -12,7 +12,7 @@ import navigationService from '../../navigation/navigation-service';
 import { IRootDispatch, IRootState } from '../../redux/root-store';
 import {
   currentPosition,
-  requestLocationPermission
+  requestLocationPermission,
 } from '../../services/geolocation-service';
 import { getCurrentLocationByCoordinates } from '../../services/google-map-service';
 import { Colors } from '../../styles/colors';
@@ -107,7 +107,7 @@ const HomeDetailScreen = (props: IProps) => {
             onPress={allowToEnableLocation}>
             Allow only while using the app
           </PrimaryButton>
-          <LinkButton onPress={doNotAllow} >Don't allow this app</LinkButton>
+          <LinkButton onPress={doNotAllow}>Don't allow this app</LinkButton>
         </View>
       </ActionModal>
     </SafeAreaContainer>
