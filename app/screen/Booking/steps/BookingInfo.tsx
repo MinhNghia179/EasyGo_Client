@@ -113,16 +113,16 @@ const BookingInfo = (props: IProps) => {
           />
           <View style={[styles.ml_small]}>
             <Text color={Colors.Green600} fontWeight="bold" type="subhead">
-              Vindel Huskel
+              {trackBooking?.bookingInfo?.username}
             </Text>
             <Text color={Colors.Text.GreySecondary} type="caption2">
-              Ride complete: 250 +
+              Ride complete: {trackBooking?.bookingInfo?.rideComplete} +
             </Text>
           </View>
         </View>
         <View>
           <Text color={Colors.Green600} fontWeight="bold" type="subhead">
-            (4.8)
+            ({trackBooking?.bookingInfo?.rating})
           </Text>
           <Text color={Colors.Text.GreySecondary} type="caption2">
             Rating
@@ -132,10 +132,10 @@ const BookingInfo = (props: IProps) => {
       <View style={[styles.flex_row, styles.jus_between, styles.alg_center]}>
         <View>
           <Text type="caption1" color={Colors.Text.GreySecondary}>
-            Yamaha Sirius
+            {trackBooking?.bookingInfo?.typeTransport}
           </Text>
           <Text type="footnote" color={Colors.Black}>
-            (JDG-4565998)
+            ({trackBooking?.bookingInfo?.licensePlate})
           </Text>
         </View>
         <View style={[styles.flex_row]}>
@@ -201,7 +201,7 @@ const BookingInfo = (props: IProps) => {
         </View>
         <Divider width={1} orientation="vertical" color={Colors.Black} />
         <Text fontWeight="bold" type="callout" color={Colors.Text.Primary}>
-          100
+          {createBookingWizard?.totalPrice}
         </Text>
       </View>
       <PrimaryButton

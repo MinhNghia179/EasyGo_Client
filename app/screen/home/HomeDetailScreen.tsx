@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { useDispatch, useSelector } from 'react-redux';
 import LinkButton from '../../components/Button/LinkButton';
 import PrimaryButton from '../../components/Button/PrimaryButton';
@@ -11,7 +12,7 @@ import navigationService from '../../navigation/navigation-service';
 import { IRootDispatch, IRootState } from '../../redux/root-store';
 import {
   currentPosition,
-  requestLocationPermission,
+  requestLocationPermission
 } from '../../services/geolocation-service';
 import { getCurrentLocationByCoordinates } from '../../services/google-map-service';
 import { Colors } from '../../styles/colors';
@@ -44,13 +45,24 @@ const HomeDetailScreen = (props: IProps) => {
   };
 
   const allowToEnableLocation = async () => {
-    const isGranted = await requestLocationPermission();
-    if (isGranted) {
-      const response = await currentPosition();
-      if (response) {
-        const address = await getCurrentLocationByCoordinates(response);
-        dispatch.authStore.setCurrentLocation(address);
+    setIsLoading(true);
+    try {
+      const isGranted = await requestLocationPermission();
+      if (isGranted) {
+        const response = await currentPosition();
+        if (response) {
+          const address = await getCurrentLocationByCoordinates(response);
+          dispatch.authStore.setCurrentLocation(address);
+        }
       }
+    } catch (error) {
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error!',
+        textBody: 'Oops, something went wrong! Please try again.',
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -58,6 +70,11 @@ const HomeDetailScreen = (props: IProps) => {
     setIsLoading(true);
     try {
     } catch (error) {
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'Error!',
+        textBody: 'Oops, something went wrong! Please try again.',
+      });
     } finally {
       setIsLoading(false);
     }
@@ -85,11 +102,12 @@ const HomeDetailScreen = (props: IProps) => {
         </Text>
         <View style={[styles.flex_col, styles.alg_center, styles.jus_between]}>
           <PrimaryButton
+            disabled={isLoading}
             style={[styles.mv_medium]}
             onPress={allowToEnableLocation}>
             Allow only while using the app
           </PrimaryButton>
-          <LinkButton onPress={doNotAllow}>Don't allow this app</LinkButton>
+          <LinkButton onPress={doNotAllow} >Don't allow this app</LinkButton>
         </View>
       </ActionModal>
     </SafeAreaContainer>
