@@ -90,7 +90,11 @@ const HomeDetailScreen = (props: IProps) => {
 
   return (
     <SafeAreaContainer contentType="scrollView" backgroundColor={Colors.White}>
-      <HeaderDetailsSection onPressShowMap={() => {}} />
+      <HeaderDetailsSection
+        onPressShowMap={() => {
+          navigationService.navigate(BookingStackRoute.CREATE_BOOKING_GUID, {});
+        }}
+      />
       <BodyDetailsSection
         navigateToBookingScreen={navigateToBookingScreen}
         AddressVisitedRecently={AddressVisitedRecently}

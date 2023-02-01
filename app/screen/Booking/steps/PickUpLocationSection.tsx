@@ -162,6 +162,7 @@ const PickUpLocationSection = (props: IProps) => {
       <PrimaryButton
         loading={isLoading}
         color={Colors.Green}
+        disabled={!createBookingWizard?.dropOff}
         onPress={handleNextStep}>
         Choose this pick up point
       </PrimaryButton>

@@ -71,8 +71,13 @@ const BookingInfo = (props: IProps) => {
         bookingId: '',
         driverId: trackBooking?.driverInfo?.id,
       });
-      dispatch.bookingStore.setClearState();
+      Toast.show({
+        type: ALERT_TYPE.SUCCESS,
+        title: 'Successfully!',
+        textBody: 'Cancel booking successfully!',
+      });
       navigationService.navigate(HomeStackRoute.DASHBOARD, {});
+      dispatch.bookingStore.setClearState();
     } catch (error) {
       Toast.show({
         type: ALERT_TYPE.DANGER,

@@ -52,15 +52,13 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
   };
 
   const driverFinishBooking = (info: any) => {
-    if (info?.status == BookingStatus.SUCCESS) {
-      Toast.show({
-        type: ALERT_TYPE.SUCCESS,
-        title: 'Acclaim!',
-        textBody: 'Congrats! Ride complete.',
-      });
-      dispatch.bookingStore.setClearState();
-      navigationService.navigate(HomeStackRoute.DASHBOARD, {});
-    }
+    Toast.show({
+      type: ALERT_TYPE.SUCCESS,
+      title: 'Acclaim!',
+      textBody: 'Congrats! The ride is completed.',
+    });
+    dispatch.bookingStore.setClearState();
+    navigationService.navigate(HomeStackRoute.DASHBOARD, {});
   };
 
   const trackPosition = (info: ICoordinates) => {
@@ -71,11 +69,13 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
   };
 
   useEffect(() => {
-    socket?.on(SocketEvent.SEND_DRIVER_INFO, data => driverAcceptBooking(data));
-
-    socket?.on(SocketEvent.FINISH_BOOKING, data => driverFinishBooking(data));
-
-    socket?.on(SocketEvent.TRACK, data => trackPosition(data));
+    Promise.all([
+      socket?.on(SocketEvent.SEND_DRIVER_INFO, data =>
+        driverAcceptBooking(data),
+      ),
+      socket?.on(SocketEvent.FINISH_BOOKING, data => driverFinishBooking(data)),
+      socket?.on(SocketEvent.TRACK, data => trackPosition(data)),
+    ]);
   }, [socket]);
 
   return (
