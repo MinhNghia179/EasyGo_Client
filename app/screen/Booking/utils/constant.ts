@@ -4,4 +4,5 @@ export const BookingGuidStep = {
   BOOKING_INFO: 'DriverInfo',
   SELECT_SERVICE: 'SelectService',
   BOOKING_DETAILS: 'BookingDetails',
+  COMPLETE_BOOKING: 'CompleteBooking',
 };

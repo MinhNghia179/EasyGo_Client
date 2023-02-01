@@ -2,17 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  BookingStatus,
-  HomeStackRoute,
-  SocketEvent,
-} from '../../../constants/constant';
+import { SocketEvent } from '../../../constants/constant';
 import { ICoordinates } from '../../../interfaces/home-interfaces';
-import navigationService from '../../../navigation/navigation-service';
 import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import { Colors } from '../../../styles/colors';
 import styles from '../../../styles/style-sheet';
 import BookingInfo from '../steps/BookingInfo';
+import CompleteBooking from '../steps/CompleteBooking';
 import PickUpLocationSection from '../steps/PickUpLocationSection';
 import SearchingRide from '../steps/SearchingRide';
 import SelectServiceSection from '../steps/SelectServiceSection';
@@ -52,13 +48,13 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
   };
 
   const driverFinishBooking = (info: any) => {
+    setStep(BookingGuidStep.COMPLETE_BOOKING);
     Toast.show({
       type: ALERT_TYPE.SUCCESS,
       title: 'Acclaim!',
       textBody: 'Congrats! The ride is completed.',
     });
     dispatch.bookingStore.setClearState();
-    navigationService.navigate(HomeStackRoute.DASHBOARD, {});
   };
 
   const trackPosition = (info: ICoordinates) => {
@@ -103,6 +99,8 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
       {step === BookingGuidStep.SEARCHING_RIDE && <SearchingRide />}
 
       {step === BookingGuidStep.BOOKING_INFO && <BookingInfo />}
+
+      {step === BookingGuidStep.COMPLETE_BOOKING && <CompleteBooking />}
 
       <SearchAddressModal
         isOpen={searchAddressModalVisible}
