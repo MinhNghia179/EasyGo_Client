@@ -64,12 +64,13 @@ const BookingInfo = (props: IProps) => {
   const [cancelBookingModalVisible, setCancelBookingModalVisible] =
     useState<boolean>(false);
 
-  const handleCancelBooking = async () => {
+  const handleCancelBooking = async (reason: string) => {
     setIsLoading(true);
     try {
       await dispatch.bookingStore.doCancelBooking({
         bookingId: bookingInfo?.id,
         driverId: driverInfo?.id,
+        reason,
       });
       Toast.show({
         type: ALERT_TYPE.SUCCESS,

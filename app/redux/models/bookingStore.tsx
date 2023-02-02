@@ -68,10 +68,12 @@ const bookingStore = {
     async doCancelBooking(payload: {
       bookingId: string;
       driverId: string;
+      reason?: string;
     }): Promise<boolean> {
       try {
         return await apiClient.post(
           `/booking/cancelBooking?bookingId=${payload.bookingId}&driverId=${payload.driverId}`,
+          { reason: payload.reason },
         );
       } catch (error) {
         return false;

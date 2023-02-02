@@ -12,7 +12,7 @@ interface IProps {
   visible: boolean;
   isLoading: boolean;
   onClose: () => void;
-  onCancelBooking: () => void;
+  onCancelBooking: (reason: string) => void;
 }
 
 const CancelBookingModal = (props: IProps) => {
@@ -49,7 +49,7 @@ const CancelBookingModal = (props: IProps) => {
           disabled={!reasonNote}
           color={Colors.Red400}
           loading={isLoading}
-          onPress={onCancelBooking}>
+          onPress={() => onCancelBooking(reasonNote)}>
           Continue with cancellation
         </PrimaryButton>
       </View>
