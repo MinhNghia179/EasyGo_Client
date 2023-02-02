@@ -15,6 +15,7 @@ import { wp } from '../../../services/response-screen-service';
 import { Colors } from '../../../styles/colors';
 import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
+import { numberWithCommas } from '../../../utils/constant';
 import CancelBookingModal from '../components/CancelBookingModal';
 
 interface IProps {}
@@ -197,7 +198,7 @@ const BookingInfo = (props: IProps) => {
         </View>
         <Divider width={1} orientation="vertical" color={Colors.Black} />
         <Text fontWeight="bold" type="callout" color={Colors.Text.Primary}>
-          {createBookingWizard?.totalPrice}
+          {numberWithCommas(createBookingWizard?.totalPrice)}
         </Text>
       </View>
       <PrimaryButton
