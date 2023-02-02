@@ -12,11 +12,11 @@ const latDelta = 0.025;
 const longDelta = 0.025;
 
 const MapViewSection = () => {
-  const { createBookingWizard, currentLocation, trackBooking } = useSelector(
+  const { createBookingWizard, currentLocation, driverPosition } = useSelector(
     (state: IRootState) => ({
       createBookingWizard: state.bookingStore.createBookingWizard,
       currentLocation: state.authStore.currentLocation,
-      trackBooking: state.bookingStore.trackBooking,
+      driverPosition: state.bookingStore.driverPosition,
     }),
   );
 
@@ -70,8 +70,8 @@ const MapViewSection = () => {
             />
           )}
 
-        {!!trackBooking && !!trackBooking?.driverPosition && (
-          <Marker coordinate={trackBooking?.driverPosition} title="Driver">
+        {!!driverPosition && (
+          <Marker coordinate={driverPosition} title="Driver">
             <Icon
               name="motorcycle"
               color={Colors.Red500}

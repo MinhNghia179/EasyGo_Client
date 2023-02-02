@@ -24,9 +24,8 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
 }) => {
   const dispatch = useDispatch<IRootDispatch>();
 
-  const { socket, trackBooking } = useSelector((state: IRootState) => ({
+  const { socket } = useSelector((state: IRootState) => ({
     socket: state.authStore.socket,
-    trackBooking: state.bookingStore.trackBooking,
   }));
 
   const [step, setStep] = useState<string>(BookingGuidStep.SET_ROUTE);
@@ -34,10 +33,7 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
     useState<boolean>(false);
 
   const driverAcceptBooking = (info: any) => {
-    dispatch.bookingStore.setTrackBooking({
-      ...trackBooking,
-      driverInfo: info,
-    });
+    dispatch.bookingStore.setDriverInfo(info);
     setStep(BookingGuidStep.BOOKING_INFO);
     Toast.show({
       type: ALERT_TYPE.SUCCESS,
@@ -58,10 +54,7 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
   };
 
   const trackPosition = (info: ICoordinates) => {
-    dispatch.bookingStore.setTrackBooking({
-      ...trackBooking,
-      driverPosition: info,
-    });
+    dispatch.bookingStore.setDriverPosition(info);
   };
 
   useEffect(() => {

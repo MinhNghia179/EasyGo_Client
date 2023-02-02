@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { Divider } from 'react-native-elements';
@@ -8,8 +8,7 @@ import { Avatar } from '../../../components/Avatar';
 import PrimaryButton from '../../../components/Button/PrimaryButton';
 import { PointLocationIcon } from '../../../components/common';
 import { Text } from '../../../components/Text';
-import { HomeStackRoute, SocketEvent } from '../../../constants/constant';
-import { ICoordinates } from '../../../interfaces/home-interfaces';
+import { HomeStackRoute } from '../../../constants/constant';
 import navigationService from '../../../navigation/navigation-service';
 import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import { wp } from '../../../services/response-screen-service';
@@ -52,11 +51,11 @@ const BookingInfo = (props: IProps) => {
 
   const dispatch = useDispatch<IRootDispatch>();
 
-  const { createBookingWizard, socket, trackBooking } = useSelector(
+  const { createBookingWizard, bookingInfo, driverInfo } = useSelector(
     (state: IRootState) => ({
       createBookingWizard: state.bookingStore.createBookingWizard,
-      socket: state.authStore.socket,
-      trackBooking: state.bookingStore.trackBooking,
+      bookingInfo: state.bookingStore.bookingInfo,
+      driverInfo: state.bookingStore.driverInfo,
     }),
   );
 
@@ -68,8 +67,8 @@ const BookingInfo = (props: IProps) => {
     setIsLoading(true);
     try {
       await dispatch.bookingStore.doCancelBooking({
-        bookingId: '',
-        driverId: trackBooking?.driverInfo?.id,
+        bookingId: bookingInfo?.id,
+        driverId: driverInfo?.id,
       });
       Toast.show({
         type: ALERT_TYPE.SUCCESS,
@@ -88,17 +87,6 @@ const BookingInfo = (props: IProps) => {
       setIsLoading(false);
     }
   };
-
-  const handleTrackLocationOfDriver = (data: ICoordinates) => {
-    dispatch.bookingStore.setTrackBooking({
-      ...trackBooking,
-      driverPosition: data,
-    });
-  };
-
-  useEffect(() => {
-    socket?.on(SocketEvent.TRACK, data => handleTrackLocationOfDriver(data));
-  }, [socket]);
 
   return (
     <>
@@ -121,16 +109,16 @@ const BookingInfo = (props: IProps) => {
           />
           <View style={[styles.ml_small]}>
             <Text color={Colors.Green600} fontWeight="bold" type="subhead">
-              {trackBooking?.driverInfo?.username}
+              {driverInfo?.username}
             </Text>
             <Text color={Colors.Text.GreySecondary} type="caption2">
-              Ride complete: {trackBooking?.driverInfo?.rideComplete} +
+              Ride complete: {driverInfo?.rideComplete} +
             </Text>
           </View>
         </View>
         <View>
           <Text color={Colors.Green600} fontWeight="bold" type="subhead">
-            ({trackBooking?.driverInfo?.rating})
+            ({driverInfo?.rating})
           </Text>
           <Text color={Colors.Text.GreySecondary} type="caption2">
             Rating
@@ -140,10 +128,10 @@ const BookingInfo = (props: IProps) => {
       <View style={[styles.flex_row, styles.jus_between, styles.alg_center]}>
         <View>
           <Text type="caption1" color={Colors.Text.GreySecondary}>
-            {trackBooking?.driverInfo?.typeTransport}
+            {driverInfo?.typeTransport}
           </Text>
           <Text type="footnote" color={Colors.Black}>
-            ({trackBooking?.driverInfo?.licensePlate})
+            ({driverInfo?.licensePlate})
           </Text>
         </View>
         <View style={[styles.flex_row]}>

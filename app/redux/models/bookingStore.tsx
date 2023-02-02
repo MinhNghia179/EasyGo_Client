@@ -1,32 +1,24 @@
-import {
-  ICreateBookingWizard,
-  ITrackBooking,
-} from '../../interfaces/booking-interface';
+import { ICreateBookingWizard } from '../../interfaces/booking-interface';
+import { ICoordinates } from '../../interfaces/home-interfaces';
 import apiClient from '../../services/api-client';
 
 export interface IBookingStore {
-  bookingDetails: any;
   createBookingWizard: ICreateBookingWizard;
-  trackBooking: ITrackBooking;
+  bookingInfo: any;
+  driverInfo: any;
+  driverPosition: ICoordinates;
 }
 
 const initialState: IBookingStore = {
-  bookingDetails: null,
   createBookingWizard: null,
-  trackBooking: {
-    bookingInfo: null,
-    driverPosition: null,
-    driverInfo: null,
-  },
+  bookingInfo: null,
+  driverPosition: null,
+  driverInfo: null,
 };
 
 const bookingStore = {
   state: initialState,
   reducers: {
-    setBookingDetails: (state: IBookingStore, payload: any) => ({
-      ...state,
-      bookingDetails: payload,
-    }),
     setCreateBookingWizard: (
       state: IBookingStore,
       payload: ICreateBookingWizard,
@@ -34,9 +26,17 @@ const bookingStore = {
       ...state,
       createBookingWizard: payload,
     }),
-    setTrackBooking: (state: IBookingStore, payload: any) => ({
+    setBookingInfo: (state: IBookingStore, bookingInfo: any) => ({
       ...state,
-      trackBooking: payload,
+      bookingInfo,
+    }),
+    setDriverInfo: (state: IBookingStore, driverInfo: any) => ({
+      ...state,
+      driverInfo,
+    }),
+    setDriverPosition: (state: IBookingStore, driverPosition: any) => ({
+      ...state,
+      driverPosition,
     }),
     setClearState: () => ({
       state: initialState,
@@ -48,13 +48,16 @@ const bookingStore = {
       const { pickUp, dropOff, serviceId, totalPrice, notes } =
         rootState.bookingStore.createBookingWizard;
       try {
-        return await apiClient.post(`/booking/create`, {
+        const response = await apiClient.post(`/booking/create`, {
           pickUp: { ...pickUp.location, fullAddress: pickUp.fullAddress },
           dropOff: { ...dropOff.location, fullAddress: dropOff.fullAddress },
           serviceId,
           totalPrice,
           notes,
         });
+        if (response.data.status === 200) {
+          dispatch.bookingStore.setBookingInfo(response?.data?.result);
+        }
       } catch (error) {
         throw error;
       }
