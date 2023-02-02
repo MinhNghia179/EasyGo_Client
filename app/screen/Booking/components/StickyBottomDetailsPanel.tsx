@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { useDispatch, useSelector } from 'react-redux';
 import { SocketEvent } from '../../../constants/constant';
-import { ICoordinates } from '../../../interfaces/home-interfaces';
 import { IRootDispatch, IRootState } from '../../../redux/root-store';
 import { Colors } from '../../../styles/colors';
 import styles from '../../../styles/style-sheet';
@@ -53,8 +52,11 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
     dispatch.bookingStore.setClearState();
   };
 
-  const trackPosition = (info: ICoordinates) => {
-    dispatch.bookingStore.setDriverPosition(info);
+  const trackPosition = (info: any) => {
+    dispatch.bookingStore.setDriverPosition({
+      latitude: info?.lat,
+      longitude: info?.lon,
+    });
   };
 
   useEffect(() => {

@@ -34,7 +34,10 @@ const bookingStore = {
       ...state,
       driverInfo,
     }),
-    setDriverPosition: (state: IBookingStore, driverPosition: any) => ({
+    setDriverPosition: (
+      state: IBookingStore,
+      driverPosition: ICoordinates,
+    ) => ({
       ...state,
       driverPosition,
     }),
