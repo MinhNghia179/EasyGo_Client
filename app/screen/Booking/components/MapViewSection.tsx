@@ -71,7 +71,7 @@ const MapViewSection = () => {
           )}
 
         {!!driverPosition && (
-          <Marker coordinate={driverPosition} title="Driver">
+          <Marker coordinate={driverPosition} title="Vị trí tài xế">
             <Icon
               name="motorcycle"
               color={Colors.Red500}

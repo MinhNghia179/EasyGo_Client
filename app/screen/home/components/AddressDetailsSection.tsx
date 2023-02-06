@@ -50,7 +50,7 @@ const AddressDetailsSection = (props: IProps) => {
           },
         ]}>
         {isNotLocation ? (
-          <Text color={Colors.Red400}>Please select a destination</Text>
+          <Text color={Colors.Red400}>Vui lòng chọn một điểm đến</Text>
         ) : (
           <>
             <Text type="subhead" numberOfLines={1} fontWeight="bold">

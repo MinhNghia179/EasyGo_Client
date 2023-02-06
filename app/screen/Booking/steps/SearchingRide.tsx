@@ -11,12 +11,15 @@ interface IProps {}
 const SearchingRide = (props: IProps) => {
   return (
     <>
+      <Text fontWeight="bold" type="subhead" textAlign="center">
+        Đang tìm tài xế ...
+      </Text>
       <View style={[styles.flex_row, styles.alg_center, styles.jus_between]}>
         <Image
           style={[
             {
-              width: wp(150),
-              height: wp(150),
+              width: wp(120),
+              height: wp(120),
             },
           ]}
           source={require('../../../assets/image/icon_driver.gif')}
@@ -28,16 +31,13 @@ const SearchingRide = (props: IProps) => {
               flexShrink: 1,
             },
           ]}>
-          <Text fontWeight="bold" type="subhead">
-            Searching Ride
-          </Text>
-
           <Text type="footnote" color={Colors.Text.GreySecondary}>
-            Looking for the nearest driver for you. It may take some times...
+            Hệ thống đang tìm tài xế đang hoạt động và khoảng cách gần bạn nhất.
+            Quá trình này có thể mất một hoặc vài phút
           </Text>
         </View>
       </View>
-      <View style={[styles.pv_small]}>
+      <View style={[styles.pv_x2_small]}>
         <SkeletonPlaceholder borderRadius={4}>
           <SkeletonPlaceholder.Item height={10} />
         </SkeletonPlaceholder>

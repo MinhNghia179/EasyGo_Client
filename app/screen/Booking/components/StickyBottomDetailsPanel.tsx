@@ -40,9 +40,8 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
     setStep(BookingGuidStep.BOOKING_INFO);
     Toast.show({
       type: ALERT_TYPE.SUCCESS,
-      title: 'Acclaim!',
-      textBody:
-        'Congrats! The driver has been found and is coming to pick you up',
+      title: 'Hoan hô!',
+      textBody: 'Đã tìm thấy tài xế cho bạn và đang đến',
     });
   };
 
@@ -51,8 +50,8 @@ const StickyBottomDetailsPanel: React.FC<IProps> = ({
     setFinishBookingModalVisible(true);
     Toast.show({
       type: ALERT_TYPE.SUCCESS,
-      title: 'Acclaim!',
-      textBody: 'Congrats! The ride is completed.',
+      title: 'Hoan hô!',
+      textBody: 'Cuốc xe của bạn đã hoàn thành!.',
     });
   };
 

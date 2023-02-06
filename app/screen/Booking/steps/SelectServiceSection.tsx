@@ -50,8 +50,8 @@ const SelectServiceSection = (props: IProps) => {
     } catch (error) {
       Toast.show({
         type: ALERT_TYPE.DANGER,
-        title: 'Error!',
-        textBody: 'Oops, something went wrong! Please try again.',
+        title: 'Lỗi!',
+        textBody: 'Rất tiếc, đã xảy ra lỗi! Vui lòng thử lại.',
       });
     } finally {
       setIsLoading(false);
@@ -61,7 +61,7 @@ const SelectServiceSection = (props: IProps) => {
   return (
     <>
       <Text textAlign="center" fontWeight="bold" type="caption1">
-        Choose a ride, or scroll up for more
+        Chọn một dịch vụ hiện có hoặc cuộn lên để biết thêm
       </Text>
       <View style={[styles.pv_small]}>
         <View
@@ -87,11 +87,11 @@ const SelectServiceSection = (props: IProps) => {
               },
             ]}>
             <Text type="caption1" color={Colors.Text.GreySecondary}>
-              Service price has been calculated based on the distance traveled
+              Giá dịch vụ đã được tính dựa trên quãng đường di chuyển
             </Text>
           </View>
         </View>
-        <Text fontWeight="bold">Standard</Text>
+        <Text fontWeight="bold">Tiêu chuẩn</Text>
         {services &&
           services.length &&
           services.map(one => (
@@ -151,10 +151,10 @@ const SelectServiceSection = (props: IProps) => {
               <Divider />
             </>
           ))}
-        <Text fontWeight="bold">Economy</Text>
+        <Text fontWeight="bold">Khác</Text>
         <View style={[styles.ph_small]}>
           <Text type="caption1" color={Colors.Text.GreySecondary}>
-            There are currently no services available
+            Hiện tại không có dịch vụ nào khả dụng
           </Text>
         </View>
       </View>
@@ -186,7 +186,7 @@ const SelectServiceSection = (props: IProps) => {
               fontWeight="bold"
               type="footnote"
               color={Colors.Text.GreySecondary}>
-              Payment (No card at the moment)
+              Thanh toán (Không có thẻ vào lúc này)
             </Text>
           </View>
           <Icon
@@ -202,7 +202,7 @@ const SelectServiceSection = (props: IProps) => {
             onPress={prevStep}
             color={Colors.Red400}
             style={[styles.flex_1]}>
-            Prev Step
+            Chọn Điểm đi/đến
           </PrimaryButton>
           <View style={[styles.mh_x2_small]}></View>
           <PrimaryButton
@@ -211,7 +211,7 @@ const SelectServiceSection = (props: IProps) => {
             onPress={onConfirm}
             loading={isLoading}
             disabled={!selectedService}>
-            Confirm Pick Up
+            Tạo cuốc xe
           </PrimaryButton>
         </View>
       </View>
@@ -219,10 +219,10 @@ const SelectServiceSection = (props: IProps) => {
       <BottomSheetModal
         onClose={() => setPaymentMethodVisible(false)}
         isVisible={paymentMethodModalVisible}
-        title="Payment Methods"
-        description="Choose a payment method for the booking process">
+        title="Phương thức thanh toán"
+        description="Chọn phương thức thanh toán cho quá trình đặt phòng">
         <View style={[styles.p_medium]}>
-          <Text>No card at the moment</Text>
+          <Text>Hiện tại không có bất kỳ thẻ nào!</Text>
         </View>
       </BottomSheetModal>
     </>

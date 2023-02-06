@@ -52,7 +52,9 @@ const HeaderDetailsSection: React.FC<IProps> = ({ onPressShowMap }) => {
               {greetingTime()},&nbsp;
               <Text fontWeight="bold">{portalUser?.username}</Text>
             </Text>
-            <Text color={Colors.White}>Let's discover a new adventure!</Text>
+            <Text color={Colors.White}>
+              Hãy khám phá một cuộc phiêu lưu mới!
+            </Text>
           </View>
         </View>
         <TouchableOpacity>
@@ -78,10 +80,10 @@ const HeaderDetailsSection: React.FC<IProps> = ({ onPressShowMap }) => {
       <View style={[styles.flex_row, styles.jus_between, styles.mt_medium]}>
         <View>
           <Text type="subhead" fontWeight="bold" color={Colors.White}>
-            Move
+            Di chuyển
           </Text>
           <Text type="subhead" color={Colors.White}>
-            We will take you anywhere!
+            Chúng tôi sẽ đưa bạn đi bất cứ đâu!
           </Text>
         </View>
         <View style={[styles.p_small]}>
@@ -97,7 +99,7 @@ const HeaderDetailsSection: React.FC<IProps> = ({ onPressShowMap }) => {
               />
             }>
             <Text type="subhead" fontWeight="bold">
-              Show map
+              Map
             </Text>
           </PrimaryButton>
         </View>

@@ -74,16 +74,16 @@ const BookingInfo = (props: IProps) => {
       });
       Toast.show({
         type: ALERT_TYPE.SUCCESS,
-        title: 'Successfully!',
-        textBody: 'Cancel booking successfully!',
+        title: 'Thành công!',
+        textBody: 'Bạn đã hủy cuốc xe thành công!',
       });
       navigationService.navigate(HomeStackRoute.DASHBOARD, {});
       dispatch.bookingStore.setClearState();
     } catch (error) {
       Toast.show({
         type: ALERT_TYPE.DANGER,
-        title: 'Error!',
-        textBody: 'Oops, something went wrong! Please try again.',
+        title: 'Lỗi!',
+        textBody: 'Rất tiếc, đã xảy ra lỗi! Vui lòng thử lại.',
       });
     } finally {
       setIsLoading(false);
@@ -93,11 +93,11 @@ const BookingInfo = (props: IProps) => {
   return (
     <>
       <Text color={Colors.Black} type="footnote" fontWeight="bold">
-        Nearest driver found, will reach in 01:00 min
+        Đã tìm thấy tài xế cho bạn, sẽ đến sau 01:00 phút
       </Text>
       <View
         style={[
-          styles.mv_medium,
+          styles.mt_small,
           styles.flex_row,
           styles.jus_between,
           styles.alg_center,
@@ -113,51 +113,65 @@ const BookingInfo = (props: IProps) => {
             <Text color={Colors.Green600} fontWeight="bold" type="subhead">
               {driverInfo?.username}
             </Text>
-            <Text color={Colors.Text.GreySecondary} type="caption2">
-              Ride complete: {driverInfo?.rideComplete} +
+            <Text color={Colors.Text.GreySecondary} type="caption1">
+              Cuốc xe đã hoàn thành:{' '}
+              <Text color={Colors.Green600} fontWeight="bold">
+                {driverInfo?.rideComplete}
+              </Text>{' '}
+              +
+            </Text>
+            <Text type="caption1">
+              Số điện thoại: <Text fontWeight="bold">{driverInfo?.phone}</Text>
             </Text>
           </View>
         </View>
-        <View>
-          <Text color={Colors.Green600} fontWeight="bold" type="subhead">
+        <View style={[styles.flex_row, styles.alg_center, styles.jus_center]}>
+          <Text color={Colors.Text.GreySecondary} type="caption2">
+            Đánh giá: &nbsp;
+          </Text>
+          <Text color={Colors.Green600} fontWeight="bold">
             ({driverInfo?.rating})
           </Text>
-          <Text color={Colors.Text.GreySecondary} type="caption2">
-            Rating
-          </Text>
         </View>
       </View>
-      <View style={[styles.flex_row, styles.jus_between, styles.alg_center]}>
+      <View
+        style={[
+          styles.flex_row,
+          styles.jus_between,
+          styles.alg_center,
+          styles.mv_small,
+        ]}>
         <View>
-          <Text type="caption1" color={Colors.Text.GreySecondary}>
-            {driverInfo?.typeTransport}
+          <Text type="caption1">
+            Biển số xe đăng kí: &nbsp;
+            <Text fontWeight="bold">
+              {driverInfo?.typeTransport} ({driverInfo?.licensePlate})
+            </Text>
           </Text>
-          <Text type="footnote" color={Colors.Black}>
-            ({driverInfo?.licensePlate})
-          </Text>
-        </View>
-        <View style={[styles.flex_row]}>
-          <Item
-            label="Call Now"
-            onPress={() => {}}
-            icon={
-              <Icon name="phone" color={Colors.Black} size={IconSizes.small} />
-            }
-          />
-          <Item
-            label="Message"
-            onPress={() => {}}
-            icon={
-              <Icon
-                name="message1"
-                style={[styles.mr_medium]}
-                color={Colors.Black}
-                size={IconSizes.small}
-              />
-            }
-          />
         </View>
       </View>
+      <View style={[styles.flex_row, styles.alg_center, styles.jus_start]}>
+        <Item
+          label="Gọi điện"
+          onPress={() => {}}
+          icon={
+            <Icon name="phone" color={Colors.Black} size={IconSizes.small} />
+          }
+        />
+        <Item
+          label="Nhắn tin"
+          onPress={() => {}}
+          icon={
+            <Icon
+              name="message1"
+              style={[styles.mr_medium]}
+              color={Colors.Black}
+              size={IconSizes.small}
+            />
+          }
+        />
+      </View>
+
       <View style={[styles.mv_small, styles.shadowCard]}>
         <View style={[styles.flex_row]}>
           <PointLocationIcon size="medium" style={[styles.mh_small]} />
@@ -177,6 +191,7 @@ const BookingInfo = (props: IProps) => {
           </Text>
         </View>
       </View>
+
       <View
         style={[
           styles.flex_row,
@@ -188,7 +203,7 @@ const BookingInfo = (props: IProps) => {
         ]}>
         <View style={[styles.flex_row, styles.alg_center]}>
           <Text fontWeight="bold" type="callout" color={Colors.Text.Primary}>
-            Cash
+            Tổng
           </Text>
           <Icon
             style={[styles.mh_small]}
@@ -199,13 +214,13 @@ const BookingInfo = (props: IProps) => {
         </View>
         <Divider width={1} orientation="vertical" color={Colors.Black} />
         <Text fontWeight="bold" type="callout" color={Colors.Text.Primary}>
-          {numberWithCommas(createBookingWizard?.totalPrice)}
+          {numberWithCommas(createBookingWizard?.totalPrice)} (VNĐ)
         </Text>
       </View>
       <PrimaryButton
         color={Colors.Red300}
         onPress={() => setCancelBookingModalVisible(true)}>
-        Cancel Ride
+        Hủy cuốc xe
       </PrimaryButton>
 
       <CancelBookingModal

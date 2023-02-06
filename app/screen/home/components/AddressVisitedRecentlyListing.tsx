@@ -22,7 +22,7 @@ const AddressVisitedRecentlyListing: React.FC<IProps> = ({
   return (
     <View style={[styles.mv_small]}>
       <Text fontWeight="bold" type="subhead">
-        Locations
+        Vị trí gần bạn
       </Text>
       {map(addressList, (one, index) => {
         return (

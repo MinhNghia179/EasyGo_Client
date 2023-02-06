@@ -38,7 +38,7 @@ const LocationCard = (props: IProps) => {
         ]}>
         {isNotLocation ? (
           <Text color={Colors.Red400} type="caption1">
-            Please select {label.toLowerCase()} location
+            Vui lòng chọn {label.toLowerCase()}
           </Text>
         ) : (
           <>

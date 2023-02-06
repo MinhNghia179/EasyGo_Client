@@ -6,10 +6,10 @@ export const greetingTime = () => {
   const date = new Date();
   const hours = date.getHours();
   if (hours < 12) {
-    return 'Good morning';
+    return 'Chào buổi sáng';
   } else if (hours >= 12 && hours < 17) {
-    return 'Good afternoon';
+    return 'Chào buổi chiều';
   } else {
-    return 'Good night';
+    return 'Chào buổi tối';
   }
 };

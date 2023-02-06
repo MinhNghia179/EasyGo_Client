@@ -43,7 +43,7 @@ const Item = (props: IIteamProps) => {
       <Text type="caption1" color={Colors.Text.GreySecondary}>
         {label}: &nbsp;
         <Text fontWeight="bold">
-          {value || 0.0}({unit})
+          {value || 0.0} ({unit})
         </Text>
       </Text>
     </View>
@@ -89,8 +89,8 @@ const PickUpLocationSection = (props: IProps) => {
     } catch (error) {
       Toast.show({
         type: ALERT_TYPE.DANGER,
-        title: 'Error!',
-        textBody: 'Oops, something went wrong! Please try again.',
+        title: 'Lỗi!',
+        textBody: 'Rất tiếc, đã xảy ra lỗi! Vui lòng thử lại.',
       });
     } finally {
       setIsLoading(false);
@@ -100,12 +100,12 @@ const PickUpLocationSection = (props: IProps) => {
   return (
     <>
       <LocationCard
-        label="Pick up (Current Location)"
+        label="Điểm xuất phát (Vị trí hiện tại)"
         address={currentLocation}
       />
       <View style={[styles.mv_x_small]} />
       <LocationCard
-        label="Drop off"
+        label="Điểm đến"
         onPress={onOpenSearchAddressModal}
         address={createBookingWizard?.dropOff}
       />
@@ -122,13 +122,13 @@ const PickUpLocationSection = (props: IProps) => {
             },
           ]}>
           <Item
-            label="Distance"
+            label="Khoảng cách"
             value={round(createBookingWizard?.routeInfo?.travelDistance, 2)}
             unit="km"
             iconName="road"
           />
           <Item
-            label="Duration"
+            label="Thời gian dự tính"
             value={round(
               createBookingWizard?.routeInfo?.travelDuration / 60,
               1,
@@ -137,7 +137,7 @@ const PickUpLocationSection = (props: IProps) => {
             iconName="hourglass-half"
           />
           <Item
-            label="Duration Traffic"
+            label="Thời gian thực tế"
             value={round(
               createBookingWizard?.routeInfo?.travelDurationTraffic / 60,
               1,
@@ -155,7 +155,7 @@ const PickUpLocationSection = (props: IProps) => {
           style={[styles.mh_small]}
         />
         <LinkButton onPress={() => setAddNoteVisible(true)} type="footnote">
-          Additional notes about the pick up point for the driver
+          Ghi chú thêm về điểm đón cho tài xế
         </LinkButton>
       </View>
 
@@ -164,26 +164,26 @@ const PickUpLocationSection = (props: IProps) => {
         color={Colors.Green}
         disabled={!createBookingWizard?.dropOff}
         onPress={handleNextStep}>
-        Choose this pick up point
+        Chọn điểm đón này
       </PrimaryButton>
 
       <BottomSheetModal
         hasDivider
         isVisible={addNoteVisible}
-        title="Add notes"
-        description="Additional notes about the pick up point for the driver"
+        title="Ghi chú"
+        description="Ghi chú thêm về điểm đón cho tài xế"
         onClose={handleOnClose}>
         <InputText
           style={[styles.mv_small]}
           value={noteText || createBookingWizard?.notes}
           onChange={setNoteText}
-          placeholder="Type note"
+          placeholder="Nhập ghi chú"
         />
         <PrimaryButton
           disable={!noteText}
           color={Colors.Green}
           onPress={onSaveNote}>
-          Confirm
+          Xác nhận
         </PrimaryButton>
       </BottomSheetModal>
     </>

@@ -58,8 +58,8 @@ const SearchAddressModal = (props: IProps) => {
     } catch (error) {
       Toast.show({
         type: ALERT_TYPE.DANGER,
-        title: 'Error!',
-        textBody: 'Oops, something went wrong! Please try again.',
+        title: 'Lỗi!',
+        textBody: 'Rất tiếc, đã xảy ra lỗi! Vui lòng thử lại.',
       });
     } finally {
       setIsLoading(false);
@@ -83,8 +83,8 @@ const SearchAddressModal = (props: IProps) => {
     } catch (error) {
       Toast.show({
         type: ALERT_TYPE.DANGER,
-        title: 'Error!',
-        textBody: 'Oops, something went wrong! Please try again.',
+        title: 'Lỗi!',
+        textBody: 'Rất tiếc, đã xảy ra lỗi! Vui lòng thử lại.',
       });
     }
   };
@@ -100,11 +100,11 @@ const SearchAddressModal = (props: IProps) => {
     <ActionModal
       onClose={handleOnClose}
       isVisible={isOpen}
-      title="Search address">
+      title="Tìm kiếm địa chỉ">
       <InputText
         value={searchText}
         onChange={handleOnChange}
-        placeholder="search on google map"
+        placeholder="Tìm kiếm địa chỉ trên google map"
         leftIcon={
           <Icon name="search" size={IconSizes.small} color={Colors.Black} />
         }
@@ -176,7 +176,7 @@ const SearchAddressModal = (props: IProps) => {
       )}
       <View style={[styles.flex_row, styles.jus_end, styles.mt_medium]}>
         <GhostButton color={Colors.Red300} onPress={handleOnClose}>
-          Cancel
+          Hủy bỏ
         </GhostButton>
       </View>
     </ActionModal>

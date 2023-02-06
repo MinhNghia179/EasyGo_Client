@@ -45,13 +45,13 @@ const BodyDetailsSection = (props: IProps) => {
               color={Colors.Red300}
             />
           </View>
-          <Text type="footnote">Where you want to go?</Text>
+          <Text type="footnote">Bạn muốn đi đâu?</Text>
         </TouchableOpacity>
 
         <AddressVisitedRecentlyListing addressList={AddressVisitedRecently} />
 
         <Text fontWeight="bold" type="subhead">
-          Add more ways to move
+          Thêm nhiều cách để di chuyển
         </Text>
 
         <TouchableOpacity
@@ -64,7 +64,7 @@ const BodyDetailsSection = (props: IProps) => {
             },
           ]}>
           <Text type="footnote" color={Colors.White}>
-            Car rental by the hour
+            Cho thuê xe theo giờ
           </Text>
         </TouchableOpacity>
       </View>
