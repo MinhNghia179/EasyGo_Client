@@ -59,10 +59,10 @@ const PickUpLocationSection = (props: IProps) => {
   const [noteText, setNoteText] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { currentLocation, createBookingWizard } = useSelector(
+  const { createBookingWizard, isSearchingLocation } = useSelector(
     (state: IRootState) => ({
-      currentLocation: state.authStore.currentLocation,
       createBookingWizard: state.bookingStore.createBookingWizard,
+      isSearchingLocation: state.bookingStore.isSearchingLocation,
     }),
   );
 
@@ -100,12 +100,14 @@ const PickUpLocationSection = (props: IProps) => {
   return (
     <>
       <LocationCard
+        isLoading={isSearchingLocation}
         label="Điểm xuất phát (Vị trí hiện tại)"
-        address={currentLocation}
+        address={createBookingWizard?.pickUp}
       />
       <View style={[styles.mv_x_small]} />
       <LocationCard
         label="Điểm đến"
+        isLoading={isSearchingLocation}
         onPress={onOpenSearchAddressModal}
         address={createBookingWizard?.dropOff}
       />

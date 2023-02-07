@@ -34,7 +34,7 @@ const Item = ({ label, icon, onPress }: IItemProps) => {
         styles.flex_row,
         styles.alg_center,
         styles.mh_x_small,
-        styles.p_small,
+        styles.p_x_small,
         styles.rounded_small,
         styles.b_small,
         {
@@ -97,7 +97,7 @@ const BookingInfo = (props: IProps) => {
       </Text>
       <View
         style={[
-          styles.mt_small,
+          styles.mt_medium,
           styles.flex_row,
           styles.jus_between,
           styles.alg_center,
@@ -120,9 +120,6 @@ const BookingInfo = (props: IProps) => {
               </Text>{' '}
               +
             </Text>
-            <Text type="caption1">
-              Số điện thoại: <Text fontWeight="bold">{driverInfo?.phone}</Text>
-            </Text>
           </View>
         </View>
         <View style={[styles.flex_row, styles.alg_center, styles.jus_center]}>
@@ -143,6 +140,9 @@ const BookingInfo = (props: IProps) => {
         ]}>
         <View>
           <Text type="caption1">
+            Số điện thoại: <Text fontWeight="bold">{driverInfo?.phone}</Text>
+          </Text>
+          <Text type="caption1">
             Biển số xe đăng kí: &nbsp;
             <Text fontWeight="bold">
               {driverInfo?.typeTransport} ({driverInfo?.licensePlate})
@@ -150,7 +150,28 @@ const BookingInfo = (props: IProps) => {
           </Text>
         </View>
       </View>
-      <View style={[styles.flex_row, styles.alg_center, styles.jus_start]}>
+
+      <View style={[styles.mv_x_small, styles.shadowCard]}>
+        <View style={[styles.flex_row]}>
+          <PointLocationIcon size="medium" style={[styles.mh_small]} />
+          <Text type="caption1" fontWeight="bold">
+            {createBookingWizard?.pickUp?.fullAddress}
+          </Text>
+        </View>
+        <View style={[styles.mv_x_small]} />
+        <View style={[styles.flex_row]}>
+          <PointLocationIcon
+            size="medium"
+            style={[styles.mh_small]}
+            color={Colors.Red300}
+          />
+          <Text type="caption1" fontWeight="bold">
+            {createBookingWizard?.dropOff?.fullAddress}
+          </Text>
+        </View>
+      </View>
+
+      <View style={[styles.flex_row, styles.alg_center, styles.jus_end]}>
         <Item
           label="Gọi điện"
           onPress={() => {}}
@@ -170,26 +191,6 @@ const BookingInfo = (props: IProps) => {
             />
           }
         />
-      </View>
-
-      <View style={[styles.mv_small, styles.shadowCard]}>
-        <View style={[styles.flex_row]}>
-          <PointLocationIcon size="medium" style={[styles.mh_small]} />
-          <Text type="caption1" fontWeight="bold">
-            {createBookingWizard?.pickUp?.fullAddress}
-          </Text>
-        </View>
-        <View style={[styles.mv_x_small]} />
-        <View style={[styles.flex_row]}>
-          <PointLocationIcon
-            size="medium"
-            style={[styles.mh_small]}
-            color={Colors.Red300}
-          />
-          <Text type="caption1" fontWeight="bold">
-            {createBookingWizard?.dropOff?.fullAddress}
-          </Text>
-        </View>
       </View>
 
       <View

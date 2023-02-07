@@ -3,6 +3,7 @@ import { ICoordinates } from '../../interfaces/home-interfaces';
 import apiClient from '../../services/api-client';
 
 export interface IBookingStore {
+  isSearchingLocation: boolean;
   createBookingWizard: ICreateBookingWizard;
   bookingInfo: any;
   driverInfo: any;
@@ -10,6 +11,7 @@ export interface IBookingStore {
 }
 
 const initialState: IBookingStore = {
+  isSearchingLocation: false,
   createBookingWizard: null,
   bookingInfo: null,
   driverPosition: null,
@@ -33,6 +35,13 @@ const bookingStore = {
     setDriverInfo: (state: IBookingStore, driverInfo: any) => ({
       ...state,
       driverInfo,
+    }),
+    setIsSearchingLocation: (
+      state: IBookingStore,
+      isSearchingLocation: boolean,
+    ) => ({
+      ...state,
+      isSearchingLocation,
     }),
     setDriverPosition: (
       state: IBookingStore,
