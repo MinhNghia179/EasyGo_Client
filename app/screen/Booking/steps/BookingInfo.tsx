@@ -17,6 +17,7 @@ import IconSizes from '../../../styles/icon-size';
 import styles from '../../../styles/style-sheet';
 import { numberWithCommas } from '../../../utils/constant';
 import CancelBookingModal from '../components/CancelBookingModal';
+import { Rating } from 'react-native-ratings';
 
 interface IProps {}
 
@@ -122,13 +123,16 @@ const BookingInfo = (props: IProps) => {
             </Text>
           </View>
         </View>
-        <View style={[styles.flex_row, styles.alg_center, styles.jus_center]}>
-          <Text color={Colors.Text.GreySecondary} type="caption2">
-            Đánh giá: &nbsp;
-          </Text>
-          <Text color={Colors.Green600} fontWeight="bold">
-            ({driverInfo?.rating})
-          </Text>
+        <View style={[styles.flex_col, styles.alg_center, styles.jus_center]}>
+          <View style={[styles.flex_row]}>
+            <Text color={Colors.Text.GreySecondary} type="caption2">
+              Đánh giá: &nbsp;
+            </Text>
+            <Text color={Colors.Green600} fontWeight="bold">
+              ({driverInfo?.rating})
+            </Text>
+          </View>
+          <Rating type="star" imageSize={15} ratingCount={driverInfo?.rating} />
         </View>
       </View>
       <View

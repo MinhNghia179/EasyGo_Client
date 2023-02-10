@@ -145,7 +145,7 @@ const SelectServiceSection = (props: IProps) => {
                   type="footnote"
                   textDecorationLine="underline"
                   color={Colors.Text.GreySecondary}>
-                  {numberWithCommas(one.totalPrice)}đ
+                  {numberWithCommas(one.totalPrice)} VNĐ
                 </Text>
               </TouchableOpacity>
               <Divider />
