@@ -93,7 +93,7 @@ const BookingInfo = (props: IProps) => {
   return (
     <>
       <Text color={Colors.Black} type="footnote" fontWeight="bold">
-        Đã tìm thấy tài xế cho bạn, sẽ đến sau 01:00 phút
+        Đã tìm thấy tài xế cho bạn
       </Text>
       <View
         style={[
